@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>기계설비점검 퀘스트</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* 화면 밀림 방지를 위한 기본 설정 */
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+        overflow: hidden !important;
+        touch-action: manipulation;
+      }
+
+      /* 상단 헤더 및 진행률 */
+      .header-bar {
+        background-color: #17324d;
+        padding: 15px;
+        color: white;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .progress-container {
+        width: 100%;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+      #exp-bar {
+        height: 100%;
+        background-color: #63d3a5;
+        width: 0%;
+        transition: width 0.3s ease-out;
+      }
+
+      /* 콤보 이펙트 */
+      #combo-text {
+        position: absolute;
+        top: 100px;
+        right: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffc107;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 100;
+      }
+      .show-combo {
+        opacity: 1 !important;
+        transform: scale(1.2) !important;
+      }
+
+      /* 카드 덱 UI */
+      .card-container {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        height: 52vh;
+        margin: 15px auto;
+        perspective: 1000px;
+      }
+      .swipe-card {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        will-change: transform;
+        z-index: 2;
+        overflow-y: auto;
+      }
+      .swipe-card::-webkit-scrollbar {
+        display: none;
+      }
+      .card-cat {
+        font-size: 14px;
+        color: #0d6efd;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .card-title-text {
+        font-size: 20px;
+        font-weight: 900;
+        color: #17324d;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; /* 번호와 텍스트 사이 간격 */
+      }
+
+      /* 동그라미 번호 스타일 */
+      .card-index-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e8f0ff;
+        color: #2d6cdf;
+        font-size: 14px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .card-desc {
+        font-size: 14px;
+        color: #6c757d;
+        line-height: 1.5;
+      }
+      .card-details {
+        margin-top: 15px;
+        font-size: 12px;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        border-left: 3px solid #6c757d;
+        text-align: left;
+        width: 100%;
+      }
+
+      /* 상태 스탬프 */
+      .stamp {
+        position: absolute;
+        font-size: 36px;
+        font-weight: bold;
+        opacity: 0;
+        z-index: 10;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+      .stamp-like {
+        color: #198754;
+        border: 4px solid #198754;
+        padding: 5px 15px;
+        border-radius: 10px;
+        top: 40px;
+        right: 20px;
+        transform: rotate(20deg);
+      }
+      .stamp-nope {
+        color: #dc3545;
+        border: 4px solid #dc3545;
+        padding: 5px 15px;
+        border-radius: 10px;
+        top: 40px;
+        left: 20px;
+        transform: rotate(-20deg);
+      }
+      .stamp-back {
+        color: #6c757d;
+        border: 4px solid #6c757d;
+        padding: 5px 15px;
+        border-radius: 10px;
+        top: 40px;
+        left: 20px;
+        transform: rotate(-20deg);
+      }
+
+      /* 하단 액션 버튼 */
+      .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 5px;
+      }
+      .action-btn {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: none;
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.1s;
+      }
+      .action-btn:active {
+        transform: scale(0.9);
+      }
+      .btn-like {
+        background-color: #fff;
+        border: 3px solid #198754;
+      }
+      .btn-nope {
+        background-color: #fff;
+        border: 3px solid #dc3545;
+      }
+
+      /* 화면 흔들림 효과 */
+      @keyframes shake {
+        0% {
+          transform: translate(1px, 1px) rotate(0deg);
+        }
+        20% {
+          transform: translate(-3px, 0px) rotate(1deg);
+        }
+        40% {
+          transform: translate(1px, -1px) rotate(1deg);
+        }
+        60% {
+          transform: translate(-3px, 1px) rotate(0deg);
+        }
+        80% {
+          transform: translate(-1px, -1px) rotate(1deg);
+        }
+        100% {
+          transform: translate(1px, -2px) rotate(-1deg);
+        }
+      }
+      .shake-screen {
+        animation: shake 0.3s;
+        border: 3px solid #dc3545;
+      }
+
+      /* 결과 화면 */
+      #result-screen {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #17324d;
+        color: white;
+        z-index: 1050;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+      .rank-text {
+        font-size: 60px;
+        font-weight: 900;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        margin: 10px 0;
+      }
+      .rank-S {
+        color: #ffc107;
+      }
+      .rank-A {
+        color: #63d3a5;
+      }
+      .rank-B {
+        color: #dc3545;
+      }
+
+      .absorber-table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .absorber-table th,
+      .absorber-table td {
+        border: 1px solid #dee2e6;
+        padding: 6px;
+        text-align: center;
+      }
+      .absorber-table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+      }
+      .absorber-table td.val-col {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+      .phone-text {
+        text-decoration: none !important;
+      }
+      a.phone-text:link,
+      a.phone-text:visited,
+      a.phone-text:hover,
+      a.phone-text:active {
+        text-decoration: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 (버튼 및 경험치 바) -->
+    <header class="header-bar" id="app-header">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1
+          class="fw-bold mb-0 text-truncate"
+          style="font-size: 15px; flex-shrink: 0"
+        >
+          🏭 기계설비점검
+        </h1>
+
+        <!-- 주야간 선택 토글 영역 -->
+        <div
+          class="btn-group shadow-sm mx-2"
+          role="group"
+          style="flex-grow: 1; max-width: 200px"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="shiftToggle"
+            id="shiftDay"
+            autocomplete="off"
+            checked
+            onchange="toggleShift('day')"
+          />
+          <label
+            class="btn btn-outline-light fw-bold py-1 px-0"
+            for="shiftDay"
+            style="font-size: 11px; border-color: rgba(255, 255, 255, 0.3)"
+            >☀️ 주간</label
+          >
+          <input
+            type="radio"
+            class="btn-check"
+            name="shiftToggle"
+            id="shiftNight"
+            autocomplete="off"
+            onchange="toggleShift('night')"
+          />
+          <label
+            class="btn btn-outline-light fw-bold py-1 px-0"
+            for="shiftNight"
+            style="font-size: 11px; border-color: rgba(255, 255, 255, 0.3)"
+            >🌙 야간</label
+          >
+        </div>
+
+        <a
+          href="/bas/"
+          class="btn btn-light rounded-pill px-2 py-1 text-dark fw-bold shadow-sm"
+          style="font-size: 12px; flex-shrink: 0"
+        >
+          Home
+        </a>
+      </div>
+
+      <!-- 기능 버튼 영역 -->
+      <div class="row g-2 mb-2">
+        <div class="col-4">
+          <button
+            class="btn btn-success w-100 fw-bold shadow-sm"
+            style="font-size: 12px; padding: 8px 0"
+            onclick="allNo()"
+          >
+            전체 이상 없음
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-outline-light w-100 fw-bold shadow-sm"
+            style="font-size: 12px; padding: 8px 0"
+            onclick="resetAll()"
+          >
+            전체 초기화
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-light w-100 fw-bold text-dark shadow-sm"
+            style="font-size: 12px; padding: 8px 0"
+            onclick="printResult()"
+          >
+            PDF 저장/인쇄
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between small mt-2">
+        <span style="font-size: 12px">
+          <a href="tel:02-6987-1112" class="phone-text text-white"
+            >진행률 - CA 중앙관제기계팀</a
+          >
+        </span>
+        <span id="progress-text">0 / 0</span>
+      </div>
+      <div class="progress-container">
+        <div id="exp-bar"></div>
+      </div>
+    </header>
+
+    <!-- 콤보 UI -->
+    <div id="combo-text">제대로 하는거 맞죠?</div>
+
+    <!-- 카드 영역 -->
+    <div class="card-container" id="card-container"></div>
+
+    <!-- 컨트롤 버튼 -->
+    <div class="action-buttons" id="control-panel" style="align-items: center">
+      <button class="action-btn btn-like" onclick="handleAction('no')">
+        🟢
+      </button>
+      <button class="action-btn btn-nope" onclick="handleAction('yes')">
+        🔴
+      </button>
+    </div>
+
+    <!-- 이상 메모 입력 모달 -->
+    <div
+      class="modal fade"
+      id="memoModal"
+      tabindex="-1"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog mx-3" style="margin-top: 5vh">
+        <div class="modal-content shadow-lg">
+          <div class="modal-header bg-danger text-white py-2">
+            <h5 class="modal-title fs-6">⚠️ 이상 항목 발견</h5>
+          </div>
+          <div class="modal-body">
+            <p class="small text-muted fw-bold mb-2" id="modal-target-item"></p>
+            <textarea
+              id="memo-input"
+              class="form-control bg-light"
+              rows="3"
+              style="font-size: 16px"
+              placeholder="이상한 점을 기재해주세요..."
+            ></textarea>
+          </div>
+          <div class="modal-footer d-flex gap-2 py-2">
+            <button
+              type="button"
+              class="btn btn-secondary flex-fill"
+              onclick="cancelYes()"
+            >
+              취소
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger flex-fill fw-bold"
+              onclick="saveMemo()"
+            >
+              기록하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 완료 결과 화면 -->
+    <div id="result-screen">
+      <h2>기계설비점검 완료~!</h2>
+      <div id="final-rank" class="rank-text rank-S">S</div>
+      <p id="result-summary" class="fs-6 mb-3"></p>
+
+      <div
+        id="error-summary-list"
+        class="w-100 bg-white text-dark rounded-3 p-3 mb-4 text-start shadow-sm"
+        style="
+          max-height: 35vh;
+          overflow-y: auto;
+          display: none;
+          max-width: 400px;
+        "
+      >
+        <b class="text-danger d-block mb-2" style="font-size: 14px"
+          >⚠️ 이상 항목 요약</b
+        >
+        <div id="error-list-content"></div>
+      </div>
+
+      <div class="d-flex flex-column gap-2 mt-2" style="width: 260px">
+        <button
+          class="btn btn-secondary fw-bold w-100 shadow-sm"
+          onclick="returnFromResult()"
+        >
+          ↩️ 이전 항목으로 (뒤로가기)
+        </button>
+        <div class="d-flex gap-2 w-100">
+          <button
+            class="btn btn-light fw-bold flex-fill shadow-sm"
+            onclick="printResult()"
+          >
+            인쇄 / PDF
+          </button>
+          <button
+            class="btn btn-outline-light fw-bold flex-fill shadow-sm"
+            onclick="resetAll()"
+          >
+            다시 점검
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // 1. 화면 확대 방지
+      document.addEventListener(
+        'touchstart',
+        function (event) {
+          if (event.touches.length > 1) event.preventDefault()
+        },
+        { passive: false },
+      )
+      document.addEventListener(
+        'touchmove',
+        function (event) {
+          if (event.touches.length > 1) event.preventDefault()
+        },
+        { passive: false },
+      )
+
+      // 키보드 닫힘 시 화면 위치 강제 복구 스크립트
+      function forceScrollReset() {
+        window.scrollTo(0, 0)
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      }
+      document.addEventListener('focusout', function (e) {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+          setTimeout(forceScrollReset, 100)
+          setTimeout(forceScrollReset, 300)
+        }
+      })
+
+      // 데이터 정의
+      const rawItems = [
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 고장경보 알람',
+          desc: '고장·경보 발생 AHU가 있는가?',
+          details:
+            '⭐️공조기 세트<br>E6 : Left/Right<br>E8 : 1278/3456<br>E5 : 1,5,7 | 2,6,8<br>E7 : 1,5,7 | 2,4',
+          placeholder: '이상한 점 : E6-AHU-01 팬 인버터 트립 경보 발생 (09:30)',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 운전상태',
+          desc: '기동 조건인데 정지해 있거나, 정지 조건인데 운전 중인 AHU가 있는가?',
+          details:
+            'E6-B2 CN-04~05 : 1층 STAFF/아뜨리움/로비 평일 주간<br>E8-B2 LS-01~03,06 : 지하층 지원시설 평일 06시~20시<br>E5-B2 E5-01~02 : 1층 회의실/세미나실/로비는 주간 기동<br>E7-B2 E7-02~03 : 로비는 주간, 강당은 요청시 냉방 기동<br>E57 AHU-CS-01,02,03 : M층~B4 지원시설 평일 주간',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 운전모드',
+          desc: '냉방/제습 설정이 잘못된 AHU가 있는가?',
+          details:
+            '2026.09.11 이후 E68-AHU 냉방모드<br>E6-B2 CN-04~05 : 항상 냉방<br>E8-B2 LS-01~03,06 : 항상 냉방<br>E57-AHU : 항상 냉방',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 온도값',
+          desc: '온도설정, 급기온도를 비교했을 때 비정상적인 편차가 지속되는 AHU가 있는가?',
+          details:
+            '정상: ±1℃ 이내<br>관찰: ±1~2℃<br>이상 의심: ±2℃ 초과가 10분 이상 지속<br>현장확인 우선: ±3℃ 이상이 지속',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 습도값',
+          desc: '급기습도가 짧은 시간 내 5%p 이상 급격하게 변하거나, 습도설정 대비 5%p 이상 편차가 지속되는 AHU가 있는가?',
+          details:
+            '급기습도 48~52% → 정상적인 범위<br>53~55% → 관찰<br>56% 이상이 지속 → 이상 의심<br>60% 이상 → 우선 확인',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 토출·환기온도',
+          desc: '동일한 운전조건의 다른 AHU와 비교했을 때 환기→토출 온도차가 ±2℃ 이상 차이를 보이거나, 환기온도 대비 토출온도의 변화가 비정상적인 AHU가 있는가?',
+          details:
+            '동일 조건 AHU<br>환기온도 비교<br>토출온도 비교<br>환기→토출 온도차 비교<br>2℃ 이상 차이가 지속되는지 확인<br>냉방·난방밸브 및 댐퍼 상태 확인',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 냉·난방밸브',
+          desc: '냉방요구 또는 급기온도 변화에 따라 냉방밸브 개도가 적절하게 변화하지 않거나, 밸브 개도가 특정 값에 장시간 고정되어 급기온도가 정상 제어되지 않는 AHU가 있는가?',
+          details:
+            '⭐️제습모드에서는 난방밸브가 많이 열리기 때문에 냉방밸브 역시 (냉방모드에 비해) 많이 열릴 수 밖에 없다.<br>냉방 ↑ + 난방 ↑ + 급기온도 설정값 유지 → 정상<br>냉방 ↑ + 난방 ↓ + 급기온도 하강 → 정상<br>냉방 ↓ + 난방 ↑ + 급기온도 상승 → 정상<br>급기온도가 설정값을 지속적으로 벗어남 → 이상<br>급기온도가 크게 변하는데 밸브 개도 고정 → 이상<br>온도조건 변화에도 특정 밸브 개도가 고정 → 이상',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 가습밸브',
+          desc: '습도 조건에 따라 가습밸브가 적절하게 제어되지 않거나 비정상적으로 개방·고정된 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 댐퍼',
+          desc: '(외기·배기·혼합)댐퍼의 개도가 운전조건과 일치하지 않거나 비정상적으로 고정된 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '전열교환기',
+          desc: '전열교환기 운전상태가 비정상 상태인 AHU가 있는가?',
+          details:
+            'E6(4대) : AHU-C1-06-1~4<br>E8(8대) : AHU-LS-04-1~8<br>E5(4대) : AHU-5-1~2, AHU-6-1~2<br>E7(4대) : AHU-5-1~2, AHU-6-1~2',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 급기·환기정압 (양압/음압)',
+          desc: '급기 및 환기정압이 설정값을 지속적으로 벗어나거나, 동일한 운전조건의 다른 AHU와 비교하여 비정상적인 정압 상태를 보이는 AHU가 있는가?',
+          details:
+            '⭐️E8 AHU-LS-05는 5~6F BSL 실험실용<br>설정 500 Pa / 실제 495~505 Pa 정상<br>설정 500 Pa / 실제 480 Pa가 잠시 발생 → 관찰<br>설정 500 Pa / 실제 450 Pa가 계속 유지 → 이상<br>설정 500 Pa / 실제 300 Pa가 장시간 유지 → 현장확인<br>설정 500 Pa / 실제 500 Pa인데 Hz 큰변동 → 추가확인',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 급기·환기 Hz',
+          desc: '운전 중인 SF·RF의 Hz가 운전조건이나 동일 조건의 다른 AHU와 비교하여 비정상적인 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 필터차압',
+          desc: '필터차압에 경고 표시가 있는 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 연기감지기',
+          desc: '연기감지기 상태가 비정상으로 표시되는 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 냉수·온수 유량',
+          desc: '냉·난방밸브 개도 변화에 따라 냉수·온수 유량이 적절하게 변화하지 않거나, 동일한 운전조건의 다른 AHU와 비교하여 유량이 비정상적으로 높거나 낮은 AHU가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E5 AHU-CR',
+          desc: 'AHU-CR의 급기상태, 현재온도, 습도설정·현재습도, 외기·환기댐퍼 및 실외기 운전상태에 이상이 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E5 Dry Room DEHU',
+          desc: 'Dry Room DEHU의 급기·리턴팬, 냉각·재열 관련 운전상태 및 온·습도 값에 이상이 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E7 Dry Room DEHU 운전상태',
+          desc: 'DEHU의 급기팬·배기팬 운전상태가 운전조건과 일치하지 않거나 비정상적으로 정지·운전하는 설비가 있는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '공조설비 현장확인',
+          desc: '이상이 발견되어 현장 확인이 필요한 AHU또는 DEHU가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '고장경보 알람',
+          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '운전상태',
+          desc: '냉동기 운전조건과 실제 운전상태가 일치하지 않거나, 운전이 필요한 냉동기가 정지해 있는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '이상패턴',
+          desc: '동일한 운전조건의 다른 냉동기와 비교했을 때 냉수온도·냉각수온도·운전상태 등이 확연히 다른 냉동기가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 운전상태',
+          desc: '냉동기 운전상태 및 냉각탑 사전지정 조건과 실제 냉각탑의 ON/OFF·Hz 상태가 일치하지 않는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 팬 Hz',
+          desc: '운전 중인 냉각탑 팬의 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적으로 높거나 낮은 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉각수 온도를 보이는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉수 온도를 보이는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 운전상태',
+          desc: '냉수 순환펌프의 운전상태가 냉동기 및 냉방부하 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 Hz',
+          desc: '운전 중인 냉수 순환펌프의 인버터 Hz가 운전조건이나 동일 조건의 다른 펌프와 비교하여 비정상적인 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 차압',
+          desc: '냉수 공급계통의 차압이 설정값을 지속적으로 벗어나거나 정상적으로 추종하지 못하는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '중온수 열원',
+          desc: '냉동기에 공급되는 중온수 공급·환수온도가 냉동기 운전조건 또는 정상 운전범위를 벗어나는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '열원설비 현장확인',
+          desc: '자동제어 화면에서 이상이 발견되어 흡수식 냉동기·냉각탑·펌프 등의 현장 확인이 필요한 설비가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '고장·경보 알람',
+          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
+          details: '경보 발생 표시 → 이상 있음<br>고장 발생 표시 → 이상 있음',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: 'E5/7 냉수 공급온도 및 차압',
+          desc: '공급온도와 냉수차압이 설정범위를 벗어났는가?',
+          details:
+            '⭐️공급온도 : 2026-09-21 이후 기존 8도 -> 변경 9.5도<br>⭐️CS 2차 냉수차압 권장 정상범위 : 0.5 < X ≤ 0.7',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '운전상태',
+          desc: '냉각탑의 운전조건과 실제 ON/OFF·AUTO·Hz 상태가 일치하지 않는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 밸브상태',
+          desc: '운전 중인 냉각탑의 관련 밸브가 운전상태와 일치하지 않거나 비정상적으로 닫혀 있는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 인버터 Hz',
+          desc: '운전 중인 냉각탑의 인버터 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적인 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 온도',
+          desc: '상·하한 및 정지 설정조건에서 벗어나 비정상적으로 운전되는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 조절밸브',
+          desc: '냉각수 조절밸브의 개도가 설정조건이나 냉각수 온도조건에 비해 비정상적으로 높거나 낮거나, 특정 개도에 고정되어 있는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 순환펌프 운전상태',
+          desc: '자동운전 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 순환펌프 Hz',
+          desc: '펌프의 Hz가 현재 냉각수 운전조건에 비해 비정상적으로 높거나 낮은 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '펌프 압력조건',
+          desc: '냉각수 순환펌프의 압력이 설정조건을 지속적으로 벗어나거나 정상적으로 유지되지 않는 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열교환기 공급·환수온도',
+          desc: '냉각수 공급·환수온도가 동일한 운전조건의 다른 열교환기와 비교하여 확연히 다르거나, 공급·환수온도의 변화가 비정상적인 열교환기가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열교환기 밸브 개도',
+          desc: '열교환기 관련 밸브 개도가 냉각수 운전조건과 비교하여 비정상적으로 높거나 낮거나 특정 개도에 고정된 경우가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 동파방지',
+          desc: '냉각탑 동파방지 제어가 설정된 온도조건에 맞게 정상적으로 작동하고 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '과냉방지 제어',
+          desc: '냉각수 온도가 과냉방지 설정조건에 도달했을 때 관련 밸브 제어가 정상적으로 이루어지는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: 'PILOT 실험실 냉각수 온도',
+          desc: 'PILOT 실험실의 냉각수 공급·환수온도가 정상 운전범위에서 작동하고 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '이상패턴',
+          desc: '동일한 운전조건의 냉각탑·펌프·열교환기와 비교했을 때 온도·Hz·밸브 개도·운전상태 등이 확연히 다른 설비가 있는가?',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열원설비 현장확인',
+          desc: '자동제어 화면에서 이상이 발견되어 냉각탑·순환펌프·열교환기·밸브 등의 현장 확인이 필요한 설비가 있는가?',
+        },
+        // 주간 항목
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E6동 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: 'ORG1', val: 106 },
+            { label: 'ORG2', val: 106 },
+            { label: 'ACID', val: 96 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E8동 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: 'ORG2', val: 108 },
+            { label: 'ACID', val: 55 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E57 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: '#1', val: 25 },
+            { label: '#2', val: 35 },
+            { label: '#3', val: 25 },
+            { label: '#4', val: 25 },
+          ],
+        },
+        // 야간 항목
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E6동 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: 'ORG1', val: 85 },
+            { label: 'ORG2', val: 85 },
+            { label: 'ACID', val: 69 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E8동 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: 'ORG2', val: 87 },
+            { label: 'ACID', val: 44 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E57 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          type: 'absorber',
+          data: [
+            { label: '#1', val: 20 },
+            { label: '#2', val: 28 },
+            { label: '#3', val: 20 },
+            { label: '#4', val: 20 },
+          ],
+        },
+      ]
+
+      // 상태 관리 변수
+      let currentShift = 'day'
+      let items = []
+      let currentIndex = 0
+      let results = []
+      let comboCount = 0
+      let lastActionTime = Date.now()
+
+      const STORAGE_KEY = 'bas_checklist_quest_state'
+
+      function saveState() {
+        try {
+          const state = {
+            currentShift: currentShift,
+            currentIndex: currentIndex,
+            results: results,
+          }
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+        } catch (e) {
+          console.warn('로컬 스토리지 저장 실패', e)
+        }
+      }
+
+      function loadState() {
+        try {
+          const savedState = localStorage.getItem(STORAGE_KEY)
+          if (savedState) {
+            const state = JSON.parse(savedState)
+            currentShift = state.currentShift || 'day'
+            currentIndex = state.currentIndex || 0
+            results = state.results || []
+
+            if (currentShift === 'day') {
+              document.getElementById('shiftDay').checked = true
+            } else {
+              document.getElementById('shiftNight').checked = true
+            }
+          }
+        } catch (e) {
+          console.error('데이터 로드 실패', e)
+        }
+      }
+
+      window.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') saveState()
+      })
+      window.addEventListener('pagehide', () => saveState())
+
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          loadState()
+          initItems()
+          renderCard(currentIndex)
+        }
+      })
+
+      function initItems() {
+        items = rawItems.filter(
+          (item) => !item.shift || item.shift === currentShift,
+        )
+      }
+
+      const cardContainer = document.getElementById('card-container')
+      const comboEl = document.getElementById('combo-text')
+      const expBar = document.getElementById('exp-bar')
+      const progressText = document.getElementById('progress-text')
+      const memoModalEl = document.getElementById('memoModal')
+      const memoModal = new bootstrap.Modal(memoModalEl)
+      const memoInput = document.getElementById('memo-input')
+
+      // 타이핑 시 실시간 업데이트
+      memoInput.addEventListener('input', function () {
+        if (items[currentIndex]) {
+          let currentStatus =
+            (results[currentIndex] && results[currentIndex].status) || 'yes'
+          results[currentIndex] = {
+            item: items[currentIndex],
+            status: currentStatus,
+            memo: this.value,
+          }
+          saveState()
+        }
+      })
+
+      function toggleShift(shift) {
+        if (currentShift === shift) return
+
+        let absorberStartIndex = items.findIndex(
+          (item) => item.cat === '▣ 흡착탑',
+        )
+        currentShift = shift
+        initItems()
+
+        if (currentIndex > absorberStartIndex) {
+          currentIndex = absorberStartIndex
+          results = results.slice(0, absorberStartIndex)
+          alert('흡착탑 설정이 변경되어, 해당 구간부터 다시 점검합니다.')
+        }
+
+        saveState()
+        renderCard(currentIndex)
+      }
+
+      function renderCard(index) {
+        if (index >= items.length) {
+          showResultScreen()
+          return
+        }
+
+        const item = items[index]
+        const card = document.createElement('div')
+        card.className = 'swipe-card'
+        card.id = 'current-card'
+
+        let detailsHtml = item.details
+          ? `<div class="card-details">${item.details}</div>`
+          : ''
+        let absorberHtml = ''
+
+        if (item.type === 'absorber' && item.data) {
+          let rows = item.data
+            .map(
+              (d) =>
+                `<tr><td>${d.label}</td><td class="val-col">${d.val} mmH2O</td></tr>`,
+            )
+            .join('')
+          absorberHtml = `<table class="absorber-table"><tbody>${rows}</tbody></table>`
+        }
+
+        card.innerHTML = `
+          <div class="stamp stamp-like" id="stamp-like">이상없음</div>
+          <div class="stamp stamp-nope" id="stamp-nope">이상있음</div>
+          <div class="stamp stamp-back" id="stamp-back">이전</div>
+          <div class="card-cat">${item.cat}</div>
+          <div class="card-title-text">
+            <span class="card-index-badge">${index + 1}</span>
+            ${item.title}
+          </div>
+          <div class="card-desc">${item.desc}</div>
+          ${detailsHtml}
+          ${absorberHtml}
+          <div class="mt-4 small text-muted">👈 다음 항목 (이상없음) | 이전 항목 👉</div>
+        `
+
+        cardContainer.innerHTML = ''
+        cardContainer.appendChild(card)
+        updateProgress()
+        setupSwipeEvents(card)
+      }
+
+      function goBack() {
+        if (currentIndex > 0) {
+          currentIndex--
+          comboCount = 0
+          saveState()
+          renderCard(currentIndex)
+        }
+      }
+
+      function returnFromResult() {
+        document.getElementById('result-screen').style.display = 'none'
+        document.getElementById('app-header').style.display = 'block'
+        document.getElementById('card-container').style.display = 'block'
+        document.getElementById('control-panel').style.display = 'flex'
+        goBack()
+      }
+
+      function updateProgress() {
+        progressText.innerText = `${currentIndex} / ${items.length}`
+        expBar.style.width = `${(currentIndex / items.length) * 100}%`
+      }
+
+      function allNo() {
+        if (
+          !confirm(
+            "남은 모든 점검 항목을 '이상 없음'으로 일괄 처리하시겠습니까?",
+          )
+        )
+          return
+        while (currentIndex < items.length) {
+          let existingMemo =
+            (results[currentIndex] && results[currentIndex].memo) || ''
+          results[currentIndex] = {
+            item: items[currentIndex],
+            status: 'no',
+            memo: existingMemo,
+          }
+          currentIndex++
+        }
+        saveState()
+        showResultScreen()
+      }
+
+      function resetAll() {
+        if (!confirm('모든 점검 결과와 진행 상황을 초기화하시겠습니까?')) return
+        results = []
+        currentIndex = 0
+        localStorage.removeItem(STORAGE_KEY)
+
+        document.getElementById('app-header').style.display = 'block'
+        document.getElementById('card-container').style.display = 'block'
+        document.getElementById('control-panel').style.display = 'flex'
+        document.getElementById('result-screen').style.display = 'none'
+
+        document.getElementById('shiftDay').checked = true
+        currentShift = 'day'
+        initItems()
+        renderCard(currentIndex)
+      }
+
+      function printResult() {
+        if (currentIndex < items.length) {
+          alert('모든 항목의 점검을 완료한 후 인쇄/저장할 수 있습니다.')
+          return
+        }
+
+        let d = new Date(),
+          hours = d.getHours(),
+          timeStr = d.toLocaleString('ko-KR')
+        let errorItems = results
+          .slice(0, items.length)
+          .filter((r) => r && r.status === 'yes')
+        let a = []
+
+        if (errorItems.length === 0) {
+          let successTitle =
+            hours < 12
+              ? '오전 기계설비점검 이상없음'
+              : '오후 기계설비점검 이상없음'
+          a = [successTitle, '점검일시: ' + timeStr, '']
+        } else {
+          let errorTitle =
+            hours < 12
+              ? '오전 기계설비점검 이상 보고'
+              : '오후 기계설비점검 이상 보고'
+          a = [errorTitle, '점검일시: ' + timeStr, '']
+          let currentCat = ''
+          errorItems.forEach((r) => {
+            if (r.item.cat !== currentCat) {
+              currentCat = r.item.cat
+              a.push('')
+              a.push('[' + currentCat + ']')
+            }
+            a.push('- ' + r.item.title + ': 이상 있음')
+            if (r.memo) a.push('  상세설명: ' + r.memo)
+          })
+        }
+
+        let w = open('', '_blank')
+        let safeText = a
+          .join('\n')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+        w.document.write(
+          "<pre style='white-space:pre-wrap; font-family:sans-serif; padding:24px; font-size:14px;'>" +
+            safeText +
+            '</pre>',
+        )
+        w.document.close()
+        w.print()
+      }
+
+      function handleCombo() {
+        const now = Date.now()
+        if (now - lastActionTime < 3000) {
+          comboCount++
+          if (comboCount > 1) {
+            comboEl.innerText = `제대로 하는거 맞죠?`
+            comboEl.classList.add('show-combo')
+            setTimeout(() => comboEl.classList.remove('show-combo'), 800)
+          }
+        } else {
+          comboCount = 1
+        }
+        lastActionTime = now
+      }
+
+      function triggerHaptic(type) {
+        if (navigator.vibrate) {
+          if (type === 'no') navigator.vibrate(10)
+          if (type === 'yes') navigator.vibrate([50, 50, 50])
+        }
+      }
+
+      function handleAction(action) {
+        const card = document.getElementById('current-card')
+        if (!card) return
+
+        triggerHaptic(action)
+
+        if (action === 'no') {
+          card.querySelector('#stamp-like').style.opacity = '1'
+          card.style.transform = 'translateX(-150%) rotate(-15deg)'
+          handleCombo()
+
+          let existingMemo =
+            (results[currentIndex] && results[currentIndex].memo) || ''
+          results[currentIndex] = {
+            item: items[currentIndex],
+            status: 'no',
+            memo: existingMemo,
+          }
+          saveState()
+
+          setTimeout(() => {
+            currentIndex++
+            saveState()
+            renderCard(currentIndex)
+          }, 300)
+        } else if (action === 'yes') {
+          comboCount = 0
+          card.querySelector('#stamp-nope').style.opacity = '1'
+          card.style.transform = 'translateX(150%) rotate(15deg)'
+
+          document.body.classList.add('shake-screen')
+          setTimeout(() => document.body.classList.remove('shake-screen'), 300)
+
+          setTimeout(() => {
+            document.getElementById('modal-target-item').innerText =
+              `[${items[currentIndex].cat}] ${items[currentIndex].title}`
+            let placeholderTxt =
+              items[currentIndex].placeholder ||
+              '발견된 이상한 점을 기재해주세요...'
+            memoInput.setAttribute('placeholder', placeholderTxt)
+
+            let existingMemo =
+              (results[currentIndex] && results[currentIndex].memo) || ''
+            memoInput.value = existingMemo
+
+            results[currentIndex] = {
+              item: items[currentIndex],
+              status: 'yes',
+              memo: existingMemo,
+            }
+            saveState()
+
+            memoModal.show()
+          }, 300)
+        }
+      }
+
+      function saveMemo() {
+        memoInput.blur()
+        setTimeout(() => {
+          const memo = memoInput.value
+          results[currentIndex] = {
+            item: items[currentIndex],
+            status: 'yes',
+            memo: memo,
+          }
+          saveState()
+          memoModal.hide()
+          setTimeout(() => {
+            currentIndex++
+            saveState()
+            renderCard(currentIndex)
+          }, 300)
+        }, 150)
+      }
+
+      function cancelYes() {
+        memoInput.blur()
+        setTimeout(() => {
+          const currentMemo = memoInput.value
+          results[currentIndex] = {
+            item: items[currentIndex],
+            status: null,
+            memo: currentMemo,
+          }
+          saveState()
+
+          memoModal.hide()
+          setTimeout(() => {
+            const card = document.getElementById('current-card')
+            card.style.transition = 'transform 0.3s ease, opacity 0.3s ease'
+            card.style.transform = 'translateX(0px) rotate(0deg)'
+            card.querySelector('#stamp-like').style.opacity = 0
+            card.querySelector('#stamp-nope').style.opacity = 0
+          }, 300)
+        }, 150)
+      }
+
+      function setupSwipeEvents(card) {
+        let startX = 0,
+          currentX = 0,
+          isDragging = false
+        const likeStamp = card.querySelector('#stamp-like')
+        const backStamp = card.querySelector('#stamp-back')
+
+        card.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX
+          isDragging = true
+          card.style.transition = 'none'
+        })
+
+        card.addEventListener('touchmove', (e) => {
+          if (!isDragging) return
+          currentX = e.touches[0].clientX - startX
+
+          // 첫 카드에서는 이전(오른쪽) 스와이프 차단
+          if (currentIndex === 0 && currentX > 0) {
+            currentX = 0
+          }
+
+          card.style.transform = `translateX(${currentX}px) rotate(${currentX * 0.05}deg)`
+
+          if (currentX < 0) {
+            likeStamp.style.opacity = Math.min(Math.abs(currentX) / 100, 1)
+            if (backStamp) backStamp.style.opacity = 0
+          } else if (currentX > 0) {
+            if (backStamp) backStamp.style.opacity = Math.min(currentX / 100, 1)
+            likeStamp.style.opacity = 0
+          }
+        })
+
+        card.addEventListener('touchend', () => {
+          isDragging = false
+          card.style.transition = 'transform 0.3s ease, opacity 0.3s ease'
+
+          if (currentX < -100) {
+            handleAction('no')
+          } else if (currentX > 100 && currentIndex > 0) {
+            if (backStamp) backStamp.style.opacity = '1'
+            card.style.transform = 'translateX(150%) rotate(15deg)'
+            setTimeout(() => {
+              goBack()
+            }, 200)
+          } else {
+            card.style.transform = 'translateX(0px) rotate(0deg)'
+            likeStamp.style.opacity = 0
+            if (backStamp) backStamp.style.opacity = 0
+          }
+          currentX = 0
+        })
+      }
+
+      function showResultScreen() {
+        document.getElementById('app-header').style.display = 'none'
+        document.getElementById('card-container').style.display = 'none'
+        document.getElementById('control-panel').style.display = 'none'
+
+        const screen = document.getElementById('result-screen')
+        const rankEl = document.getElementById('final-rank')
+        const summaryEl = document.getElementById('result-summary')
+        const errorContainer = document.getElementById('error-summary-list')
+        const errorContent = document.getElementById('error-list-content')
+
+        const errorItems = results
+          .slice(0, items.length)
+          .filter((r) => r && r.status === 'yes')
+        const errorCount = errorItems.length
+
+        if (errorCount === 0) {
+          rankEl.innerText = 'S'
+          rankEl.className = 'rank-text rank-S'
+          summaryEl.innerText = '완벽합니다! 발견된 이상 항목이 없습니다.'
+          errorContainer.style.display = 'none'
+        } else {
+          if (errorCount <= 3) {
+            rankEl.innerText = 'A'
+            rankEl.className = 'rank-text rank-A'
+            summaryEl.innerText = `총 ${errorCount}건의 이상 항목을 발견했습니다.`
+          } else {
+            rankEl.innerText = 'B'
+            rankEl.className = 'rank-text rank-B'
+            summaryEl.innerText = `총 ${errorCount}건의 이상 항목 발견! 긴급 점검 요망.`
+          }
+
+          let htmlStr = ''
+          errorItems.forEach((r) => {
+            let categoryName = r.item.cat.replace('▣ ', '')
+            let memoText = r.memo ? r.memo : '메모 없음'
+            htmlStr += `
+            <div class="mb-2 pb-2 border-bottom" style="font-size: 13px;">
+              <b>[${categoryName}] ${r.item.title}</b><br>
+              <span class="text-secondary">${memoText}</span>
+            </div>
+          `
+          })
+          errorContent.innerHTML = htmlStr
+          errorContainer.style.display = 'block'
+        }
+
+        screen.style.display = 'flex'
+        updateProgress()
+      }
+
+      // 앱 실행 시 저장된 상태 불러오기
+      loadState()
+      initItems()
+      renderCard(currentIndex)
+    </script>
+  </body>
+</html>

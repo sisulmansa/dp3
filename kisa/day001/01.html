@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1일차 학습 : Q = mcΔt 복습</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #f5f7fa;
+        color: #343a40;
+        padding-bottom: 50px;
+      }
+
+      /* Header Hero Section */
+      .header-banner {
+        background-color: #4a5a6a;
+        color: #ffffff;
+        padding: 40px 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .header-banner h1 {
+        font-weight: 700;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      .header-banner p {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin: 0;
+      }
+
+      /* Content Cards */
+      .section-card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        margin-bottom: 24px;
+        overflow: hidden;
+        border: 1px solid #e9ecef;
+      }
+      .section-card .card-header {
+        background-color: #ffffff;
+        border-bottom: 2px solid #f1f3f5;
+        padding: 18px 20px;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #2c3e50;
+        display: flex;
+        align-items: center;
+      }
+      .section-card .card-header .badge {
+        background-color: #6c7a89;
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+      .section-card .card-body {
+        padding: 20px;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* Equation/Math Styling */
+      .math-text {
+        font-family: 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: bold;
+        color: #34495e;
+        background-color: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 1.05em;
+      }
+
+      /* Highlight Boxes */
+      .highlight-box {
+        background-color: #f1f3f5;
+        border-left: 4px solid #6c7a89;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .step-title {
+        font-weight: 600;
+        color: #4a5a6a;
+        margin-top: 15px;
+      }
+
+      /* Practice Problem Section */
+      .practice-problem {
+        background-color: #ffffff;
+        border: 2px dashed #6c7a89;
+        border-radius: 12px;
+        padding: 25px;
+        margin-top: 30px;
+      }
+      .practice-problem h4 {
+        font-weight: 700;
+        color: #2c3e50;
+      }
+      .answer-box {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border-left: 4px solid #198754;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header-banner">
+      <div class="container">
+        <h1>
+          1일차 학습 :
+          <span
+            style="font-family: 'Times New Roman', serif; font-style: italic"
+            >Q = mcΔt</span
+          >
+          복습
+        </h1>
+        <p>공조냉동기능사 실기 필수 열량 계산 공식 완벽 정리</p>
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+      <div class="small text-secondary mb-2">
+        <a href="/chem/">Home</a>
+      </div>
+      <!-- Section 1 & 2 -->
+      <div class="section-card">
+        <div class="card-header">
+          <span class="badge">1</span> 공식의 이해와 온도차(Δt)
+        </div>
+        <div class="card-body">
+          <p>
+            <strong>공식의 의미:</strong> 질량이 큰 물체일수록, 비열이 큰
+            물질일수록, 온도 변화가 클수록 더 많은 열량이 필요합니다.
+          </p>
+          <div class="highlight-box">
+            <p class="mb-1">
+              <strong>주의:</strong> <span class="math-text">Δt</span>는 온도
+              자체가 아니라 <strong>「온도차」</strong>입니다. 이 부분을 반드시
+              구분해야 합니다.
+            </p>
+          </div>
+          <p>
+            예를 들어 물을 10℃ → 30℃로 가열했다면
+            <span class="math-text">Δt = 30 − 10 = 20℃</span> 입니다.<br />
+            따라서 <span class="math-text">Q = mc × 20</span>입니다.
+          </p>
+
+          <p>
+            냉각할 때도 마찬가지입니다. 예를 들어 35℃ 물을 5℃로 냉각한다면:
+            <span class="math-text">Δt = 35 − 5 = 30℃</span><br />
+            따라서 제거해야 할 열량은:
+            <span class="math-text">Q = mc × 30</span> 입니다.
+          </p>
+
+          <p class="text-muted small mb-0">
+            ※ 중요한 점은 냉각할 때 수학적으로는 5−35=−30℃ 가 될 수 있지만,
+            냉동공학의 열량 계산에서는 보통 제거되는 열량의 크기를 구하므로
+            온도차를 <strong>양수</strong>로 사용합니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 3 & 4 -->
+      <div class="section-card">
+        <div class="card-header">
+          <span class="badge">2</span> 공조냉동 실무: 물의 열량 계산
+        </div>
+        <div class="card-body">
+          <p>
+            공조냉동 계산에서 물은 아주 자주 사용되며, 물의 비열이 1이기 때문에
+            계산이 쉽습니다.<br />
+            물의 비열: <span class="math-text">c = 1 kcal/(kg·℃)</span><br />
+            따라서 물의 경우 <span class="math-text">Q = mcΔt</span> 에서 c=1
+            이므로 <span class="math-text">Q = mΔt</span> 로 간단해집니다.
+          </p>
+
+          <div class="row mt-4 g-3">
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100 bg-light">
+                <h6 class="fw-bold">예제 1. 물의 냉각</h6>
+                <p class="mb-2 text-muted small">
+                  20℃의 물 2,000kg을 5℃까지 냉각한다면?
+                </p>
+                <ul class="list-unstyled small mb-3">
+                  <li>① 질량 <span class="math-text">m = 2000kg</span></li>
+                  <li>
+                    ② 물의 비열 <span class="math-text">c = 1 kcal/(kg·℃)</span>
+                  </li>
+                  <li>
+                    ③ 온도차 <span class="math-text">Δt = 20 − 5 = 15℃</span>
+                  </li>
+                </ul>
+                <p class="mb-0 fw-bold fs-6" style="color: #4a5a6a">
+                  Q = 2000 × 1 × 15 = 30,000 kcal
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100 bg-light">
+                <h6 class="fw-bold">예제 2. 물 1톤 가열</h6>
+                <p class="mb-2 text-muted small">1톤의 물을 10℃ 올린다면?</p>
+                <p class="small mb-2">
+                  1톤의 물은 1000kg 이므로<br /><span class="math-text"
+                    >Q = 1000 × 1 × 10</span
+                  >
+                </p>
+                <p class="mb-0 fw-bold fs-6" style="color: #4a5a6a">
+                  = 10,000 kcal
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="alert alert-secondary mt-3 mb-0 border-0 text-center"
+            style="background-color: #eef2f5"
+          >
+            ★★ <strong>물의 비열 암기:</strong> 물 1톤의 온도를 1℃ 변화시키는 데
+            필요한 열량 = <strong>1,000 kcal</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5 & 6 -->
+      <div class="section-card">
+        <div class="card-header">
+          <span class="badge">3</span> 주의사항: 체적-질량 변환 & 물질별 비열
+        </div>
+        <div class="card-body">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <h6 class="step-title">질량(m) 변환 주의</h6>
+              <p class="small">
+                <span class="math-text">Q = mcΔt</span> 의
+                <span class="math-text">m</span>은 '질량'입니다. 체적이
+                주어졌다면 먼저 질량으로 바꿔야 합니다.
+              </p>
+              <div class="highlight-box py-2">
+                <span class="math-text">질량 = 체적(m³) × 밀도(kg/m³)</span>
+              </div>
+              <p class="small text-muted mb-0">
+                예: 물 1m³의 밀도가 약 1,000kg/m³ 라면:<br />
+                <span class="math-text">m = 1m³ × 1000kg/m³ = 1000kg</span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6 class="step-title">브라인(Brine) 문제</h6>
+              <p class="small">
+                같은 질량과 같은 온도 변화라도
+                <strong>물질의 비열에 따라 필요한 열량이 달라집니다.</strong>
+              </p>
+              <p class="small text-muted">
+                예: 브라인 비열
+                <span class="math-text">c = 0.8 kcal/(kg·℃)</span>, 질량
+                1,000kg, 온도차 10℃인 경우:
+              </p>
+              <div class="highlight-box py-2">
+                <span class="math-text">Q = 1000 × 0.8 × 10 = 8,000 kcal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7 & 8 -->
+      <div class="section-card">
+        <div class="card-header">
+          <span class="badge">4</span> 실기시험 접근법 & 단위 구분
+        </div>
+        <div class="card-body">
+          <h6 class="step-title mt-0">총 열량 vs 시간당 열량</h6>
+          <p>
+            단순 열량(총 열량)은
+            <span class="math-text">Q = 30,000 kcal</span>와 같이 표현합니다.
+            하지만 냉동기의 냉동능력을 구할 때는 <strong>시간당 열량</strong>을
+            많이 사용합니다.
+          </p>
+          <p class="small text-muted mb-4">
+            만약 1시간 동안 30,000kcal의 열량을 제거한다면:
+            <strong>30,000 kcal/h</strong><br />
+            30,000 kcal/h 을 RT(냉동톤)로 환산하면:
+            <span class="math-text">30,000 ÷ 3,320 = 9.04 RT</span>
+          </p>
+
+          <h6 class="step-title">실기시험 문제 해결 4단계</h6>
+          <p class="mb-2">문제를 읽고 다음 4가지만 찾으세요.</p>
+          <ol class="small mb-3">
+            <li class="mb-1">
+              무엇의 열량을 구하는가? → <span class="math-text">Q</span>
+            </li>
+            <li class="mb-1">
+              질량은 얼마인가? → <span class="math-text">m</span>
+            </li>
+            <li class="mb-1">
+              비열은 얼마인가? → <span class="math-text">c</span>
+            </li>
+            <li class="mb-1">
+              몇 ℃ 변화하는가? → <span class="math-text">Δt</span>
+            </li>
+          </ol>
+          <p class="mb-0 fw-bold" style="color: #2c3e50">
+            이후 "질량 × 비열 × 온도차" 를 곱하면 됩니다!
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 9 (Key Summary) -->
+      <div
+        class="alert shadow-sm border-0 mt-4"
+        style="background-color: #3b4d61; color: white; border-radius: 10px"
+      >
+        <h5 class="fw-bold mb-3">📌 1일차 필수 암기사항</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="mb-0 small" style="line-height: 1.8">
+              <li>
+                <strong>공식:</strong>
+                <span class="math-text bg-transparent text-white p-0"
+                  >Q = mcΔt</span
+                >
+              </li>
+              <li>
+                <span class="math-text bg-transparent text-white p-0">m</span> =
+                질량 (kg)
+              </li>
+              <li>
+                <span class="math-text bg-transparent text-white p-0">c</span> =
+                비열 (kcal/kg·℃)
+              </li>
+              <li>
+                <span class="math-text bg-transparent text-white p-0">Δt</span>
+                = 온도차 (℃)
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 mt-2 mt-md-0">
+            <ul class="mb-0 small" style="line-height: 1.8">
+              <li>물의 비열 = <strong>1 kcal/kg·℃</strong></li>
+              <li>물 1톤 = <strong>1,000kg</strong></li>
+              <li>물 1톤을 1℃ 변화 = <strong>1,000 kcal</strong></li>
+              <li>
+                냉각 계산에서는 보통 온도차의 <strong>크기(양수)</strong>를 사용
+              </li>
+              <li>총 열량과 시간당 열량(kcal/h)을 구분</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 10 (Practice Problem) -->
+      <div class="practice-problem">
+        <h4>✏️ 마지막으로 1일차에 풀어볼 문제</h4>
+        <div
+          class="p-4 rounded mt-3"
+          style="background-color: #f8f9fa; border: 1px solid #e9ecef"
+        >
+          <p class="fs-6 mb-0 fw-bold">
+            30℃의 물 3m³를 10℃까지 냉각할 때 제거해야 할 열량은 얼마인가?
+          </p>
+        </div>
+
+        <button
+          class="btn btn-secondary mt-3 mb-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#solutionBox"
+          aria-expanded="false"
+          aria-controls="solutionBox"
+        >
+          정답 및 해설 보기
+        </button>
+
+        <div class="collapse" id="solutionBox">
+          <div class="answer-box">
+            <h6 class="fw-bold mb-3" style="color: #198754">
+              풀이 과정 (힌트 적용)
+            </h6>
+            <ol class="mb-3 small">
+              <li class="mb-1">
+                <strong>체적 → 질량 변환:</strong> 물 3m³ = 3,000 kg
+              </li>
+              <li class="mb-1">
+                <strong>물의 비열:</strong>
+                <span class="math-text">c = 1 kcal/kg·℃</span>
+              </li>
+              <li class="mb-1">
+                <strong>온도차 계산:</strong> 30℃ → 10℃ 이므로
+                <span class="math-text">Δt = 20℃</span>
+              </li>
+              <li class="mb-1">
+                <strong>공식 대입:</strong>
+                <span class="math-text">Q = mcΔt</span>
+              </li>
+            </ol>
+            <div class="p-3 bg-white border rounded text-center shadow-sm mt-3">
+              <p class="mb-0 fw-bold fs-5" style="color: #2c3e50">
+                Q = 3,000 × 1 × 20 = 60,000 kcal
+              </p>
+            </div>
+            <p class="text-muted mt-3 small text-center mb-0">
+              ※ 체적 → 질량 변환 → 온도차 → 공식 대입 순서로 풀면 쉽게 해결할 수
+              있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

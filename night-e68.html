@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E6/E8 담당자 야간순찰 체크리스트</title>
+    <style>
+      :root {
+        --primary-color: #0056b3;
+        --bg-color: #f4f7f6;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --border-color: #e0e0e0;
+        --highlight-red: #d32f2f;
+      }
+
+      body {
+        font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      .notice-box {
+        background-color: #fff9c4;
+        border: 1px solid #fbc02d;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 30px;
+      }
+
+      .notice-box h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #f57f17;
+        font-size: 18px;
+      }
+
+      .notice-box ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .section {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .section h2 {
+        color: var(--primary-color);
+        font-size: 20px;
+        margin-top: 0;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .sub-section {
+        margin-bottom: 20px;
+      }
+
+      .sub-section h3 {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .check-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .check-list li {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 12px;
+        padding: 12px 10px;
+        background-color: #f9f9f9;
+        border-radius: 6px;
+        border: 1px solid #eee;
+        transition: background-color 0.2s;
+      }
+
+      .check-list li:hover {
+        background-color: #f1f1f1;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      /* 아이폰 스타일 토글 스위치 CSS */
+      .check-item input[type='checkbox'] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 46px;
+        height: 26px;
+        background-color: #e5e5ea;
+        border-radius: 13px;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        flex-shrink: 0; /* 스위치 크기 고정 */
+        margin-right: 12px;
+        margin-top: 0;
+        transition: background-color 0.3s ease;
+      }
+
+      .check-item input[type='checkbox']::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 22px;
+        height: 22px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      /* 체크되었을 때 (iOS 그린 컬러) */
+      .check-item input[type='checkbox']:checked {
+        background-color: #34c759;
+      }
+
+      /* 체크되었을 때 동그라미 이동 */
+      .check-item input[type='checkbox']:checked::after {
+        transform: translateX(20px);
+      }
+
+      .check-item label {
+        cursor: pointer;
+        flex: 1;
+        font-size: 15px;
+        line-height: 1.5;
+        padding-top: 2px; /* 텍스트와 스위치 높이 균형 */
+      }
+
+      .barcode {
+        color: var(--highlight-red);
+        font-weight: bold;
+      }
+
+      .record-box {
+        margin-top: 12px;
+        margin-left: 58px; /* 토글 스위치 너비만큼 여백 조정 */
+        background-color: #e3f2fd;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #bbdefb;
+      }
+
+      .record-box .record-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      .record-box input[type='text'] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .desc {
+        font-size: 13px;
+        color: #666;
+        margin-top: 4px;
+        display: block;
+      }
+
+      button.submit-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 30px;
+        margin-bottom: 50px;
+      }
+
+      button.submit-btn:hover {
+        background-color: #003d82;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>▣ E6/8 담당자-야간순찰 체크리스트</h1>
+
+      <!-- 공지사항 -->
+      <div class="notice-box">
+        <h3>📢 공지사항</h3>
+        <ul>
+          <li>사무실 청소</li>
+          <li>주말 당직시 <span class="barcode">바코드 체크</span> 없음</li>
+          <li>자동제어 현황 파악후 순찰시 비교</li>
+          <li>엣지 체크시 무조건 5분 이상 경과후 확인 처리</li>
+          <li>Issue는 조장에게 전달</li>
+        </ul>
+      </div>
+
+      <!-- 1. 방재실 -->
+      <div class="section">
+        <h2>1. 방재실</h2>
+        <ul class="check-list">
+          <li>
+            <div class="check-item">
+              <input type="checkbox" id="chk1_1" />
+              <label for="chk1_1"
+                >자동제어 운영현황 사진캡처 (➡공조기, 냉각탑, 환기팬)</label
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 2. E7동 -->
+      <div class="section">
+        <h2>2. E7동</h2>
+        <div class="sub-section">
+          <h3>1) B1 기계실 - 북측 출입문</h3>
+          <span class="desc" style="margin-bottom: 10px; margin-left: 10px"
+            >※ E6 순찰담당이 E7에 가야하는 이유는 E6 설비 일부가 거기 있기
+            때문</span
+          >
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk2_1" />
+                <label for="chk2_1"
+                  >(1) 난방 순환 펌프 3번째 패널에 부착된
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk2_2" />
+                <label for="chk2_2"
+                  >(2)E6 난방순환펌프 <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label" name="result"
+                  >E6 B1F HWP(난방순환펌프) 31.7Hz(5호기) 난방펌프 압력
+                  7.2K</span
+                >
+
+                <label for="rpm">RPM(Hz) : </label>
+                <input type="text" id="rpm" value="31.7Hz" />
+
+                <label for="pump">펌프번호(호기) : </label>
+                <input type="text" id="pump" value="5" />
+
+                <label for="pressure">난방펌프 압력(K) : </label>
+                <input type="text" id="pressure" value=" 7.2" />
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk2_3" />
+                <label for="chk2_3"
+                  >(3)E6 공용냉각탑 냉수순환펌프
+                  <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label"
+                  >E6 B1F CHWP(냉수순환펌프) 입력:</span
+                >
+                <input
+                  type="text"
+                  value="35.0Hz(1호기) 입 16.0℃/5.8K, 출 8.5℃/6.4K"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-section">
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk2_4" />
+                <label for="chk2_4"
+                  >2) 화물엘베 타고 M 층으로 이동해서 E6으로 이동</label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. E6동 -->
+      <div class="section">
+        <h2>3. E6동</h2>
+
+        <div class="sub-section">
+          <h3>1) E6-9F</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_1" />
+                <label for="chk3_1"
+                  >(1) 에어컨실 - <span class="barcode">바코드 체크</span>,
+                  에어컨 작동 이상유무, 누수상태, 제습건조기 체크(터치스크린
+                  알람)<br />
+                  <span class="desc"
+                    >※ 에어컨 전원위치 : EPS실 안쪽 RP-CN-9B1 패널 문열면
+                    "실외기전원 9층 MCCB"</span
+                  ></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_2" />
+                <label for="chk3_2"
+                  >(2) 옆쪽 EPS실 내부 -
+                  <span class="barcode">바코드 체크</span> (2개)</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_3" />
+                <label for="chk3_3">(3) 고압 가스 저장소실</label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_4" />
+                <label for="chk3_4"
+                  >(4) 흡착탑 누수확인(자동제어상 Fan 운영정보와 비교확인)<br />
+                  <span class="desc"
+                    >※ 화장실 Exhaust Fan에서 끼익 소리가 나면 선임 자에게
+                    보고<br />※ 화장실 배기팬(EF-17)은 DP3 맨끝 층 양쪽에 2개
+                    있음</span
+                  ></label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>2) E6-8F</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_5" />
+                <label for="chk3_5"
+                  >(1) 물품창고 내 TPS실 ⊃ EPS실
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_6" />
+                <label for="chk3_6"
+                  >(2) 폐수중계조 배기팬 fault reset 버튼 점등여부 확인</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_7" />
+                <label for="chk3_7"
+                  >(3) Fan 관련 제어반과 자동제어 운영정보 비교 확인</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_8" />
+                <label for="chk3_8">(4) 냉각탑 누수 확인</label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_9" />
+                <label for="chk3_9"
+                  >(5)E6 실험실냉각탑 <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label">E6 8F 실험실냉각탑 입력:</span>
+                <input
+                  type="text"
+                  value="2,3호기 가동중 30.0Hz 24.3℃/22.3℃/-210.0℃"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>3) E6-7F 공조실(Left/Right) 점검사항</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_10" />
+                <label for="chk3_10"
+                  >(1) 자동제어 운영현황과 인버터제어반 Hz, Run 램프
+                  비교확인</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_11" />
+                <label for="chk3_11"
+                  >(2) 남쪽문 판넬 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_12" />
+                <label for="chk3_12"
+                  >(3) Left 라인 공조기 벨트, 댐퍼 Open 램프 점등 확인</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_13" />
+                <label for="chk3_13"
+                  >(4) Right 라인 공조기 벨트, 댐퍼 Open 램프 점등 확인</label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>4) E6-B1-북측 기계실</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_14" />
+                <label for="chk3_14"
+                  ><span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>5) E6-B2-북측</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_15" />
+                <label for="chk3_15"
+                  >(1) 엘베 내려서 왼쪽 공조실 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_16" />
+                <label for="chk3_16"
+                  >(2) 엘베 내려서 오른쪽 공조실 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_17" />
+                <label for="chk3_17"
+                  >(3)E6 냉각수 <strong>기록작성</strong><br />
+                  <span class="desc"
+                    >위치1) 냉각탑냉각수 - 문을 마주보고 오른쪽 벽면 위치<br />위치2)
+                    중형 실험실냉각수 - 문을 마주보고 왼쪽 벽면 위치</span
+                  ></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label"
+                  >E6 B2F 냉각탑냉각수 / 중형 실험실냉각수 입력:</span
+                >
+                <input
+                  type="text"
+                  value="냉각탑냉각수 1호기 23.8℃/6,9K/55.0Hz"
+                />
+                <input
+                  type="text"
+                  value="중형 실험실냉각수 1호기 23.0℃/6.4K/50.0Hz"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>6) E6-B4-북측 졸라펌프실</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_18" />
+                <label for="chk3_18"
+                  ><span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_19" />
+                <label for="chk3_19"
+                  >(1) 오버로드 Trip버튼 불 들어와 있으면 버튼 2번 눌러서
+                  소등시킴</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_20" />
+                <label for="chk3_20"
+                  >(2) E6-UT 유량계 제어반의 "STI-4US" 일반 폐수 수위 패널값이
+                  70% 이상이면 자동으로 펌프 기동</label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>7) ~ 9) 기타 지하층</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_21" />
+                <label for="chk3_21"
+                  >7) 다시 B2로 올라와서 - 화물E/V 쪽으로 이동</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_22" />
+                <label for="chk3_22"
+                  >8) E6-B2-남측 PS#4 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_23" />
+                <label for="chk3_23"
+                  >9) E6-B4-남측 수변전실 -
+                  <span class="barcode">바코드 체크</span><br />
+                  <span class="desc"
+                    >(1) 에어컨 물새는지 점검<br />(2) UPS실 점검</span
+                  >
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk3_24" />
+                <label for="chk3_24"
+                  >10) 발전기 <strong>기록작성</strong>(주말만)</label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label">E6 발전기</span>
+                <input type="text" value="냉각수(℃) - 35°C" />
+                <input type="text" value="배터리(Vdc) - 26V" />
+                <input type="text" value="경유(L) - 690L" />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. E8동 -->
+      <div class="section">
+        <h2>4. E8동</h2>
+
+        <div class="sub-section">
+          <h3>1) E8-8F-화물E/V 이동</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_1" />
+                <label for="chk4_1"
+                  >(1) EPS실 첫번째
+                  <span class="barcode">바코드 체크</span> (비상계단으로 9층
+                  올라가 태양광패널 점검)</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_2" />
+                <label for="chk4_2">(2) 공조실2 - AHU-1278/3456, 배기팬</label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_3" />
+                <label for="chk4_3"
+                  >(3) EPS실 두번째
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_4" />
+                <label for="chk4_4">(4) 공조실1 - AHU-1278/3456, 배기팬</label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_5" />
+                <label for="chk4_5"
+                  >(5) 셔터열고 흡착탑, BSL 배기팬 동력제어반 점검</label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>2) ~ 3) E8 7F, 6F 점검</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_6" />
+                <label for="chk4_6">2) E8-7F 중앙복도 도보로 가볍게 순찰</label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_7" />
+                <label for="chk4_7"
+                  >3) E8-6F (1) 차압계 정상범위 확인 - 안:20pa 중반,
+                  밖:10pa중반</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_8" />
+                <label for="chk4_8"
+                  >3) E8-6F (2) 온습도 <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label"
+                  >E8 5,6F 6개소 BSL실험실 차압 및 온습도 상태점검 입력:</span
+                >
+                <input
+                  type="text"
+                  value="6층 21.6℃ ~ 23.0℃/76.4% ~ 83.2%, 5311호 24.1℃/70.0%"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_9" />
+                <label for="chk4_9"
+                  >3) E8-6F (3) 남쪽 EPS
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_10" />
+                <label for="chk4_10"
+                  >3) E8-6F (4) EPS실 옆 PS#3 냉장냉동실험실 - 프레온
+                  압축기점검(계기판 확인 - 알람/트림)</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_11" />
+                <label for="chk4_11">3) E8-6F (5) 바이오 CMC 연구소 순찰</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>4) ~ 7) E8 중저층부 점검</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_12" />
+                <label for="chk4_12"
+                  >4) E8-5F (1) PS#1 냉장냉동실험실 - 프레온 압축기점검(계기판
+                  확인 - 알람/트림)</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_13" />
+                <label for="chk4_13"
+                  >4) E8-5F (2) 북측 EPS실
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_14" />
+                <label for="chk4_14"
+                  >5) E8-4F (1) 남측 EPS
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_15" />
+                <label for="chk4_15"
+                  >5) E8-4F (2) PS#3 냉장냉동실험실 - 프레온 압축기점검</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_16" />
+                <label for="chk4_16"
+                  >6) E8-3F-북측 EPS
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_17" />
+                <label for="chk4_17"
+                  >7) E8-2F-남측 EPS
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-section">
+          <h3>8) ~ 13) E8 지하층 점검</h3>
+          <ul class="check-list">
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_18" />
+                <label for="chk4_18"
+                  >8) E8-B1-북측 (1) 공조실 -
+                  <span class="barcode">바코드 체크</span> (나라컨트롤
+                  AHU)</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_19" />
+                <label for="chk4_19"
+                  >8) E8-B1-북측 (2) 실험동물실은 야간에만 환복후 일방통행선
+                  따라 순찰</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_20" />
+                <label for="chk4_20"
+                  >9) E8-B2 (1) 기계실 - 남쪽문으로 들어오자마자 문에
+                  <span class="barcode">바코드 체크</span>, 지역난방 검침,
+                  난방/냉수펌프 육안 점검</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_21" />
+                <label for="chk4_21"
+                  >9) E8-B2 (2) 냉수순환펌프 <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label"
+                  >E8 B2F CHWP(냉수순환펌프) 입력:</span
+                >
+                <input
+                  type="text"
+                  value="33.6Hz(1호기) 입 15℃/7.0K, 출 10.3℃/7.0K"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_22" />
+                <label for="chk4_22"
+                  >9) E8-B2 (3) 난방순환펌프 <strong>기록작성</strong></label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label">E8 B2F HWP(난방순환펌프) 입력:</span>
+                <input type="text" value="30.3Hz(6호기) 난방펌프 압력 8.0K" />
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_23" />
+                <label for="chk4_23"
+                  >10) E8-B1-남측 (1) EPS실 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_24" />
+                <label for="chk4_24"
+                  >10) E8-B1-남측 (2) 맞은편 PS#3 실험동물실 - 압축기점검</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_25" />
+                <label for="chk4_25"
+                  >11) E8-1F 옥내저장소 - 냉동시스템 순찰확인 차트 작성</label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_26" />
+                <label for="chk4_26"
+                  >12) E8-B3-남측 졸러펌프실 -
+                  <span class="barcode">바코드 체크</span></label
+                >
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_27" />
+                <label for="chk4_27"
+                  >13) E6-B4-남측 수변전실 -
+                  <span class="barcode">바코드 체크</span><br />
+                  <span class="desc"
+                    >(1) 에어컨 물새는지 점검<br />(2) UPS실 점검</span
+                  >
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="check-item">
+                <input type="checkbox" id="chk4_28" />
+                <label for="chk4_28"
+                  >13)-(3) 발전기 <strong>기록작성</strong>(주말만)</label
+                >
+              </div>
+              <div class="record-box">
+                <span class="record-label">수변전실 발전기 입력:</span>
+                <input type="text" value="냉각수(℃) - 35°C" />
+                <input type="text" value="배터리(Vdc) - 26V" />
+                <input type="text" value="경유(L) - 690L" />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 순찰완료 버튼 -->
+      <button class="submit-btn" onclick="alert('순찰 기록이 저장되었습니다.')">
+        순찰 완료 및 기록 저장
+      </button>
+    </div>
+  </body>
+</html>

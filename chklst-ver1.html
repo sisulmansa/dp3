@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>기계설비점검</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI',
+          sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .category-title {
+        background-color: #17324d;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        scroll-margin-top: 150px; /* 링크 이동 시 헤더에 가리지 않도록 마진 추가 */
+      }
+      textarea::placeholder {
+        color: #9ba4b5;
+      }
+      .highlight-pending {
+        transition:
+          border 0.3s,
+          box-shadow 0.3s;
+        border: 2px solid #dc3545 !important;
+        box-shadow: 0 0 10px rgba(220, 53, 69, 0.4) !important;
+      }
+      .print-btn {
+        transition: opacity 0.3s;
+      }
+      textarea:focus {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 5px rgba(220, 53, 69, 0.25) !important;
+      }
+      .scroll-top-btn {
+        cursor: pointer;
+      }
+      .absorber-table {
+        width: 100%;
+        margin-bottom: 15px;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      .absorber-table th,
+      .absorber-table td {
+        border: 1px solid #dee2e6;
+        padding: 8px;
+        text-align: center;
+      }
+      .absorber-table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+      }
+      .absorber-table td.val-col {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+
+      /* 하단 메모 요약 영역 스타일 */
+      .memo-summary-area {
+        background-color: #fff3cd;
+        border: 1px solid #ffe69c;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #664d03;
+      }
+      .memo-item {
+        margin-bottom: 8px;
+        border-bottom: 1px dashed #ffc107;
+        padding-bottom: 8px;
+      }
+      .memo-item:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      /* 커스텀 스크롤바 감추기 (퀵링크 영역) */
+      .quick-links::-webkit-scrollbar {
+        display: none;
+      }
+      .quick-links {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      /* 퀵링크 버튼 호버 시 텍스트 색상 검정색으로 변경 */
+      .quick-link-btn:hover {
+        color: #000 !important;
+      }
+
+      /* 전화번호 스타일 */
+      .phone-text {
+        text-decoration: none !important; /* 밑줄 완벽 제거 */
+      }
+
+      /* 기본 a태그가 전화번호에 밑줄을 생성하는 경우를 대비 */
+      a.phone-text:link,
+      a.phone-text:visited,
+      a.phone-text:hover,
+      a.phone-text:active {
+        text-decoration: none !important;
+      }
+
+      /* 부가 설명 스타일 */
+      .item-details {
+        font-size: 12px;
+        color: #6c757d;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        border-left: 3px solid #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5" id="topOfPage">
+      <!-- Header 영역 (진행률 및 상단 고정 툴바) -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0 scroll-top-btn" onclick="scrollToTop()">
+            🏭 기계설비점검
+          </h1>
+
+          <!-- 네비게이션 퀵 링크 -->
+          <div
+            class="d-flex gap-2 quick-links"
+            style="overflow-x: auto; white-space: nowrap"
+          >
+            <a
+              href="#cat-dp3"
+              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
+              style="
+                font-size: 12px;
+                font-weight: 500;
+                border-color: rgba(255, 255, 255, 0.4);
+              "
+            >
+              공
+            </a>
+            <a
+              href="#cat-chiller"
+              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
+              style="
+                font-size: 12px;
+                font-weight: 500;
+                border-color: rgba(255, 255, 255, 0.4);
+              "
+            >
+              냉
+            </a>
+            <a
+              href="#cat-tower"
+              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
+              style="
+                font-size: 12px;
+                font-weight: 500;
+                border-color: rgba(255, 255, 255, 0.4);
+              "
+            >
+              탑
+            </a>
+            <a
+              href="#cat-absorber"
+              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
+              style="
+                font-size: 12px;
+                font-weight: 500;
+                border-color: rgba(255, 255, 255, 0.4);
+              "
+            >
+              흡
+            </a>
+            <a
+              href="/bas/"
+              class="btn btn-light btn-sm rounded-pill px-3 py-1 text-dark fw-bold"
+              style="font-size: 12px"
+            >
+              Home
+            </a>
+          </div>
+        </div>
+
+        <!-- 진행률 -->
+        <div
+          class="d-flex justify-content-between align-items-end small mb-1 mt-3"
+        >
+          <span style="font-size: 12px">
+            <a href="tel:02-6987-1112" class="phone-text text-white"
+              >진행률 - CA 중앙관제기계팀</a
+            ></span
+          >
+          <b id="progressText" class="fs-6">0 / 0</b>
+        </div>
+        <div
+          class="progress mb-3"
+          style="height: 8px; background-color: rgba(255, 255, 255, 0.2)"
+        >
+          <div
+            id="bar"
+            class="progress-bar"
+            style="background-color: #63d3a5; width: 0%"
+          ></div>
+        </div>
+
+        <!-- 헤더 툴바 -->
+        <div class="row g-2">
+          <div class="col-4">
+            <button
+              class="btn btn-success w-100 fw-bold shadow-sm"
+              style="font-size: 12px; padding: 8px 0"
+              onclick="allNo()"
+            >
+              전체 이상 없음
+            </button>
+          </div>
+          <div class="col-4">
+            <button
+              class="btn btn-outline-light w-100 fw-bold shadow-sm"
+              style="font-size: 12px; padding: 8px 0"
+              onclick="resetAll()"
+            >
+              전체 초기화
+            </button>
+          </div>
+          <div class="col-4">
+            <button
+              class="btn btn-light w-100 fw-bold text-dark shadow-sm print-btn"
+              style="font-size: 12px; padding: 8px 0"
+              onclick="printResult()"
+            >
+              PDF 저장 / 인쇄
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-3">
+        <!-- 상단 요약 통계 (Summary) -->
+        <div class="card border-0 shadow-sm mb-3 rounded-4">
+          <div class="card-body p-3">
+            <b class="d-block mb-3 text-dark">오늘의 점검 결과</b>
+            <div class="row g-2 text-center">
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="yes1" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >이상 있음</small
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="no1" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >이상 없음</small
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="pending1" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >미점검</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 체크리스트 출력 영역 -->
+        <div id="list"></div>
+
+        <!-- 하단 요약 통계 (Summary) -->
+        <div class="card border-0 shadow-sm mt-4 mb-3 rounded-4">
+          <div class="card-body p-3">
+            <b class="d-block mb-3 text-dark">오늘의 점검 결과</b>
+            <div class="row g-2 text-center">
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="yes2" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >이상 있음</small
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="no2" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >이상 없음</small
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <div class="bg-light rounded-3 p-2">
+                  <b id="pending2" class="fs-4 text-dark d-block">0</b>
+                  <small class="text-muted" style="font-size: 11px"
+                    >미점검</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- 이상항목 메모 요약 출력 영역 -->
+            <div id="memoSummary" class="memo-summary-area d-none">
+              <b class="d-block mb-2 text-danger">⚠️ 이상 항목 요약</b>
+              <div id="memoSummaryContent"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer
+        class="text-center text-secondary p-3 mt-2"
+        style="font-size: 12px"
+      >
+        ※ 화면상 이상은 곧바로 고장으로 판단하지 말고 이력 및 현장확인 필수<br />
+        <span class="mt-2 d-inline-block">v0.1.20-beta</span>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS 로직 -->
+    <script>
+      let currentShift = 'day'
+
+      const items = [
+        // 1. 스마트 공조기
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 고장경보 알람',
+          desc: '고장·경보 발생 AHU가 있는가?',
+          details:
+            '⭐️공조기 세트<br>E6 : Left/Right<br>E8 : 1278/3456<br>E5 : 1,5,7 | 2,6,8<br>E7 : 1,5,7 | 2,4',
+          placeholder: '이상한 점 : E6-AHU-01 팬 인버터 트립 경보 발생 (09:30)',
+        },
+
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 운전상태',
+          desc: '기동 조건인데 정지해 있거나, 정지 조건인데 운전 중인 AHU가 있는가?',
+          details:
+            'E6-B2 CN-04~05 : 1층 STAFF/아뜨리움/로비 평일 주간<br>E8-B2 LS-01~03,06 : 지하층 지원시설 평일 06시~20시<br>E5-B2 E5-01~02 : 1층 회의실/세미나실/로비는 주간 기동<br>E7-B2 E7-02~03 : 로비는 주간, 강당은 요청시 냉방 기동<br>E57 AHU-CS-01,02,03 : M층~B4 지원시설 평일 주간',
+          placeholder:
+            '이상한 점 : E7-AHU-03 스케줄상 기동이나 현장 수동정지 상태',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 운전모드',
+          desc: '냉방/제습 설정이 잘못된 AHU가 있는가?',
+          details:
+            '2026.09.11 이후 E68-AHU 냉방모드<br>E6-B2 CN-04~05 : 항상 냉방<br>E8-B2 LS-01~03,06 : 항상 냉방<br>E57-AHU : 항상 냉방',
+          placeholder:
+            '이상한 점 : E5-AHU-01 겨울철이나 냉방모드로 잘못 설정됨',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 온도값',
+          desc: '온도설정, 급기온도를 비교했을 때 비정상적인 편차가 지속되는 AHU가 있는가?',
+          details:
+            '정상: ±1℃ 이내<br>관찰: ±1~2℃<br>이상 의심: ±2℃ 초과가 10분 이상 지속<br>현장확인 우선: ±3℃ 이상이 지속',
+          placeholder:
+            '이상한 점 : E6-AHU-02 설정온도 22℃이나 실제 급기온도 27℃ 지속',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 습도값',
+          desc: '급기습도가 짧은 시간 내 5%p 이상 급격하게 변하거나, 습도설정 대비 5%p 이상 편차가 지속되는 AHU가 있는가?',
+          details:
+            '급기습도 48~52% → 정상적인 범위<br>53~55% → 관찰<br>56% 이상이 지속 → 이상 의심<br>60% 이상 → 우선 확인',
+          placeholder:
+            '이상한 점 : E8-AHU-01 설정습도 50% 대비 급기습도 75%로 비정상 다습',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 토출·환기온도',
+          desc: '동일한 운전조건의 다른 AHU와 비교했을 때 환기→토출 온도차가 ±2℃ 이상 차이를 보이거나, 환기온도 대비 토출온도의 변화가 비정상적인 AHU가 있는가?',
+          details:
+            '동일 조건 AHU<br>환기온도 비교<br>토출온도 비교<br>환기→토출 온도차 비교<br>2℃ 이상 차이가 지속되는지 확인<br>냉방·난방밸브 및 댐퍼 상태 확인',
+          placeholder:
+            '이상한 점 : E6-AHU-04 환기온도가 30℃로 타 장비 대비 5℃ 높음',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 냉·난방밸브',
+          desc: '냉방 요구 또는 급기온도 변화에 따라 냉방밸브 개도가 적절하게 변화하지 않거나, 밸브 개도가 특정 값에 장시간 고정되어 급기온도가 정상적으로 제어되지 않는 AHU가 있는가?',
+          details:
+            '⭐️제습모드에서는 난방밸브가 많이 열리기 때문에 냉방밸브 역시 (냉방모드에 비해) 많이 열릴 수 밖에 없다.<br>냉방 ↑ + 난방 ↑ + 급기온도 설정값 유지 → 정상<br>냉방 ↑ + 난방 ↓ + 급기온도 하강 → 정상<br>냉방 ↓ + 난방 ↑ + 급기온도 상승 → 정상<br>냉·난방밸브가 동시에 개도되면서 급기온도 정상 유지<br>급기온도가 설정값을 지속적으로 벗어남 → 이상<br>급기온도가 크게 변하는데 밸브 개도 고정 → 이상<br>온도조건 변화에도 특정 밸브 개도가 고정 → 이상',
+          placeholder:
+            '이상한 점 : E5-AHU-02 두 밸브가 상당히 개도되어 있는데도 급기온도가 제어되지 않음',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 가습밸브',
+          desc: '습도 조건에 따라 가습밸브가 적절하게 제어되지 않거나 비정상적으로 개방·고정된 AHU가 있는가?',
+          details: '',
+          placeholder: '이상한 점 : E6-AHU-02 가습 밸브 100% 개방 상태 지속',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 댐퍼',
+          desc: '(외기·배기·혼합)댐퍼의 개도가 운전조건과 일치하지 않거나 비정상적으로 고정된 AHU가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E7-AHU-01 외기댐퍼 30% 설정이나 실제 100% 열림 고정',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '전열교환기',
+          desc: '전열교환기 운전상태가 비정상 상태인 AHU가 있는가?',
+          details:
+            'E6(4대) : AHU-C1-06-1~4<br>E8(8대) : AHU-LS-04-1~8<br>E5(4대) : AHU-5-1~2, AHU-6-1~2<br>E7(4대) : AHU-5-1~2, AHU-6-1~2',
+          placeholder:
+            '이상한 점 : E8-AHU-02 공조기 가동 중이나 전열교환기 로터 정지됨',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 급기·환기정압 (양압/음압)',
+          desc: '급기 및 환기정압이 설정값을 지속적으로 벗어나거나, 동일한 운전조건의 다른 AHU와 비교하여 비정상적인 정압 상태를 보이는 AHU가 있는가?',
+          details:
+            '⭐️E8 AHU-LS-05는 5~6F BSL 실험실용<br>설정 500 Pa / 실제 495~505 Pa 정상<br>설정 500 Pa / 실제 480 Pa가 잠시 발생 → 관찰<br>설정 500 Pa / 실제 450 Pa가 계속 유지 → 이상<br>설정 500 Pa / 실제 300 Pa가 장시간 유지 → 현장확인<br>설정 500 Pa / 실제 500 Pa인데 Hz 큰변동 → 추가확인',
+          placeholder:
+            '이상한 점 : E6-AHU-01 급기정압 설정 350Pa이나 현재 150Pa로 저하',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '🌟AHU 급기·환기 Hz',
+          desc: '운전 중인 SF·RF의 Hz가 운전조건이나 동일 조건의 다른 AHU와 비교하여 비정상적인 AHU가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E5-AHU-02 급기팬 60Hz 풀가동 중임에도 풍량 부족 호소',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 필터차압',
+          desc: '필터차압에 경고 표시가 있는 AHU가 있는가?',
+          details: '',
+          placeholder: '이상한 점 : E7-AHU-03 필터차압 "경고" 발생',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 연기감지기',
+          desc: '연기감지기 상태가 비정상으로 표시되는 AHU가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E8-AHU-04 환기덕트 측 연기감지기 오동작 알람',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'AHU 냉수·온수 유량',
+          desc: '냉·난방밸브 개도 변화에 따라 냉수·온수 유량이 적절하게 변화하지 않거나, 동일한 운전조건의 다른 AHU와 비교하여 유량이 비정상적으로 높거나 낮은 AHU가 있는가?',
+          details:
+            '밸브 20% → 유량 낮음 → 정상<br>밸브 50% → 유량 중간 정도 → 정상<br>밸브 80% → 유량 증가 → 정상<br>밸브 80% → 유량이 거의 없음 → 이상<br>밸브 20% → 유량이 매우 높음 → 이상<br>밸브 개도 변화 → 유량도 그에 따라 변화 → 정상<br>밸브 개도가 변하는데 유량이 거의 변화없음 → 이상',
+          placeholder:
+            '핵심 판단 기준 : 밸브 개도 ↔ 유량의 변화가 서로 맞는가?',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E5 AHU-CR',
+          desc: 'AHU-CR의 급기상태, 현재온도, 습도설정·현재습도, 외기·환기댐퍼 및 실외기 운전상태에 이상이 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E5-AHU-CR-02 실외기 압축기 고압 트립으로 냉방 불가',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E5 Dry Room DEHU',
+          desc: 'Dry Room DEHU의 급기·리턴팬, 냉각·재열 관련 운전상태 및 온·습도 값에 이상이 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E5-DEHU-01 리턴팬 정지 및 노점온도 급상승 현상',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: 'E7 Dry Room DEHU 운전상태',
+          desc: 'DEHU의 급기팬·배기팬 운전상태가 운전조건과 일치하지 않거나 비정상적으로 정지·운전하는 설비가 있는가?',
+          details: '',
+          placeholder: '이상한 점 : E7-DEHU-02 제습로터 구동 모터 이상 알람',
+        },
+        {
+          cat: '▣ 스마트 공조기',
+          title: '공조설비 현장확인',
+          desc: '이상이 발견되어 현장 확인이 필요한 AHU또는 DEHU가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : E5-AHU-01 가동 중 비정상적 기계 소음 발생 (현장확인 요)',
+        },
+
+        // 2. 흡수식냉동기
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '고장경보 알람',
+          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 펌프 인버터 고장 및 용액결정 경보',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '운전상태',
+          desc: '냉동기 운전조건과 실제 운전상태가 일치하지 않거나, 운전이 필요한 냉동기가 정지해 있는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #2 기동 지령 내려갔으나 점화 실패로 기동 안됨',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '이상패턴',
+          desc: '동일한 운전조건의 다른 냉동기와 비교했을 때 냉수온도·냉각수온도·운전상태 등이 확연히 다른 냉동기가 있는가?',
+          details:
+            '동일 조건인가?<br>다른 냉동기들은 비슷한 값을 보이는가?<br>특정 냉동기만 확연하게 다른가?<br>그 차이가 일시적인가, 지속되는가?<br>설정값·운전조건과 비교해도 설명되지 않는 차이인가?',
+          placeholder:
+            '이상한 점 : 냉동기 #3 타 장비 대비 냉수 출수온도 회복이 확연히 느림',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 운전상태',
+          desc: '냉동기 운전상태 및 냉각탑 사전지정 조건과 실제 냉각탑의 ON/OFF·Hz 상태가 일치하지 않는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 연동 냉각탑 #1 가동되어야 하나 시스템상 정지 상태 유지됨',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 팬 Hz',
+          desc: '운전 중인 냉각탑 팬의 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적으로 높거나 낮은 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 입수온도 33℃(고온)이나 냉각탑 팬 인버터 25Hz 저속 고정',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉각수 온도를 보이는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 냉각수 입구 35℃ / 출구 40℃로 정상범위 초과',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉수 온도를 보이는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #2 냉수 출수 11℃ 지속되어 설정치(7℃) 미달',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 운전상태',
+          desc: '냉수 순환펌프의 운전상태가 냉동기 및 냉방부하 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
+          details:
+            '냉동기가 정지했는데 펌프가 잠시 운전하는 것은 후행운전이나 보호제어 때문에 정상일 수도 있습니다. 따라서 순간적인 ON/OFF만으로 이상이라고 판단하면 안 됩니다.',
+          placeholder:
+            '이상한 점 : 냉수 펌프 #2 자동 모드 설정되어 있으나 가동 신호 없음',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 Hz',
+          desc: '운전 중인 냉수 순환펌프의 인버터 Hz가 운전조건이나 동일 조건의 다른 펌프와 비교하여 비정상적인 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 배관 차압이 설정치보다 낮음에도 펌프 인버터 35Hz에서 안 올라감',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 차압',
+          desc: '냉수 공급계통의 차압이 설정값을 지속적으로 벗어나거나 정상적으로 추종하지 못하는 경우가 있는가?',
+          details:
+            '냉수 차압의 설정값과 실제값을 비교하고, 차압 편차가 장시간 지속되는지 확인한다.',
+          placeholder:
+            '이상한 점 : 냉수 메인 헤더 차압 0.4 bar로 설정 기준(1.2 bar) 미달 현상',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '중온수 열원',
+          desc: '냉동기에 공급되는 중온수 공급·환수온도가 냉동기 운전조건 또는 정상 운전범위를 벗어나는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 중온수 공급온도 80℃로 냉동기 100% 가동 조건치(95℃)에 미달',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '열원설비 현장확인',
+          desc: '자동제어 화면에서 이상이 발견되어 흡수식 냉동기·냉각탑·펌프 등의 현장 확인이 필요한 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 추기펌프 가동 불량 의심되어 현장 확인 요망',
+        },
+
+        // 3. 냉각탑
+        {
+          cat: '▣ 냉각탑',
+          title: '고장·경보 알람',
+          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
+          details:
+            '경보 발생 표시 → 이상 있음<br>고장 발생 표시 → 이상 있음<br>운전 중인데 고장/트립 표시 → 이상 있음<br>냉각탑 정지 상태 + 고장/경보 표시없음 → 정상<br>냉각탑 정지 상태 + 고장/트립 표시 → 이상<br>경보 발생후 사라졌지만 이력 기록 → 확인 필요',
+          placeholder:
+            '단순히 온도가 높다거나 팬 Hz가 이상해 보인다는 이유로 “고장·경보 있음”으로 체크하면 안됩니다.',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: 'E5/7 냉수 공급온도 및 차압',
+          desc: '공급온도와 냉수차압이 설정범위를 벗어났는가?',
+          details:
+            '⭐️공급온도 : 2026-09-21 이후 기존 8도 -> 변경 9.5도<br>⭐️CS 2차 냉수차압 권장 정상범위 : 0.5 < X ≤ 0.7',
+          placeholder: '냉수차압 경보설정 : 0.3 ≤ X < 0.9',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '운전상태',
+          desc: '냉각탑의 운전조건과 실제 ON/OFF·AUTO·Hz 상태가 일치하지 않는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각탑 #1 현장 패널에서 수동(HAND) 모드로 전환되어 제어 불가',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 밸브상태',
+          desc: '운전 중인 냉각탑의 관련 밸브가 운전상태와 일치하지 않거나 비정상적으로 닫혀 있는 경우가 있는가?',
+          details:
+            'OFF → 밸브 닫힘 → 정상 가능<br>OFF → 밸브 열림 → 제어조건 확인 필요<br>ON → 밸브 정상 개방 → 정상<br>ON → 밸브 완전 폐쇄 → 이상 의심<br>ON → 밸브 개도 부족 → 운전조건에 따라 확인<br>ON → 밸브 개도 변화 → 냉각수 제어와 연계하여 확인<br>ON → 밸브가 특정 값에 장시간 고정 → 이상 의심',
+          placeholder:
+            '이상한 점 : 냉각탑 #2 입출구 전동밸브 닫힘 상태로 유량 순환 불가',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 인버터 Hz',
+          desc: '운전 중인 냉각탑의 인버터 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적인 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 34℃로 냉각 부하 큼에도 인버터 20Hz 출력 고정됨',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 온도',
+          desc: '상·하한 및 정지 설정조건에서 벗어나 비정상적으로 운전되는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 공급 32℃, 환수 34℃로 온도차가 2℃ 불과 (열교환 불량)',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 조절밸브',
+          desc: '냉각수 조절밸브의 개도가 설정조건이나 냉각수 온도조건에 비해 비정상적으로 높거나 낮거나, 특정 개도에 고정되어 있는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 온도 높으나 냉각탑 바이패스 밸브 100% 열림 고정으로 물 안 식음',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 순환펌프 운전상태',
+          desc: '자동운전 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 순환펌프 #1 차단기 트립으로 비정상 정지',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각수 순환펌프 Hz',
+          desc: '펌프의 Hz가 현재 냉각수 운전조건에 비해 비정상적으로 높거나 낮은 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 유량 부족 경보 지속되나 펌프 인버터 35Hz에 리미트 걸림',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '펌프 압력조건',
+          desc: '냉각수 순환펌프의 압력이 설정조건을 지속적으로 벗어나거나 정상적으로 유지되지 않는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 펌프 토출 압력 1.5kg/cm2로 정상 운전 압력(3.0kg/cm2) 대비 저하',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열교환기 공급·환수온도',
+          desc: '냉각수 공급·환수온도가 동일한 운전조건의 다른 열교환기와 비교하여 확연히 다르거나, 공급·환수온도의 변화가 비정상적인 열교환기가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 프리쿨링 열교환기 #1 이차측 공급 18℃로 과냉각 발생',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열교환기 밸브 개도',
+          desc: '열교환기 관련 밸브 개도가 냉각수 운전조건과 비교하여 비정상적으로 높거나 낮거나 특정 개도에 고정된 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 열교환기 #2 1차측 밸브가 수동으로 50% 개방 상태',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '냉각탑 동파방지',
+          desc: '냉각탑 동파방지 제어가 설정된 온도조건에 맞게 정상적으로 작동하고 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 수조 온도 2℃ 이하 경보 중이나 동파방지 히터 미작동',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '과냉방지 제어',
+          desc: '냉각수 온도가 과냉방지 설정조건에 도달했을 때 관련 밸브 제어가 정상적으로 이루어지는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 15℃ 이하이나 3-Way 바이패스 밸브 미작동 (과냉각)',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: 'PILOT 실험실 냉각수 온도',
+          desc: 'PILOT 실험실의 냉각수 공급·환수온도가 정상 운전범위에서 작동하고 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : PILOT 실험실 공급 냉각수 온도가 28℃로 기준치 상회',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '이상패턴',
+          desc: '동일한 운전조건의 냉각탑·펌프·열교환기와 비교했을 때 온도·Hz·밸브 개도·운전상태 등이 확연히 다른 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각탑 #1만 수위 조절 밸브 헌팅 및 진동 스위치 감지됨',
+        },
+        {
+          cat: '▣ 냉각탑',
+          title: '열원설비 현장확인',
+          desc: '자동제어 화면에서 이상이 발견되어 냉각탑·순환펌프·열교환기·밸브 등의 현장 확인이 필요한 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각탑 #3 감속기 오일 누유 의심되어 현장 확인 요망',
+        },
+
+        // 4. 흡착탑
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E6동 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까?',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: 'ORG1', val: 106 },
+            { label: 'ORG2', val: 106 },
+            { label: 'ACID', val: 96 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E8동 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: 'ORG2', val: 108 },
+            { label: 'ACID', val: 55 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'day',
+          title: 'E57 (주간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: '#1', val: 25 },
+            { label: '#2', val: 35 },
+            { label: '#3', val: 25 },
+            { label: '#4', val: 25 },
+          ],
+        },
+
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E6동 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: 'ORG1', val: 85 },
+            { label: 'ORG2', val: 85 },
+            { label: 'ACID', val: 69 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E8동 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: 'ORG2', val: 87 },
+            { label: 'ACID', val: 44 },
+          ],
+        },
+        {
+          cat: '▣ 흡착탑',
+          shift: 'night',
+          title: 'E57 (야간)',
+          desc: '자동제어 화면의 수치가 오차범위 내에 있습니까',
+          details: '',
+          type: 'absorber',
+          data: [
+            { label: '#1', val: 20 },
+            { label: '#2', val: 28 },
+            { label: '#3', val: 20 },
+            { label: '#4', val: 20 },
+          ],
+        },
+      ]
+
+      let state = JSON.parse(localStorage.getItem('dp3_bas_v20') || '{}')
+      let pendingFocusIndex = null
+
+      function save() {
+        localStorage.setItem('dp3_bas_v20', JSON.stringify(state))
+      }
+
+      function setV(i, v) {
+        let currentState = state[i]?.v
+
+        if (currentState === v) {
+          state[i] = { ...(state[i] || {}), v: null }
+          pendingFocusIndex = null
+        } else {
+          state[i] = { ...(state[i] || {}), v: v }
+          if (v === 'yes') {
+            pendingFocusIndex = i
+          }
+        }
+
+        save()
+        render()
+      }
+
+      function setN(i, n) {
+        state[i] = { ...(state[i] || {}), n }
+        save()
+        updateMemoSummary()
+      }
+
+      function toggleShift(shift) {
+        currentShift = shift
+        render()
+      }
+
+      function render() {
+        let el = document.getElementById('list')
+        el.innerHTML = ''
+
+        let currentCategory = ''
+        let categoryIndex = 0
+
+        items.forEach((x, i) => {
+          if (x.shift && x.shift !== currentShift) {
+            return
+          }
+
+          let s = state[i] || {},
+            v = s.v || ''
+
+          if (x.cat !== currentCategory) {
+            currentCategory = x.cat
+            categoryIndex = 0
+
+            let sectionId = ''
+            if (currentCategory === '▣ 스마트 공조기') sectionId = 'cat-dp3'
+            else if (currentCategory === '▣ 흡수식 냉동기')
+              sectionId = 'cat-chiller'
+            else if (currentCategory === '▣ 냉각탑') sectionId = 'cat-tower'
+            else if (currentCategory === '▣ 흡착탑') sectionId = 'cat-absorber'
+
+            if (currentCategory === '▣ 흡착탑') {
+              el.insertAdjacentHTML(
+                'beforeend',
+                `
+                  <div class="mb-3 bg-white p-3 rounded text-dark text-center shadow-sm" style="border: 2px solid #aecae8;">
+                      <label class="fw-bold mb-2 d-block" style="font-size:14px; color:#17324d;">🕒 흡착탑 점검 시간대 선택</label>
+                      <div class="btn-group w-100" role="group">
+                          <input type="radio" class="btn-check" name="shiftToggle" id="shiftDay" autocomplete="off" onchange="toggleShift('day')" ${currentShift === 'day' ? 'checked' : ''}>
+                          <label class="btn btn-outline-primary fw-bold" for="shiftDay" style="font-size:13px;">주간 (06:00~17:30)</label>
+                          
+                          <input type="radio" class="btn-check" name="shiftToggle" id="shiftNight" autocomplete="off" onchange="toggleShift('night')" ${currentShift === 'night' ? 'checked' : ''}>
+                          <label class="btn btn-outline-primary fw-bold" for="shiftNight" style="font-size:13px;">야간 (17:30~06:00)</label>
+                      </div>
+                  </div>
+                `,
+              )
+            }
+
+            el.insertAdjacentHTML(
+              'beforeend',
+              `<div id="${sectionId}" class="category-title">${currentCategory}</div>`,
+            )
+          }
+
+          categoryIndex++
+
+          let titleColorClass =
+            x.title.includes('고장경보 알람') ||
+            x.title.includes('고장·경보 알람')
+              ? 'text-danger'
+              : 'text-dark'
+
+          let detailsHtml = x.details
+            ? `<div class="item-details mt-2">${x.details}</div>`
+            : ''
+
+          let contentHtml = ''
+
+          if (x.type === 'absorber') {
+            let tableRows = ''
+            x.data.forEach((item) => {
+              tableRows += `<tr><td>${item.label}</td><td class="val-col">${item.val} mmH2O</td></tr>`
+            })
+
+            contentHtml = `
+              <p class="text-secondary mb-3" style="font-size: 13px; line-height: 1.5;">${x.desc}</p>
+              ${detailsHtml}
+              <table class="absorber-table mt-2">
+                  <tbody>
+                      ${tableRows}
+                  </tbody>
+              </table>
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <button class="btn w-100 fw-bold border ${v == 'no' ? 'btn-success' : 'btn-light text-secondary'}" 
+                          style="font-size: 13px;" onclick="setV(${i},'no')">🟢 이상 없음</button>
+                </div>
+                <div class="col-6">
+                  <button class="btn w-100 fw-bold border ${v == 'yes' ? 'btn-danger' : 'btn-light text-secondary'}" 
+                          style="font-size: 13px;" onclick="setV(${i},'yes')">🔴 이상 있음</button>
+                </div>
+              </div>
+              <textarea id="memo-${i}" class="form-control text-secondary border-light-subtle shadow-none mt-2 ${v === 'yes' ? '' : 'd-none'}" 
+                        style="font-size: 16px; background-color: #f8f9fa; resize: vertical;" 
+                        rows="2" 
+                        placeholder="이상한 점 : " 
+                        onchange="setN(${i},this.value)">${s.n || ''}</textarea>
+              `
+          } else {
+            contentHtml = `
+              <p class="text-secondary mb-3" style="font-size: 13px; line-height: 1.5;">${x.desc}</p>
+              ${detailsHtml}
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <button class="btn w-100 fw-bold border ${v == 'no' ? 'btn-success' : 'btn-light text-secondary'}" 
+                          style="font-size: 13px;" onclick="setV(${i},'no')">🟢 이상 없음</button>
+                </div>
+                <div class="col-6">
+                  <button class="btn w-100 fw-bold border ${v == 'yes' ? 'btn-danger' : 'btn-light text-secondary'}" 
+                          style="font-size: 13px;" onclick="setV(${i},'yes')">🔴 이상 있음</button>
+                </div>
+              </div>
+              
+              <div class="fw-bold mb-2" style="font-size: 12px; color: ${v == 'yes' ? '#c62836' : v == 'no' ? '#137447' : '#69747f'};">
+                ${v == 'yes' ? '⚠ 이상 있음 — 현장 확인 필요' : v == 'no' ? '✓ 이상 없음' : '미점검'}
+              </div>
+              
+              <textarea id="memo-${i}" class="form-control text-secondary border-light-subtle shadow-none ${v === 'yes' ? '' : 'd-none'}" 
+                        style="font-size: 16px; background-color: #f8f9fa; resize: vertical;" 
+                        rows="2" 
+                        placeholder="${x.placeholder || '이상한 점 : '}" 
+                        onchange="setN(${i},this.value)">${s.n || ''}</textarea>
+              `
+          }
+
+          el.insertAdjacentHTML(
+            'beforeend',
+            `
+          <section id="item-${i}" class="card border-0 shadow-sm mb-3 rounded-4">
+            <div class="card-body p-3">
+              <div class="d-flex align-items-center mb-2">
+                <span class="badge rounded-circle d-flex align-items-center justify-content-center me-2" 
+                      style="width: 28px; height: 28px; background-color: #e8f0ff; color: #2d6cdf; font-size: 14px;">
+                  ${categoryIndex}
+                </span>
+                <h6 class="fw-bold mb-0 ${titleColorClass}" style="font-size: 15px;">${x.title}</h6>
+              </div>
+              ${contentHtml}
+            </div>
+          </section>
+          `,
+          )
+        })
+
+        update()
+        updateMemoSummary()
+
+        if (pendingFocusIndex !== null) {
+          let targetTextarea = document.getElementById(
+            'memo-' + pendingFocusIndex,
+          )
+          if (targetTextarea) {
+            targetTextarea.focus()
+            let length = targetTextarea.value.length
+            targetTextarea.setSelectionRange(length, length)
+          }
+          pendingFocusIndex = null
+        }
+      }
+
+      function update() {
+        let y = 0,
+          n = 0,
+          currentTotal = 0
+
+        items.forEach((x, i) => {
+          if (x.shift && x.shift !== currentShift) {
+            return
+          }
+          currentTotal++
+          if (state[i]?.v == 'yes') y++
+          else if (state[i]?.v == 'no') n++
+        })
+
+        let done = y + n
+        let pending = currentTotal - done
+
+        document.getElementById('yes1').textContent = y
+        document.getElementById('no1').textContent = n
+        document.getElementById('pending1').textContent = pending
+
+        document.getElementById('yes2').textContent = y
+        document.getElementById('no2').textContent = n
+        document.getElementById('pending2').textContent = pending
+
+        document.getElementById('progressText').textContent =
+          done + ' / ' + currentTotal
+
+        let pct = currentTotal === 0 ? 0 : (done / currentTotal) * 100
+        document.getElementById('bar').style.width = pct + '%'
+
+        const printBtns = document.querySelectorAll('.print-btn')
+        if (pending > 0) {
+          printBtns.forEach((btn) => {
+            btn.style.opacity = '0.5'
+            btn.style.cursor = 'not-allowed'
+          })
+        } else {
+          printBtns.forEach((btn) => {
+            btn.style.opacity = '1'
+            btn.style.cursor = 'pointer'
+          })
+        }
+      }
+
+      // 하단 메모 요약 업데이트 함수
+      function updateMemoSummary() {
+        const summaryArea = document.getElementById('memoSummary')
+        const summaryContent = document.getElementById('memoSummaryContent')
+
+        let hasMemo = false
+        let summaryHtml = ''
+
+        items.forEach((x, i) => {
+          if (x.shift && x.shift !== currentShift) return
+
+          let s = state[i] || {}
+          if (s.v === 'yes' && s.n && s.n.trim() !== '') {
+            hasMemo = true
+            summaryHtml += `
+                    <div class="memo-item">
+                        <b>[${x.cat.replace('▣ ', '')}] ${x.title}</b><br>
+                        <span class="text-dark">${esc(s.n)}</span>
+                    </div>
+                  `
+          }
+        })
+
+        if (hasMemo) {
+          summaryContent.innerHTML = summaryHtml
+          summaryArea.classList.remove('d-none')
+        } else {
+          summaryArea.classList.add('d-none')
+          summaryContent.innerHTML = ''
+        }
+      }
+
+      function allNo() {
+        items.forEach((x, i) => {
+          if (!x.shift || x.shift === currentShift) {
+            state[i] = { ...(state[i] || {}), v: 'no' }
+          }
+        })
+        save()
+        render()
+      }
+
+      function resetAll() {
+        if (confirm('점검 결과와 메모를 모두 초기화할까요?')) {
+          state = {}
+          save()
+          render()
+        }
+      }
+
+      function esc(s) {
+        return s
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+      }
+
+      function printResult() {
+        let firstPendingIndex = -1
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].shift && items[i].shift !== currentShift) continue
+
+          if (!state[i] || (state[i].v !== 'yes' && state[i].v !== 'no')) {
+            firstPendingIndex = i
+            break
+          }
+        }
+
+        if (firstPendingIndex !== -1) {
+          alert('미점검 항목이 있습니다. 모든 항목을 점검해주세요.')
+          const targetElement = document.getElementById(
+            'item-' + firstPendingIndex,
+          )
+
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            })
+            targetElement.classList.add('highlight-pending')
+            setTimeout(() => {
+              targetElement.classList.remove('highlight-pending')
+            }, 2000)
+          }
+          return
+        }
+
+        let d = new Date(),
+          hours = d.getHours(),
+          timeStr = d.toLocaleString('ko-KR')
+
+        let hasError = false
+
+        items.forEach((x, i) => {
+          if (x.shift && x.shift !== currentShift) return
+          if (state[i]?.v === 'yes') {
+            hasError = true
+          }
+        })
+
+        let a = []
+
+        if (!hasError) {
+          let message =
+            hours < 12
+              ? '오전 기계설비점검 이상없음'
+              : '오후 기계설비점검 이상없음'
+          a = [message, '점검일시: ' + timeStr, '']
+        } else {
+          a = ['기계설비점검 이상 보고', '점검일시: ' + timeStr, '']
+
+          let currentCat = ''
+
+          items.forEach((x, i) => {
+            if (x.shift && x.shift !== currentShift) return
+            let s = state[i] || {}
+            if (s.v === 'yes') {
+              if (x.cat !== currentCat) {
+                currentCat = x.cat
+                a.push('')
+                a.push('[' + currentCat + ']')
+              }
+
+              a.push('- ' + x.title + ': 이상 있음')
+              if (s.n) a.push('  상세설명: ' + s.n)
+            }
+          })
+        }
+
+        let w = open('', '_blank')
+        w.document.write(
+          "<pre style='white-space:pre-wrap;font:14px sans-serif;padding:24px'>" +
+            esc(a.join('\n').trim()) +
+            '</pre>',
+        )
+        w.document.close()
+        w.print()
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      }
+
+      render()
+    </script>
+  </body>
+</html>

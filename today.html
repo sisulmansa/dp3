@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 핀치줌 허용 안함 -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>업무일지</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-size: 0.85rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .journal-container {
+        background-color: white;
+        padding: 10px;
+        min-height: 100vh;
+      }
+
+      /* 섹션 타이틀 및 컨트롤 버튼 레이아웃 */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e9ecef;
+        padding: 5px 10px;
+        border-left: 4px solid #0d6efd;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      .table th,
+      .table td {
+        vertical-align: middle;
+        padding: 0.25rem;
+      }
+      .form-control {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.4rem;
+      }
+
+      /* 아이폰 스타일 체크박스 UI (iOS Toggle Switch) */
+      .ios-switch {
+        appearance: none;
+        width: 40px;
+        height: 22px;
+        background: #e5e5ea;
+        border-radius: 22px;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        transition: background 0.3s;
+        margin: 0 auto;
+        display: block;
+      }
+      .ios-switch::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+      .ios-switch:checked {
+        background: #34c759;
+      }
+      .ios-switch:checked::after {
+        transform: translateX(18px);
+      }
+
+      /* 일반 체크박스 (내업무 체크용) 크기 확대 */
+      .my-work-chk {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .fixed-bottom-bar {
+        background-color: white;
+        border-top: 1px solid #dee2e6;
+        padding: 10px;
+        z-index: 1030;
+      }
+      .mb-spacer {
+        margin-bottom: 70px;
+      }
+
+      /* 분류 컬럼 폭 (2글자용) */
+      .col-type {
+        width: 45px;
+        text-align: center;
+      }
+
+      /* 날짜 입력박스 폭 조절 */
+      .col-date {
+        width: 110px;
+      }
+
+      /* =========================================
+         스마트폰 환경 (화면 화면에서만 적용, PDF 제외)
+         ========================================= */
+      @media screen and (max-width: 767px) {
+        #hourlySection thead {
+          display: none;
+        }
+        #hourlySection table,
+        #hourlySection tbody,
+        #hourlySection tr,
+        #hourlySection td {
+          display: block;
+          width: 100%;
+        }
+        #hourlySection tr {
+          display: flex;
+          flex-wrap: wrap;
+          border: 1px solid #ced4da;
+          border-radius: 6px;
+          padding: 5px;
+          margin-bottom: 10px;
+          background-color: #fcfcfc;
+        }
+        #hourlySection td {
+          padding: 2px;
+          border: none;
+          display: flex;
+          align-items: center;
+        }
+
+        #hourlySection td:nth-child(1) {
+          order: 1;
+          flex: 1 1 0%;
+          min-width: 0;
+        }
+        #hourlySection td:nth-child(2) {
+          order: 2;
+          flex: 0 0 50px;
+          min-width: 0;
+        }
+        #hourlySection td:nth-child(3) {
+          order: 3;
+          flex: 0 0 65px;
+          justify-content: center;
+        }
+        #hourlySection td:nth-child(5) {
+          order: 4;
+          flex: 0 0 60px;
+          justify-content: flex-end;
+        }
+
+        /* 모바일에서 '내업무' 라벨 표시 */
+        #hourlySection td:nth-child(3)::before {
+          content: '내업무';
+          font-size: 0.75rem;
+          margin-right: 4px;
+          font-weight: bold;
+          color: #495057;
+          white-space: nowrap;
+        }
+
+        #hourlySection td:nth-child(4) {
+          order: 5;
+          flex: 0 0 100%;
+          margin-top: 4px;
+          min-width: 0;
+        }
+
+        #hourlySection .form-control {
+          padding: 0.15rem 0.25rem;
+          font-size: 0.8rem;
+          width: 100%;
+          min-width: 0;
+        }
+      }
+
+      /* =========================================
+         PDF 출력용 네이티브 인쇄 스타일
+         ========================================= */
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 10mm;
+        }
+        body {
+          background: white;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* 불필요한 UI 숨김 */
+        .no-print,
+        .fixed-bottom-bar {
+          display: none !important;
+        }
+
+        .journal-container {
+          box-shadow: none;
+          max-width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* 입력창을 일반 텍스트처럼 표시 */
+        .form-control,
+        .form-select {
+          border: none !important;
+          background: transparent !important;
+          padding: 0 !important;
+          text-align: center;
+          appearance: none; /* select 화살표 제거 */
+          -webkit-appearance: none;
+        }
+
+        /* TBM 항목 내용은 왼쪽 정렬 */
+        #tbmBody td:first-child .form-control {
+          text-align: left !important;
+          padding-left: 5px !important;
+        }
+
+        /* 메모장은 테두리 남김 */
+        textarea.form-control {
+          text-align: left !important;
+          border: 1px solid #dee2e6 !important;
+          padding: 10px !important;
+          resize: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="journal-container mb-spacer" id="printableArea">
+      <!-- Home 링크 및 타이틀 -->
+      <div
+        class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2 pt-2"
+      >
+        <a href="/bas/" class="btn btn-sm btn-outline-secondary no-print"
+          >🏠 Home</a
+        >
+        <h4 class="fw-bold mb-0 text-end" id="mainTitle">
+          계획하라! 실천하라! 지속하라!
+        </h4>
+      </div>
+
+      <!-- 기본 정보 -->
+      <div class="d-flex gap-2 mb-3 align-items-end">
+        <div class="col-date">
+          <label class="form-label mb-1 fw-bold text-nowrap">Day(날짜)</label>
+          <input type="date" class="form-control ls-save" id="dateInput" />
+        </div>
+        <!-- 주(Week)/주제 -> 오늘의 미션 -->
+        <div class="flex-grow-1">
+          <label class="form-label mb-1 fw-bold">오늘의 미션</label>
+          <input
+            type="text"
+            class="form-control ls-save"
+            id="todayLine"
+            value="Day"
+          />
+        </div>
+      </div>
+
+      <!-- Team Box Meeting -->
+      <div id="tbmSection">
+        <div class="section-header">
+          <span>Team Box Meeting - 업무일정</span>
+          <div class="no-print">
+            <button
+              class="btn btn-sm btn-secondary py-0 px-2"
+              onclick="addRow('tbmBody', 'tbm')"
+            >
+              +
+            </button>
+            <button
+              class="btn btn-sm btn-outline-secondary py-0 px-2"
+              onclick="removeRow('tbmBody')"
+            >
+              -
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>항목</th>
+                <th style="width: 50px">담당</th>
+                <th style="width: 50px">실행</th>
+              </tr>
+            </thead>
+            <tbody id="tbmBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 샌디/민원/기타 -->
+      <div id="sandySection">
+        <div class="section-header">
+          <span>③ 샌디 / 민원 / 기타</span>
+          <div class="no-print">
+            <button
+              class="btn btn-sm btn-secondary py-0 px-2"
+              onclick="addRow('sandyBody', 'sandy')"
+            >
+              +
+            </button>
+            <button
+              class="btn btn-sm btn-outline-secondary py-0 px-2"
+              onclick="removeRow('sandyBody')"
+            >
+              -
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center mb-0">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 35%">요청위치</th>
+                <th>요청내용</th>
+              </tr>
+            </thead>
+            <tbody id="sandyBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 시간별 업무내용 -->
+      <div id="hourlySection">
+        <div class="section-header">
+          <div class="d-flex align-items-center">
+            <span>시간별 업무내용</span>
+            <!-- 주/야/당직 선택 박스 -->
+            <select
+              id="workShift"
+              class="form-select form-select-sm d-inline-block w-auto ms-2"
+              style="font-weight: bold"
+              onchange="changeTitle()"
+            >
+              <option value="주간">주간</option>
+              <option value="야간">야간</option>
+              <option value="당직">당직</option>
+            </select>
+          </div>
+          <div class="no-print">
+            <button
+              class="btn btn-sm btn-secondary py-0 px-2"
+              onclick="addRow('hourlyBody', 'hourly')"
+            >
+              +
+            </button>
+            <button
+              class="btn btn-sm btn-outline-secondary py-0 px-2"
+              onclick="removeRow('hourlyBody')"
+            >
+              -
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive" style="overflow: visible">
+          <table class="table table-bordered text-center align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 115px">시간</th>
+                <th style="width: 70px">분류</th>
+                <th style="width: 60px">내업무</th>
+                <th>업무내용 / 참석자</th>
+                <th class="no-print" style="width: 65px">순서</th>
+              </tr>
+            </thead>
+            <tbody id="hourlyBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 하단: 매일점검목록 & 월간 특별일정 (PDF 출력 시 숨김 영역) -->
+      <div class="row g-2 mt-2" id="bottomSchedules">
+        <div class="col-md-6 col-12">
+          <div class="section-header" style="margin-top: 0">
+            <span>매일 점검 목록</span>
+          </div>
+          <table class="table table-bordered table-sm text-center mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="text-start">점검항목</th>
+                <th style="width: 50px">담당</th>
+                <th style="width: 50px">실행</th>
+              </tr>
+            </thead>
+            <tbody id="dailyBody"></tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="section-header" style="margin-top: 0">
+            <span>월간 특별일정</span>
+          </div>
+          <div
+            class="p-2 border rounded"
+            style="font-size: 0.8rem; background-color: #fcfcfc"
+          >
+            <strong>매월초 - 교번작업</strong><br /><br />
+            <strong>1, 4, 7, 10월</strong>
+            <ul class="mb-2">
+              <li>지열EHP 실외기 스트레이너 청소</li>
+              <li>실험동물실 필터교체 (1,7월 프레임까지)</li>
+            </ul>
+            <strong>2, 5, 8, 11월</strong>
+            <ul class="mb-0">
+              <li>프리+미디엄 필터교체</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 메모장 -->
+      <div id="memoSection" class="mt-2">
+        <div class="section-header" style="margin-top: 0">
+          <span>오늘의 메모</span>
+        </div>
+        <textarea
+          id="memoInput"
+          class="form-control"
+          rows="4"
+          placeholder="오늘 있었던 주요 사항이나 특이사항을 자유롭게 기록하세요."
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- 하단 고정 컨트롤 바 -->
+    <div class="fixed-bottom fixed-bottom-bar shadow-lg no-print">
+      <div class="container d-flex justify-content-between gap-2">
+        <button class="btn btn-primary flex-fill fw-bold" onclick="saveData()">
+          저장
+        </button>
+        <button class="btn btn-danger flex-fill fw-bold" onclick="clearData()">
+          새로고침
+        </button>
+        <button class="btn btn-success flex-fill fw-bold" onclick="exportPDF()">
+          PDF
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = 'workJournalData_v4'
+
+      const dailyItems = [
+        '1. 흡착탑 정압설정(오전/오후)',
+        '2. 오전 기계설비점검',
+        '3. 오후 기계설비 점검',
+        '4. 온도체크(월수금 2시)',
+        '5. PM3시-흡수식냉동기 엣지',
+        '6. 냉각탑 수처리제 투입(화요일)',
+        '7. 마이크로필터 교체(15일마다)',
+        '8. 팬, 모터 구리스 주입(15일마다)',
+      ]
+
+      // [기능 추가] 주간/야간/당직 선택에 따른 타이틀 변경
+      function changeTitle() {
+        const shift = document.getElementById('workShift').value
+        const mainTitle = document.getElementById('mainTitle')
+        if (shift === '야간' || shift === '당직') {
+          mainTitle.innerText = '화학동 시설팀 당직인원 2명 이상!'
+        } else {
+          mainTitle.innerText = '계획하라! 실천하라! 지속하라!'
+        }
+      }
+
+      function getRowHtml(type) {
+        if (type === 'tbm') {
+          return `<tr>
+                        <td><input type="text" class="form-control" ></td>
+                        <td><input type="checkbox" class="ios-switch"></td>
+                        <td><input type="checkbox" class="ios-switch"></td>
+                    </tr>`
+        } else if (type === 'sandy') {
+          return `<tr>
+                        <td><input type="text" class="form-control" ></td>
+                        <td><input type="text" class="form-control" ></td>
+                    </tr>`
+        } else if (type === 'hourly') {
+          return `<tr>
+                        <td><input type="text" class="form-control text-center" placeholder="00:00~00:00"></td>
+                        <td><input type="text" class="form-control text-center" maxlength="4" placeholder="분류"></td>
+                        <td><input type="checkbox" class="form-check-input my-work-chk"></td>
+                        <td><input type="text" class="form-control" placeholder="업무내용 / 참석자"></td>
+                        <td class="no-print">
+                            <div class="d-flex justify-content-center gap-1">
+                                <button class="btn btn-sm btn-outline-secondary py-0 px-1" onclick="moveRow(this, -1)">▲</button>
+                                <button class="btn btn-sm btn-outline-secondary py-0 px-1" onclick="moveRow(this, 1)">▼</button>
+                            </div>
+                        </td>
+                    </tr>`
+        }
+        return ''
+      }
+
+      function addRow(tbodyId, type) {
+        const tbody = document.getElementById(tbodyId)
+        tbody.insertAdjacentHTML('beforeend', getRowHtml(type))
+      }
+
+      function removeRow(tbodyId) {
+        const tbody = document.getElementById(tbodyId)
+        if (tbody.children.length > 1) {
+          tbody.removeChild(tbody.lastElementChild)
+        }
+      }
+
+      function moveRow(btn, direction) {
+        const row = btn.closest('tr')
+        if (direction === -1 && row.previousElementSibling) {
+          row.parentNode.insertBefore(row, row.previousElementSibling)
+        } else if (direction === 1 && row.nextElementSibling) {
+          row.parentNode.insertBefore(row.nextElementSibling, row)
+        }
+      }
+
+      function initTables() {
+        document.getElementById('tbmBody').innerHTML = getRowHtml('tbm')
+        document.getElementById('sandyBody').innerHTML = getRowHtml('sandy')
+        document.getElementById('hourlyBody').innerHTML = getRowHtml('hourly')
+
+        let dailyHtml = ''
+        dailyItems.forEach((item) => {
+          dailyHtml += `<tr>
+                <td class="text-start">${item}</td>
+                <td><input type="checkbox" class="ios-switch"></td>
+                <td><input type="checkbox" class="ios-switch"></td>
+            </tr>`
+        })
+        document.getElementById('dailyBody').innerHTML = dailyHtml
+      }
+
+      function saveData() {
+        const data = {
+          date: document.getElementById('dateInput').value,
+          todayLine: document.getElementById('todayLine').value,
+          workShift: document.getElementById('workShift').value, // 셀렉트 박스 저장
+          memo: document.getElementById('memoInput').value,
+          tbm: extractTableData('tbmBody'),
+          sandy: extractTableData('sandyBody'),
+          hourly: extractTableData('hourlyBody'),
+          daily: extractTableData('dailyBody'),
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+        alert('입력된 내용이 기기에 저장되었습니다.')
+      }
+
+      function extractTableData(tbodyId) {
+        const rows = document.getElementById(tbodyId).querySelectorAll('tr')
+        const rowData = []
+        rows.forEach((row) => {
+          const inputs = row.querySelectorAll('input')
+          const values = Array.from(inputs).map((input) =>
+            input.type === 'checkbox' ? input.checked : input.value,
+          )
+          rowData.push(values)
+        })
+        return rowData
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (!saved) return
+
+        try {
+          const data = JSON.parse(saved)
+          if (data.date) document.getElementById('dateInput').value = data.date
+          if (data.todayLine)
+            document.getElementById('todayLine').value = data.todayLine
+          if (data.memo) document.getElementById('memoInput').value = data.memo
+
+          if (data.workShift) {
+            document.getElementById('workShift').value = data.workShift
+            changeTitle() // 데이터 로드 시 타이틀 반영
+          }
+
+          restoreTableData('tbmBody', 'tbm', data.tbm)
+          restoreTableData('sandyBody', 'sandy', data.sandy)
+          restoreTableData('hourlyBody', 'hourly', data.hourly)
+          restoreTableData('dailyBody', 'daily', data.daily)
+        } catch (e) {
+          console.error('데이터 로드 오류', e)
+        }
+      }
+
+      function restoreTableData(tbodyId, type, rowDataArray) {
+        if (!rowDataArray || rowDataArray.length === 0) return
+
+        const tbody = document.getElementById(tbodyId)
+        if (type !== 'daily') {
+          tbody.innerHTML = ''
+          rowDataArray.forEach(() =>
+            tbody.insertAdjacentHTML('beforeend', getRowHtml(type)),
+          )
+        }
+
+        const rows = tbody.querySelectorAll('tr')
+        rowDataArray.forEach((values, i) => {
+          if (rows[i]) {
+            const inputs = rows[i].querySelectorAll('input')
+            inputs.forEach((input, j) => {
+              if (values[j] !== undefined) {
+                if (input.type === 'checkbox') input.checked = values[j]
+                else input.value = values[j]
+              }
+            })
+          }
+        })
+      }
+
+      function clearData() {
+        if (confirm('작성된 모든 내용을 삭제하고 초기화하시겠습니까?')) {
+          localStorage.removeItem(STORAGE_KEY)
+          location.reload()
+        }
+      }
+
+      // ==========================================
+      // 브라우저 기본 인쇄 기능(텍스트 복사 가능 PDF)
+      // ==========================================
+
+      // 인쇄(PDF 변환) 직전 불필요한 영역 숨기기
+      window.onbeforeprint = () => {
+        const bottomSchedules = document.getElementById('bottomSchedules')
+        if (bottomSchedules) bottomSchedules.style.display = 'none'
+
+        const memoSection = document.getElementById('memoSection')
+        const memoInput = document.getElementById('memoInput')
+        if (memoInput.value.trim() === '') {
+          memoSection.style.display = 'none'
+        } else {
+          memoInput.style.height = 'auto'
+          memoInput.style.height = memoInput.scrollHeight + 'px'
+        }
+
+        const sections = [
+          { id: 'tbmSection', tbodyId: 'tbmBody' },
+          { id: 'sandySection', tbodyId: 'sandyBody' },
+          { id: 'hourlySection', tbodyId: 'hourlyBody' },
+        ]
+
+        sections.forEach((sec) => {
+          const tbody = document.getElementById(sec.tbodyId)
+          const inputs = tbody.querySelectorAll('input[type="text"]')
+          const hasData = Array.from(inputs).some(
+            (input) => input.value.trim() !== '',
+          )
+          if (!hasData) {
+            document.getElementById(sec.id).style.display = 'none'
+          }
+        })
+      }
+
+      // 인쇄 완료 후 원래대로 복구
+      window.onafterprint = () => {
+        const bottomSchedules = document.getElementById('bottomSchedules')
+        if (bottomSchedules) bottomSchedules.style.display = ''
+
+        const memoSection = document.getElementById('memoSection')
+        if (memoSection) {
+          memoSection.style.display = 'block'
+          document.getElementById('memoInput').style.height = ''
+        }
+
+        ;['tbmSection', 'sandySection', 'hourlySection'].forEach((id) => {
+          document.getElementById(id).style.display = 'block'
+        })
+      }
+
+      // PDF 출력 버튼 동작
+      function exportPDF() {
+        document.title = '업무일지' // PDF 저장 시 기본 파일명
+        window.print() // 브라우저 인쇄 창 호출 (여기서 PDF로 저장 선택)
+      }
+
+      window.onload = () => {
+        initTables()
+        loadData()
+      }
+    </script>
+  </body>
+</html>

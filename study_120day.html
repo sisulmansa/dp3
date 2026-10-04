@@ -1,0 +1,2944 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>공조냉동기계기사 실기 120일 학습표</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f5f6f8;
+        padding-bottom: 90px;
+      }
+      .app-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #dee2e6;
+      }
+      .progress-wrap {
+        max-width: 760px;
+        margin: auto;
+      }
+      .container-main {
+        max-width: 760px;
+      }
+      .section-header {
+        background: #fff;
+        padding: 16px;
+        border-radius: 14px;
+        border: 1px solid #e9ecef;
+      }
+      .day-card {
+        border-radius: 14px;
+        border: 1px solid #e9ecef;
+      }
+      .form-check-label {
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+      .task-check:checked + .form-check-label {
+        text-decoration: line-through;
+        opacity: 0.55;
+      }
+      .floating-actions {
+        position: fixed;
+        bottom: 16px;
+        left: 0;
+        right: 0;
+        z-index: 200;
+      }
+      .action-inner {
+        max-width: 760px;
+        margin: auto;
+        padding: 0 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="app-header py-3">
+      <div class="container container-main">
+        <div class="small text-secondary mb-2">
+          <a href="/bas/">Home</a>
+        </div>
+        <h1 class="h4 fw-bold mb-1">공조냉동기계기사 실기 120일 학습표</h1>
+        <div class="small text-secondary mb-2">
+          주주야비 4일 사이클 · 실기시험 대비
+        </div>
+        <div class="progress-wrap">
+          <div class="d-flex justify-content-between small mb-1">
+            <span>학습 진행률</span><strong id="progressText">0%</strong>
+          </div>
+          <div class="progress" role="progressbar" aria-label="학습 진행률">
+            <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+          </div>
+          <div class="small text-secondary mt-1">
+            <span id="doneCount">0</span> / <span id="totalCount">0</span>개
+            완료
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container container-main py-3">
+      <div class="alert alert-light border small">
+        <strong>사용법:</strong> 각 항목을 완료할 때마다 체크하세요. 체크 상태는
+        이 기기의 브라우저에 자동 저장됩니다.
+      </div>
+      <div class="accordion mb-3" id="scheduleAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#tips"
+            >
+              학습 운영 원칙
+            </button>
+          </h2>
+          <div
+            id="tips"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#scheduleAccordion"
+          >
+            <div class="accordion-body small">
+              <ul class="mb-0">
+                <li><strong>주간:</strong> 개념 복습 또는 계산문제 중심</li>
+                <li>
+                  <strong>야간:</strong> 새로운 진도보다 공식·암기·오답 복습
+                </li>
+                <li>
+                  <strong>비번:</strong> 집중 문제풀이와 4일 사이클 마무리
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="mb-4" id="section-1">
+        <div class="section-header">
+          <h3 class="h5 mb-1">1단계 · 기억 복구</h3>
+          <p class="mb-0 text-secondary small">
+            기초 공식과 냉동사이클의 기억을 되살리는 단계 · 1~24일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="1">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">1일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d1-1"
+                /><label class="form-check-label" for="d1-1"
+                  >실기시험 전체 범위 확인</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d1-2"
+                /><label class="form-check-label" for="d1-2">Q=mcΔt 복습</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d1-3"
+                /><label class="form-check-label" for="d1-3"
+                  >현열의 의미 정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="2">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">2일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d2-1"
+                /><label class="form-check-label" for="d2-1"
+                  >물의 현열 계산 문제 5문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d2-2"
+                /><label class="form-check-label" for="d2-2"
+                  >질량·비열·온도차 확인</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="3">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">3일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d3-1"
+                /><label class="form-check-label" for="d3-1"
+                  >질량과 무게 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d3-2"
+                /><label class="form-check-label" for="d3-2"
+                  >체적·밀도·비중 정리</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d3-3"
+                /><label class="form-check-label" for="d3-3"
+                  >단위 10분 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="4">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">4일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d4-1"
+                /><label class="form-check-label" for="d4-1"
+                  >열량 계산 종합문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d4-2"
+                /><label class="form-check-label" for="d4-2"
+                  >틀린 문제 오답정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="5">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">5일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d5-1"
+                /><label class="form-check-label" for="d5-1"
+                  >현열과 잠열 복습</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d5-2"
+                /><label class="form-check-label" for="d5-2"
+                  >상태변화 정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="6">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">6일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d6-1"
+                /><label class="form-check-label" for="d6-1"
+                  >융해·증발·응축 계산 문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="7">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">7일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d7-1"
+                /><label class="form-check-label" for="d7-1"
+                  >잠열 종류 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d7-2"
+                /><label class="form-check-label" for="d7-2"
+                  >물의 비열 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d7-3"
+                /><label class="form-check-label" for="d7-3"
+                  >얼음의 융해잠열 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="8">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">8일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d8-1"
+                /><label class="form-check-label" for="d8-1"
+                  >현열 + 잠열 종합문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d8-2"
+                /><label class="form-check-label" for="d8-2"
+                  >제빙 기초문제 풀이</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="9">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">9일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d9-1"
+                /><label class="form-check-label" for="d9-1">RT의 의미</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d9-2"
+                /><label class="form-check-label" for="d9-2"
+                  >1RT와 kcal/h 관계</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="10">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">10일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d10-1"
+                /><label class="form-check-label" for="d10-1"
+                  >RT ↔ kcal/h ↔ kW 환산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="11">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">11일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d11-1"
+                /><label class="form-check-label" for="d11-1"
+                  >주요 단위 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d11-2"
+                /><label class="form-check-label" for="d11-2">1RT</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d11-3"
+                /><label class="form-check-label" for="d11-3">1kW</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d11-4"
+                /><label class="form-check-label" for="d11-4">1kWh</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="12">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">12일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d12-1"
+                /><label class="form-check-label" for="d12-1"
+                  >냉동능력 종합문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d12-2"
+                /><label class="form-check-label" for="d12-2"
+                  >단위 환산 문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="13">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">13일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d13-1"
+                /><label class="form-check-label" for="d13-1"
+                  >냉동사이클 4과정 복습</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d13-2"
+                /><label class="form-check-label" for="d13-2"
+                  >냉매 흐름 그려보기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="14">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">14일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d14-1"
+                /><label class="form-check-label" for="d14-1">증발기</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d14-2"
+                /><label class="form-check-label" for="d14-2">압축기</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d14-3"
+                /><label class="form-check-label" for="d14-3">응축기</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d14-4"
+                /><label class="form-check-label" for="d14-4"
+                  >팽창밸브 역할</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="15">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">15일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d15-1"
+                /><label class="form-check-label" for="d15-1"
+                  >냉매 흐름 순서 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d15-2"
+                /><label class="form-check-label" for="d15-2"
+                  >저압측·고압측 정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="16">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">16일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d16-1"
+                /><label class="form-check-label" for="d16-1"
+                  >냉동사이클 기본문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d16-2"
+                /><label class="form-check-label" for="d16-2"
+                  >냉매 상태 변화 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="17">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">17일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d17-1"
+                /><label class="form-check-label" for="d17-1"
+                  >p-h 선도 기본</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d17-2"
+                /><label class="form-check-label" for="d17-2"
+                  >h1,h2,h3,h4 정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="18">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">18일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d18-1"
+                /><label class="form-check-label" for="d18-1">냉동효과</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d18-2"
+                /><label class="form-check-label" for="d18-2">압축일</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d18-3"
+                /><label class="form-check-label" for="d18-3"
+                  >응축기 방열량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="19">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">19일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d19-1"
+                /><label class="form-check-label" for="d19-1"
+                  >p-h 관련 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="20">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">20일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d20-1"
+                /><label class="form-check-label" for="d20-1"
+                  >p-h 선도 계산문제</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d20-2"
+                /><label class="form-check-label" for="d20-2"
+                  >냉동사이클 문제풀이</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="21">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">21일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d21-1"
+                /><label class="form-check-label" for="d21-1">COP 개념</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d21-2"
+                /><label class="form-check-label" for="d21-2"
+                  >냉동능력과 압축동력 관계</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="22">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">22일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d22-1"
+                /><label class="form-check-label" for="d22-1">압축효율</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d22-2"
+                /><label class="form-check-label" for="d22-2">기계효율</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="23">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">23일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d23-1"
+                /><label class="form-check-label" for="d23-1"
+                  >효율 공식 암기</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d23-2"
+                /><label class="form-check-label" for="d23-2"
+                  >COP 관련 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="24">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">24일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d24-1"
+                /><label class="form-check-label" for="d24-1"
+                  >COP·효율 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="section-25">
+        <div class="section-header">
+          <h3 class="h5 mb-1">2단계 · 냉동장치 계산</h3>
+          <p class="mb-0 text-secondary small">
+            압축기, 증발기, 응축기, 냉각수, 브라인, 제빙 · 25~48일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="25">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">25일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d25-1"
+                /><label class="form-check-label" for="d25-1"
+                  >압축기 종류와 역할</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="26">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">26일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d26-1"
+                /><label class="form-check-label" for="d26-1"
+                  >압축일 계산</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d26-2"
+                /><label class="form-check-label" for="d26-2"
+                  >압축기 동력 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="27">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">27일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d27-1"
+                /><label class="form-check-label" for="d27-1"
+                  >압축기 관련 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="28">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">28일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d28-1"
+                /><label class="form-check-label" for="d28-1"
+                  >압축기 계산문제 집중풀이</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="29">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">29일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d29-1"
+                /><label class="form-check-label" for="d29-1"
+                  >증발기의 역할</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d29-2"
+                /><label class="form-check-label" for="d29-2"
+                  >증발기 흡열량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="30">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">30일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d30-1"
+                /><label class="form-check-label" for="d30-1"
+                  >냉동효과 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="31">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">31일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d31-1"
+                /><label class="form-check-label" for="d31-1"
+                  >증발기 관련 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="32">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">32일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d32-1"
+                /><label class="form-check-label" for="d32-1"
+                  >증발기 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="33">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">33일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d33-1"
+                /><label class="form-check-label" for="d33-1"
+                  >응축기의 역할</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d33-2"
+                /><label class="form-check-label" for="d33-2"
+                  >응축기 방열량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="34">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">34일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d34-1"
+                /><label class="form-check-label" for="d34-1"
+                  >냉동부하와 압축부하 관계</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="35">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">35일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d35-1"
+                /><label class="form-check-label" for="d35-1"
+                  >응축기 방열량 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="36">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">36일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d36-1"
+                /><label class="form-check-label" for="d36-1"
+                  >응축기 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="37">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">37일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d37-1"
+                /><label class="form-check-label" for="d37-1"
+                  >냉각수의 역할</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d37-2"
+                /><label class="form-check-label" for="d37-2"
+                  >냉각수 순환량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="38">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">38일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d38-1"
+                /><label class="form-check-label" for="d38-1"
+                  >냉각수량 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="39">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">39일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d39-1"
+                /><label class="form-check-label" for="d39-1"
+                  >냉각수 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="40">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">40일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d40-1"
+                /><label class="form-check-label" for="d40-1"
+                  >냉각수 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="41">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">41일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d41-1"
+                /><label class="form-check-label" for="d41-1"
+                  >브라인의 역할</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d41-2"
+                /><label class="form-check-label" for="d41-2"
+                  >비중·밀도 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="42">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">42일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d42-1"
+                /><label class="form-check-label" for="d42-1"
+                  >브라인 순환량</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d42-2"
+                /><label class="form-check-label" for="d42-2"
+                  >브라인 열량 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="43">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">43일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d43-1"
+                /><label class="form-check-label" for="d43-1"
+                  >브라인 관련 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="44">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">44일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d44-1"
+                /><label class="form-check-label" for="d44-1"
+                  >브라인 냉각기 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="45">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">45일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d45-1"
+                /><label class="form-check-label" for="d45-1">제빙부하</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d45-2"
+                /><label class="form-check-label" for="d45-2"
+                  >물 → 얼음 변화</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="46">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">46일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d46-1"
+                /><label class="form-check-label" for="d46-1"
+                  >제빙열량 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="47">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">47일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d47-1"
+                /><label class="form-check-label" for="d47-1"
+                  >외부 침입열량 정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="48">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">48일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d48-1"
+                /><label class="form-check-label" for="d48-1"
+                  >제빙 문제 종합풀이</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="section-49">
+        <div class="section-header">
+          <h3 class="h5 mb-1">3단계 · 전열과 열교환</h3>
+          <p class="mb-0 text-secondary small">
+            열전달, 열통과율, 전열면적, LMTD · 49~68일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="49">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">49일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d49-1"
+                /><label class="form-check-label" for="d49-1">전도</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d49-2"
+                /><label class="form-check-label" for="d49-2">대류</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d49-3"
+                /><label class="form-check-label" for="d49-3">복사</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="50">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">50일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d50-1"
+                /><label class="form-check-label" for="d50-1">열전도율</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d50-2"
+                /><label class="form-check-label" for="d50-2">열저항</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="51">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">51일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d51-1"
+                /><label class="form-check-label" for="d51-1"
+                  >열전달 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="52">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">52일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d52-1"
+                /><label class="form-check-label" for="d52-1"
+                  >열전달 계산문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="53">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">53일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d53-1"
+                /><label class="form-check-label" for="d53-1">열통과율 K</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="54">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">54일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d54-1"
+                /><label class="form-check-label" for="d54-1"
+                  >관벽 열저항</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="55">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">55일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d55-1"
+                /><label class="form-check-label" for="d55-1"
+                  >1/K 공식 구성 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="56">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">56일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d56-1"
+                /><label class="form-check-label" for="d56-1"
+                  >열통과율 계산문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="57">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">57일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d57-1"
+                /><label class="form-check-label" for="d57-1"
+                  >전열면적의 의미</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="58">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">58일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d58-1"
+                /><label class="form-check-label" for="d58-1"
+                  >관의 전열면적 계산</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="59">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">59일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d59-1"
+                /><label class="form-check-label" for="d59-1"
+                  >전열량 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="60">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">60일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d60-1"
+                /><label class="form-check-label" for="d60-1"
+                  >응축기 전열면적 문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="61">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">61일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d61-1"
+                /><label class="form-check-label" for="d61-1"
+                  >대수평균온도차 개념</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="62">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">62일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d62-1"
+                /><label class="form-check-label" for="d62-1"
+                  >병류·향류 이해</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="63">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">63일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d63-1"
+                /><label class="form-check-label" for="d63-1"
+                  >LMTD 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="64">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">64일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d64-1"
+                /><label class="form-check-label" for="d64-1"
+                  >대수평균온도차 문제풀이</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="65">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">65일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d65-1"
+                /><label class="form-check-label" for="d65-1"
+                  >응축기 열교환 종합</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="66">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">66일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d66-1"
+                /><label class="form-check-label" for="d66-1"
+                  >증발기 열교환 종합</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="67">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">67일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d67-1"
+                /><label class="form-check-label" for="d67-1"
+                  >전열 공식 전체 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="68">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">68일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d68-1"
+                /><label class="form-check-label" for="d68-1"
+                  >전열 분야 오답 정리</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="section-69">
+        <div class="section-header">
+          <h3 class="h5 mb-1">4단계 · 공기와 습공기</h3>
+          <p class="mb-0 text-secondary small">
+            습공기, 노점, 결로, 공기 열량, 공기선도 · 69~88일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="69">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">69일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d69-1"
+                /><label class="form-check-label" for="d69-1"
+                  >건공기와 습공기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="70">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">70일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d70-1"
+                /><label class="form-check-label" for="d70-1"
+                  >습공기의 구성</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="71">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">71일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d71-1"
+                /><label class="form-check-label" for="d71-1">절대습도</label>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d71-2"
+                /><label class="form-check-label" for="d71-2"
+                  >상대습도 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="72">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">72일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d72-1"
+                /><label class="form-check-label" for="d72-1"
+                  >습공기 기본문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="73">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">73일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d73-1"
+                /><label class="form-check-label" for="d73-1">노점온도</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="74">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">74일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d74-1"
+                /><label class="form-check-label" for="d74-1"
+                  >결로 발생 원리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="75">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">75일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d75-1"
+                /><label class="form-check-label" for="d75-1"
+                  >상대습도와 노점 관계</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="76">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">76일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d76-1"
+                /><label class="form-check-label" for="d76-1"
+                  >노점·결로 문제풀이</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="77">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">77일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d77-1"
+                /><label class="form-check-label" for="d77-1"
+                  >공기 현열량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="78">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">78일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d78-1"
+                /><label class="form-check-label" for="d78-1"
+                  >공기 잠열량</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="79">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">79일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d79-1"
+                /><label class="form-check-label" for="d79-1"
+                  >공기 관련 상수 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="80">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">80일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d80-1"
+                /><label class="form-check-label" for="d80-1"
+                  >공기 열량 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="81">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">81일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d81-1"
+                /><label class="form-check-label" for="d81-1">공기 가열</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="82">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">82일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d82-1"
+                /><label class="form-check-label" for="d82-1"
+                  >냉각·가습·제습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="83">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">83일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d83-1"
+                /><label class="form-check-label" for="d83-1"
+                  >냉각제습·재열 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="84">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">84일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d84-1"
+                /><label class="form-check-label" for="d84-1"
+                  >공기 상태변화 문제</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="85">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">85일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d85-1"
+                /><label class="form-check-label" for="d85-1"
+                  >공기선도 구성</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="86">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">86일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d86-1"
+                /><label class="form-check-label" for="d86-1"
+                  >공기선도 읽는 방법</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="87">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">87일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d87-1"
+                /><label class="form-check-label" for="d87-1"
+                  >혼합공기 개념 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="88">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">88일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d88-1"
+                /><label class="form-check-label" for="d88-1"
+                  >공기선도 종합문제</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="section-89">
+        <div class="section-header">
+          <h3 class="h5 mb-1">5단계 · 기출문제 집중</h3>
+          <p class="mb-0 text-secondary small">
+            분야별 기출과 종합 문제 풀이 · 89~108일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="89">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">89일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d89-1"
+                /><label class="form-check-label" for="d89-1"
+                  >냉동사이클 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="90">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">90일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d90-1"
+                /><label class="form-check-label" for="d90-1"
+                  >열량·RT 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="91">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">91일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d91-1"
+                /><label class="form-check-label" for="d91-1"
+                  >틀린 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="92">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">92일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d92-1"
+                /><label class="form-check-label" for="d92-1"
+                  >기출 종합 1회분</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="93">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">93일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d93-1"
+                /><label class="form-check-label" for="d93-1"
+                  >응축기·냉각수 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="94">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">94일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d94-1"
+                /><label class="form-check-label" for="d94-1"
+                  >증발기·브라인 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="95">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">95일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d95-1"
+                /><label class="form-check-label" for="d95-1"
+                  >오답 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="96">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">96일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d96-1"
+                /><label class="form-check-label" for="d96-1"
+                  >기출 종합 1회분</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="97">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">97일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d97-1"
+                /><label class="form-check-label" for="d97-1"
+                  >전열·열통과율 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="98">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">98일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d98-1"
+                /><label class="form-check-label" for="d98-1"
+                  >LMTD·전열면적 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="99">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">99일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d99-1"
+                /><label class="form-check-label" for="d99-1"
+                  >전열 공식 복습</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="100">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">100일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d100-1"
+                /><label class="form-check-label" for="d100-1"
+                  >기출 종합 1회분</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="101">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">101일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d101-1"
+                /><label class="form-check-label" for="d101-1"
+                  >습공기 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="102">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">102일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d102-1"
+                /><label class="form-check-label" for="d102-1"
+                  >공조 계산 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="103">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">103일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d103-1"
+                /><label class="form-check-label" for="d103-1"
+                  >오답 공식 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="104">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">104일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d104-1"
+                /><label class="form-check-label" for="d104-1"
+                  >기출 종합 1회분</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="105">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">105일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d105-1"
+                /><label class="form-check-label" for="d105-1"
+                  >가장 약한 분야 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="106">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">106일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d106-1"
+                /><label class="form-check-label" for="d106-1"
+                  >두 번째 약한 분야 기출</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="107">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">107일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d107-1"
+                /><label class="form-check-label" for="d107-1"
+                  >공식 전체 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="108">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">108일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d108-1"
+                /><label class="form-check-label" for="d108-1"
+                  >실전 모의시험</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-4" id="section-109">
+        <div class="section-header">
+          <h3 class="h5 mb-1">6단계 · 최종 마무리</h3>
+          <p class="mb-0 text-secondary small">
+            실전 모의시험과 최약점 보완 · 109~120일차
+          </p>
+        </div>
+        <div class="mt-3">
+          <div class="card day-card shadow-sm mb-3" data-day="109">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">109일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d109-1"
+                /><label class="form-check-label" for="d109-1"
+                  >냉동사이클 총정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="110">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">110일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d110-1"
+                /><label class="form-check-label" for="d110-1"
+                  >열량·응축기·증발기 총정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="111">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">111일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d111-1"
+                /><label class="form-check-label" for="d111-1">공식 암기</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="112">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">112일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d112-1"
+                /><label class="form-check-label" for="d112-1"
+                  >실전 모의시험</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="113">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">113일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d113-1"
+                /><label class="form-check-label" for="d113-1"
+                  >습공기·공조 총정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="114">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">114일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d114-1"
+                /><label class="form-check-label" for="d114-1"
+                  >전열·열교환 총정리</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="115">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">115일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d115-1"
+                /><label class="form-check-label" for="d115-1"
+                  >오답노트 반복</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="116">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">116일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d116-1"
+                /><label class="form-check-label" for="d116-1"
+                  >실전 모의시험</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="117">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">117일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d117-1"
+                /><label class="form-check-label" for="d117-1"
+                  >틀린 문제만 다시 풀기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="118">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">118일차</h5>
+                <span class="badge text-bg-primary">주간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d118-1"
+                /><label class="form-check-label" for="d118-1"
+                  >자주 틀리는 계산문제 반복</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="119">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">119일차</h5>
+                <span class="badge text-bg-warning">야간</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d119-1"
+                /><label class="form-check-label" for="d119-1"
+                  >필수 공식·단위 암기</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card day-card shadow-sm mb-3" data-day="120">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 fw-bold">120일차</h5>
+                <span class="badge text-bg-success">비번</span>
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d120-1"
+                /><label class="form-check-label" for="d120-1"
+                  >전체 최종 점검</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d120-2"
+                /><label class="form-check-label" for="d120-2"
+                  >최약점 3개 복습</label
+                >
+              </div>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input task-check"
+                  type="checkbox"
+                  id="d120-3"
+                /><label class="form-check-label" for="d120-3"
+                  >공식 암기 확인</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="floating-actions">
+      <div class="action-inner d-grid">
+        <button id="resetBtn" class="btn btn-outline-danger btn-sm shadow">
+          체크 상태 전체 초기화
+        </button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const checks = [...document.querySelectorAll('.task-check')]
+      const key = 'hvac_120day_study_v1'
+
+      function updateProgress() {
+        const done = checks.filter((c) => c.checked).length
+        const total = checks.length
+        const pct = total ? Math.round((done / total) * 100) : 0
+        document.getElementById('doneCount').textContent = done
+        document.getElementById('totalCount').textContent = total
+        document.getElementById('progressText').textContent = pct + '%'
+        document.getElementById('progressBar').style.width = pct + '%'
+        localStorage.setItem(key, JSON.stringify(checks.map((c) => c.checked)))
+      }
+
+      function restore() {
+        const saved = JSON.parse(localStorage.getItem(key) || '[]')
+        checks.forEach((c, i) => (c.checked = !!saved[i]))
+        updateProgress()
+      }
+
+      checks.forEach((c) => c.addEventListener('change', updateProgress))
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        if (confirm('모든 체크 상태를 초기화하시겠습니까?')) {
+          checks.forEach((c) => (c.checked = false))
+          updateProgress()
+        }
+      })
+      restore()
+    </script>
+  </body>
+</html>
