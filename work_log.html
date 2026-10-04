@@ -273,6 +273,18 @@
           />
         </div>
       </div>
+      <!-- 메모장 -->
+      <div id="memoSection" class="mt-2">
+        <div class="section-header" style="margin-top: 0">
+          <span>Today ISSUE</span>
+        </div>
+        <textarea
+          id="memoInput"
+          class="form-control"
+          rows="4"
+          placeholder="오늘 있었던 주요 사항이나 특이사항을 자유롭게 기록하세요."
+        ></textarea>
+      </div>
 
       <!-- Team Box Meeting -->
       <div id="tbmSection">
@@ -427,19 +439,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 메모장 -->
-      <div id="memoSection" class="mt-2">
-        <div class="section-header" style="margin-top: 0">
-          <span>오늘의 메모</span>
-        </div>
-        <textarea
-          id="memoInput"
-          class="form-control"
-          rows="4"
-          placeholder="오늘 있었던 주요 사항이나 특이사항을 자유롭게 기록하세요."
-        ></textarea>
-      </div>
     </div>
 
     <!-- 하단 고정 컨트롤 바 -->
@@ -468,7 +467,8 @@
         '5. PM3시-흡수식냉동기 엣지',
         '6. 냉각탑 수처리제 투입(화요일)',
         '7. 마이크로필터 교체(15일마다)',
-        '8. 팬, 모터 구리스 주입(15일마다)',
+        '8. 팬, 모터 구리스 주입(매월15일)',
+        '9. 공조기 필터교체(매월15일)',
       ]
 
       // [기능 추가] 주간/야간/당직 선택에 따른 타이틀 변경
