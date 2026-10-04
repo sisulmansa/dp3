@@ -258,12 +258,12 @@
 
       <!-- 기본 정보 -->
       <div class="d-flex gap-2 mb-3 align-items-end">
-        <div class="col-date">
+        <div class="col-date text-center">
           <label class="form-label mb-1 fw-bold text-nowrap">Day(날짜)</label>
           <input type="date" class="form-control ls-save" id="dateInput" />
         </div>
         <!-- 주(Week)/주제 -> 오늘의 미션 -->
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 text-center">
           <label class="form-label mb-1 fw-bold">오늘의 미션</label>
           <input
             type="text"
@@ -427,14 +427,41 @@
             style="font-size: 0.8rem; background-color: #fcfcfc"
           >
             <strong>매월초 - 교번작업</strong><br /><br />
+
             <strong>1, 4, 7, 10월</strong>
             <ul class="mb-2">
               <li>지열EHP 실외기 스트레이너 청소</li>
               <li>실험동물실 필터교체 (1,7월 프레임까지)</li>
             </ul>
+
             <strong>2, 5, 8, 11월</strong>
-            <ul class="mb-0">
+            <ul class="mb-2">
               <li>프리+미디엄 필터교체</li>
+            </ul>
+            <!-- 
+            <strong></strong>
+            <ul class="mb-2">
+              <li></li>
+            </ul>            
+-->
+            <strong>기동중인 E8-BSL 배기팬</strong>
+            <ul class="mb-2">
+              <li>EF22 6313호</li>
+              <li>EF23 6312호</li>
+              <li>EF24 6311호</li>
+              <li>EF36 6310호</li>
+              <li>EF37 6309호</li>
+              <li>EF38 5311호</li>
+            </ul>
+
+            <strong
+              >E68 동절기 VAV 재열코일 밸브 위치(대략 10월 개방 / 4월
+              차단)</strong
+            >
+            <ul class="mb-2">
+              <li>E8 7F 1번 PS실</li>
+              <li>E8 2~6F 1번, 3번 PS실</li>
+              <li>E6 2~6F 1번, 3번 PS실</li>
             </ul>
           </div>
         </div>
@@ -466,9 +493,9 @@
         '4. 온도체크(월수금 2시)',
         '5. PM3시-흡수식냉동기 엣지',
         '6. 냉각탑 수처리제 투입(화요일)',
-        '7. 마이크로필터 교체(15일마다)',
-        '8. 팬, 모터 구리스 주입(매월15일)',
-        '9. 공조기 필터교체(매월15일)',
+        '7. 팬, 모터 구리스 주입(15일)',
+        '8. 공조기 필터교체(15일)',
+        '9. 마이크로필터 교체(15일,30일)',
       ]
 
       // [기능 추가] 주간/야간/당직 선택에 따른 타이틀 변경
