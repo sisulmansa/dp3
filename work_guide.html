@@ -1,19 +1,254 @@
 <!-- 
-공조기 냉방 바이패스 개도
-공조기 차압조사
-공조기 벨트교체 change_ahu_velt.html
-공조기 필터교체-E68
-공조기 필터교체-E57
-난방배관 스트레이너 청소
-냉각탑 수처리제 투입
-마이크로필터 교체(15일,30일)
-버드스크린 청소
-월간검침(주간) 로드맵
-직가밸브 잠그기-E67 공용냉각탑 
-추가작업 보고서 작성(엣지업무 이외)
-화장실배기팬 차압측정
-항온항습기 CTH 상태점검 엣지체크
-흑착탑 교번-E57
-흡수식냉동기 추기작업
-EHP 실외기 스트레이너 클리닝
+공조기 냉방 바이패스 개도 open_ahu_cooling_bypass.html
+공조기 차압조사 check_ahu_cooling_bypass.html
+공조기 벨트교체 change_ahu_belt.html
+공조기 필터교체-E68 change_ahu_filter_e68.html
+공조기 필터교체-E57 change_ahu_filter_e57.html
+난방배관 스트레이너 청소 clean_heating_pipe_strainer.html
+냉각탑 수처리제 투입 add_cooling_tower_chemical.html
+마이크로필터 교체(15일,30일) change_microfilter.html
+버드스크린 청소 clean_bird_screen.html
+월간검침(주간) 로드맵 monthly_meter_reading_roadmap.html
+직가밸브 잠그기-E67 공용냉각탑  close_direct_valve_e67.html
+추가작업 보고서 작성(엣지업무 이외) write_additional_work_report.html
+화장실배기팬 차압측정 measure_toilet_fan_pressure.html
+항온항습기 CTH 상태점검 엣지체크 check_cth_status.html
+흑착탑 교번-E57 switch_adsorption_tower_e57.html
+흡수식냉동기 추기작업 purge_absorption_chiller.html
+EHP 실외기 스트레이너 클리닝 clean_ehp_outdoor_strainer.html
 -->
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 (Work Guide)</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI',
+          sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .category-title {
+        background-color: #17324d;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        scroll-margin-top: 150px;
+      }
+      /* 가이드 항목 스타일 */
+      .guide-item {
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 15px 18px;
+        margin-bottom: 12px;
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 600;
+        font-size: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+        border-left: 4px solid #63d3a5;
+        transition: all 0.2s;
+      }
+      .guide-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
+        color: #17324d;
+      }
+      /* 아이콘(순번) 스타일 */
+      .guide-icon {
+        background-color: #e8f0ff;
+        color: #2d6cdf;
+        min-width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .guide-item span.title-text {
+        flex-grow: 1;
+        word-break: keep-all;
+      }
+      /* 커스텀 스크롤바 감추기 (퀵링크 영역) */
+      .quick-links::-webkit-scrollbar {
+        display: none;
+      }
+      .quick-links {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5" id="topOfPage">
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1
+            class="h5 fw-bold mb-0"
+            style="cursor: pointer"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          >
+            📘 작업 가이드
+          </h1>
+
+          <!-- 네비게이션 퀵 링크 (Home) -->
+          <div
+            class="d-flex gap-2 quick-links"
+            style="overflow-x: auto; white-space: nowrap"
+          >
+            <a
+              href="/"
+              class="btn btn-light btn-sm rounded-pill px-3 py-1 text-dark fw-bold"
+              style="font-size: 12px"
+            >
+              Home
+            </a>
+          </div>
+        </div>
+
+        <div class="small text-white-50 mt-2" style="font-size: 12px">
+          원하시는 세부 작업 항목을 선택해 주세요.
+        </div>
+      </header>
+
+      <main class="p-3">
+        <!-- 1. 공조기 관련 -->
+        <div class="category-title">▣ 공조기 관련</div>
+        <a href="work_guide/open_ahu_cooling_bypass.html" class="guide-item">
+          <span class="guide-icon">1</span
+          ><span class="title-text">공조기 냉방 바이패스 개도</span>
+        </a>
+        <a href="work_guide/check_ahu_cooling_bypass.html" class="guide-item">
+          <span class="guide-icon">2</span
+          ><span class="title-text">공조기 차압조사</span>
+        </a>
+        <a href="work_guide/change_ahu_belt.html" class="guide-item">
+          <span class="guide-icon">3</span
+          ><span class="title-text">공조기 벨트교체</span>
+        </a>
+        <a href="work_guide/change_ahu_filter_e68.html" class="guide-item">
+          <span class="guide-icon">4</span
+          ><span class="title-text">공조기 필터교체-E68</span>
+        </a>
+        <a href="work_guide/change_ahu_filter_e57.html" class="guide-item">
+          <span class="guide-icon">5</span
+          ><span class="title-text">공조기 필터교체-E57</span>
+        </a>
+
+        <!-- 2. 배관 및 열원설비 관련 -->
+        <div class="category-title">▣ 배관 및 열원설비</div>
+        <a
+          href="work_guide/clean_heating_pipe_strainer.html"
+          class="guide-item"
+        >
+          <span class="guide-icon">6</span
+          ><span class="title-text">난방배관 스트레이너 청소</span>
+        </a>
+        <a href="work_guide/add_cooling_tower_chemical.html" class="guide-item">
+          <span class="guide-icon">7</span
+          ><span class="title-text">냉각탑 수처리제 투입</span>
+        </a>
+        <a href="work_guide/close_direct_valve_e67.html" class="guide-item">
+          <span class="guide-icon">8</span
+          ><span class="title-text">직가밸브 잠그기-E67 공용냉각탑</span>
+        </a>
+        <a href="work_guide/purge_absorption_chiller.html" class="guide-item">
+          <span class="guide-icon">9</span
+          ><span class="title-text">흡수식냉동기 추기작업</span>
+        </a>
+
+        <!-- 3. 필터 및 청소 관련 -->
+        <div class="category-title">▣ 필터 및 청소</div>
+        <a href="work_guide/change_microfilter.html" class="guide-item">
+          <span class="guide-icon">10</span
+          ><span class="title-text">마이크로필터 교체(15일,30일)</span>
+        </a>
+        <a href="work_guide/clean_bird_screen.html" class="guide-item">
+          <span class="guide-icon">11</span
+          ><span class="title-text">버드스크린 청소</span>
+        </a>
+        <a href="work_guide/clean_ehp_outdoor_strainer.html" class="guide-item">
+          <span class="guide-icon">12</span
+          ><span class="title-text">EHP 실외기 스트레이너 클리닝</span>
+        </a>
+
+        <!-- 4. 점검 및 기타 업무 -->
+        <div class="category-title">▣ 점검 및 기타 업무</div>
+        <a
+          href="work_guide/measure_toilet_fan_pressure.html"
+          class="guide-item"
+        >
+          <span class="guide-icon">13</span
+          ><span class="title-text">화장실배기팬 차압측정</span>
+        </a>
+        <a href="work_guide/check_cth_status.html" class="guide-item">
+          <span class="guide-icon">14</span
+          ><span class="title-text">항온항습기 CTH 상태점검 엣지체크</span>
+        </a>
+        <a
+          href="work_guide/switch_adsorption_tower_e57.html"
+          class="guide-item"
+        >
+          <span class="guide-icon">15</span
+          ><span class="title-text">흑착탑 교번-E57</span>
+        </a>
+        <a
+          href="work_guide/monthly_meter_reading_roadmap.html"
+          class="guide-item"
+        >
+          <span class="guide-icon">16</span
+          ><span class="title-text">월간검침(주간) 로드맵</span>
+        </a>
+        <a
+          href="work_guide/write_additional_work_report.html"
+          class="guide-item"
+        >
+          <span class="guide-icon">17</span
+          ><span class="title-text">추가작업 보고서 작성(엣지업무 이외)</span>
+        </a>
+      </main>
+
+      <!-- Footer -->
+      <footer class="text-center text-secondary p-3" style="font-size: 12px">
+        <span class="d-inline-block">&copy; Designed By mvcweb</span>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
