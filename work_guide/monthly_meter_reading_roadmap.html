@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 - 월간검침(주간) 로드맵</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI',
+          sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .roadmap-info {
+        background-color: #e8f4fd;
+        border: 1px solid #b6d4fe;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #052c65;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        font-weight: bold;
+        text-align: center;
+      }
+      .zone-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      /* 구역별 테마 컬러 */
+      .zone-e6 {
+        border-top: 5px solid #6f42c1;
+      }
+      .zone-e8 {
+        border-top: 5px solid #fd7e14;
+      }
+      .zone-e5 {
+        border-top: 5px solid #0d6efd;
+      }
+      .zone-e7 {
+        border-top: 5px solid #20c997;
+      }
+
+      .zone-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eef2f5;
+      }
+      .zone-e6 .zone-title {
+        color: #6f42c1;
+      }
+      .zone-e8 .zone-title {
+        color: #fd7e14;
+      }
+      .zone-e5 .zone-title {
+        color: #0d6efd;
+      }
+      .zone-e7 .zone-title {
+        color: #20c997;
+      }
+
+      .location-box {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border-left: 4px solid #adb5bd;
+      }
+      .location-box:last-child {
+        margin-bottom: 0;
+      }
+      .location-title {
+        font-size: 15.5px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .location-number {
+        background-color: #343a40;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        margin-right: 8px;
+      }
+
+      .meter-list {
+        padding-left: 0;
+        list-style: none;
+        margin-bottom: 0;
+      }
+      .meter-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px dashed #dee2e6;
+        font-size: 14.5px;
+        color: #495057;
+      }
+      .meter-list li:last-child {
+        border-bottom: none;
+      }
+      .meter-item-left {
+        display: flex;
+        align-items: center;
+      }
+      .meter-badge {
+        background-color: #e9ecef;
+        color: #495057;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-right: 12px;
+        min-width: 45px;
+        text-align: center;
+        border: 1px solid #ced4da;
+      }
+
+      /* iOS 스타일 토글 스위치 CSS */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+        margin-bottom: 0;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: '';
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      input:checked + .slider {
+        background-color: #34c759; /* iOS Green */
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #34c759;
+      }
+      input:checked + .slider:before {
+        transform: translateX(22px);
+      }
+      .slider.round {
+        border-radius: 34px;
+      }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5">
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0">📋 월간검침(주간) 로드맵</h1>
+          <a
+            href="../work_guide.html"
+            class="btn btn-outline-light btn-sm rounded-pill px-3 py-1 fw-bold"
+            style="font-size: 12px"
+          >
+            가이드 목록
+          </a>
+        </div>
+      </header>
+
+      <main class="p-3">
+        <div class="roadmap-info">
+          🚶‍♂️ 총 11개 지점 순회 경로 안내 (❶ ~ ⓫)<br />
+          <span style="font-size: 12px; font-weight: normal"
+            >(검침 완료 시 우측 스위치를 눌러 체크하세요)</span
+          >
+        </div>
+
+        <!-- E6 구역 -->
+        <div class="zone-card zone-e6">
+          <div class="zone-title">🏢 E6-N 구역</div>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">1</span> E6-B2-PS#1
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">6번</span> E6 저층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">7번</span> E6 고층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">8번</span> E6 냉각탑 보급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- E8 구역 -->
+        <div class="zone-card zone-e8">
+          <div class="zone-title">🏢 E8-N 구역</div>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">2</span> E8-B2-기계실
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">9번</span> E8 저층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">10번</span> E8 고층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">11번</span> E8 저층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">12번</span> E8 고층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">13번</span> E8 난 방(Gcal)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">14번</span> E8 저층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">15번</span> E8 고층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">16번</span> E8 냉각탑 보급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">17번</span> E8 열 량
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- E5 구역 -->
+        <div class="zone-card zone-e5">
+          <div class="zone-title">🏢 E5-N / E5-S 구역</div>
+
+          <h6 class="fw-bold mt-2 text-primary">E5-N</h6>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">3</span> E5-3F-PS#2
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">2번</span> E5 급수 (PS#2)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">3번</span> E5 급수 (PS#2)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">4번</span> E5 RO (PS#2)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <h6 class="fw-bold mt-4 text-primary">E5-S</h6>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">4</span> E5-3F-PS#5
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">1번</span> E5 급수 (PS#5)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">5</span> E5-2F-PS#5
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">7번</span> E5 급수 (PS#5)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">6</span> E5-B1-기계실
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">5번</span> 난 방(Gcal)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">9번</span> 냉 방(Gcal)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">7</span> 방재실
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">3번</span> E5 저층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">4번</span> E5 고층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">14번</span> E5 냉동기 1번
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">15번</span> E5 냉동기 2번
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">16번</span> E5 냉동기 3번
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">17번</span> E5 냉수 1차분용
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- E7 구역 -->
+        <div class="zone-card zone-e7">
+          <div class="zone-title">🏢 E7-S / E7-N 구역</div>
+
+          <h6 class="fw-bold mt-2" style="color: #20c997">E7-S</h6>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">8</span> E7-B1-기계실
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">1번</span> E6 저층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">2번</span> E6 고층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">3번</span> E6 저층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">4번</span> E6 고층부 급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">5번</span> E6 난 방(Gcal)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">10번</span> E7 CS급탕
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">9</span> E7-B2-기계실
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">11번</span> CDA냉각수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">12번</span> 저층부급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">13번</span> 저층부중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">10</span> E7-B3-PS#8
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">1번</span> E7 저층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">2번</span> E7 고층부 급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">6번</span> E7 저층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">7번</span> E7 고층부 중수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">8번</span> E7 냉각탑 보급수
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+
+          <h6 class="fw-bold mt-4" style="color: #20c997">E7-N</h6>
+          <div class="location-box">
+            <div class="location-title">
+              <span class="location-number">11</span> E7-3F-PS#3
+            </div>
+            <ul class="meter-list">
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">5번</span> E7 급수 (PS#3)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+              <li>
+                <div class="meter-item-left">
+                  <span class="meter-badge">6번</span> E7 RO (PS#3)
+                </div>
+                <label class="switch"
+                  ><input type="checkbox" /><span class="slider round"></span
+                ></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer class="text-center text-secondary p-3" style="font-size: 12px">
+        <span class="d-inline-block">&copy; Designed By mvcweb</span>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

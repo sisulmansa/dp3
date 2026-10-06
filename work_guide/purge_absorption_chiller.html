@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 - 흡수식냉동기 추기작업</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI',
+          sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .info-box {
+        background-color: #e8f4fd;
+        border: 1px solid #b6d4fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #052c65;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .pressure-table {
+        width: 100%;
+        margin-top: 15px;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .pressure-table th,
+      .pressure-table td {
+        padding: 10px;
+        border: 1px solid #b6d4fe;
+        text-align: center;
+        font-size: 13.5px;
+      }
+      .pressure-table th {
+        background-color: #cfe2ff;
+        font-weight: bold;
+      }
+      .section-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid #17324d;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #17324d;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eef2f5;
+        display: flex;
+        align-items: center;
+      }
+      .step-list {
+        padding-left: 0;
+        list-style: none;
+        counter-reset: step-counter;
+        margin-bottom: 0;
+      }
+      .step-list li {
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 14.5px;
+        color: #333;
+        line-height: 1.5;
+      }
+      .step-list li::before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #3498db;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      /* 번호 카운터 이어가기 위한 유틸리티 */
+      .start-4 {
+        counter-reset: step-counter 3;
+      }
+      .start-8 {
+        counter-reset: step-counter 7;
+      }
+      .start-12 {
+        counter-reset: step-counter 11;
+      }
+
+      .valv-open {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+      .valv-close {
+        color: #dc3545;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5">
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0">⚙️ 흡수식냉동기 추기작업</h1>
+          <!-- 뒤로가기 -->
+          <a
+            href="../work_guide.html"
+            class="btn btn-outline-light btn-sm rounded-pill px-3 py-1 fw-bold"
+            style="font-size: 12px"
+          >
+            가이드 목록
+          </a>
+        </div>
+      </header>
+
+      <main class="p-3">
+        <!-- 추기장치 및 압력 기준 설명 -->
+        <div class="info-box shadow-sm">
+          <strong class="d-block mb-2 text-primary"
+            >📊 추기장치(비응축가스 제거) 압력 기준</strong
+          >
+          <p class="mb-0" style="font-size: 13.5px">
+            추기장치는 내부의 비응축가스를 제거하는 장치입니다.
+          </p>
+          <table class="pressure-table mb-2">
+            <thead>
+              <tr>
+                <th>수치 (mmHg)</th>
+                <th>상태 판정</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-primary fw-bold">0 ~ 2 mmHg</td>
+                <td>매우 양호 (현재 1mmHg = 진공 우수)</td>
+              </tr>
+              <tr>
+                <td class="text-success fw-bold">3 ~ 5 mmHg</td>
+                <td>정상 범위</td>
+              </tr>
+              <tr>
+                <td class="text-warning fw-bold">5 mmHg 이상</td>
+                <td>지속 유지 시 점검 필요</td>
+              </tr>
+              <tr>
+                <td class="text-danger fw-bold">10 mmHg 이상</td>
+                <td>공기 유입 또는 계통 이상 의심</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 1. 준비 및 기동 -->
+        <div class="section-card">
+          <div class="section-title">🟢 1. 준비 및 펌프 기동</div>
+          <ol class="step-list">
+            <li>밸브(Main, 저실, 본체)가 꽉 잠겼는지 상태 확인</li>
+            <li>스크린에서 <strong>"추기펌프" > "운전"</strong> 버튼 선택</li>
+            <li>
+              냉동기 옆에 있는 추기펌프의 작은 밸브가 열려 있는지 확인<br />
+              <span class="text-secondary" style="font-size: 13px"
+                >(만약 닫혀있으면
+                <span class="valv-open">왼쪽 끝까지 돌려서 Open</span>)</span
+              >
+            </li>
+          </ol>
+        </div>
+
+        <!-- 2. 본체 추기 -->
+        <div class="section-card">
+          <div class="section-title">🔵 2. 본체 추기</div>
+          <ol class="step-list start-4">
+            <li>
+              Main 앞단밸브 손잡이를
+              <span class="valv-open">왼쪽 끝까지 돌려 Open</span><br />
+              <span class="text-secondary" style="font-size: 13px"
+                >(마지막에 살짝 반대방향으로 돌림)</span
+              >
+            </li>
+            <li>
+              본체 밸브를 <span class="valv-open">왼쪽으로 돌려 Open</span>
+            </li>
+            <li>추기장치 압력이 <strong>1mmHg</strong>까지 오도록 대기</li>
+            <li>본체 밸브 <span class="valv-close">Close</span></li>
+          </ol>
+        </div>
+
+        <!-- 3. 저실 추기 -->
+        <div class="section-card">
+          <div class="section-title">🟣 3. 저실 추기 및 대기</div>
+          <ol class="step-list start-8">
+            <li>저실 밸브 <span class="valv-open">왼쪽으로 돌려 Open</span></li>
+            <li>추기장치 압력이 <strong>1mmHg</strong>까지 오도록 대기</li>
+            <li>
+              Oil 상태 확인 후 <strong>10분 정도 대기</strong><br />
+              <span class="text-secondary" style="font-size: 13px"
+                >(대기하는 동안 엣지 체크 진행)</span
+              >
+            </li>
+            <li>
+              저실 밸브를
+              <span class="valv-close">오른쪽으로 끝까지 돌려 Close</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- 4. 공회전 및 정지 -->
+        <div class="section-card">
+          <div class="section-title">🔴 4. 공회전 및 정지 (마무리)</div>
+          <ol class="step-list start-12">
+            <li>Main 앞단밸브 <span class="valv-close">Close</span></li>
+            <li>추기펌프 약 <strong>30분간 공회전</strong> 진행</li>
+            <li>스크린에서 <strong>"추기펌프" > "정지"</strong> 버튼 선택</li>
+            <li>
+              추기펌프 램프 상태 확인<br />
+              <span class="text-secondary" style="font-size: 13px"
+                >("자동" 램프 소등, "수동" 램프 점등)</span
+              >
+            </li>
+            <li>
+              추기펌프의 작은 밸브를
+              <span class="valv-close">오른쪽으로 돌려 Close</span>
+            </li>
+          </ol>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer class="text-center text-secondary p-3" style="font-size: 12px">
+        <span class="d-inline-block">&copy; Designed By mvcweb</span>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
