@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 - 공조기 필터교체 (E68)</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI',
+          sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .prep-box {
+        background-color: #e8f4fd;
+        border: 1px solid #b6d4fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #052c65;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .section-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid #17324d;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #17324d;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eef2f5;
+        display: flex;
+        align-items: center;
+      }
+      .sub-title {
+        font-size: 15px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        background-color: #f8f9fa;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border-left: 3px solid #3498db;
+      }
+      .step-list {
+        padding-left: 0;
+        list-style: none;
+        counter-reset: step-counter;
+        margin-bottom: 0;
+      }
+      .step-list li {
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #444;
+        line-height: 1.5;
+      }
+      .step-list li::before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #3498db;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .warning-box {
+        background-color: #fff3cd;
+        border: 1px solid #ffe69c;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 15px;
+        font-size: 14px;
+        color: #664d03;
+      }
+      .map-box {
+        background-color: #2c3e50;
+        color: white;
+        border-radius: 8px;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 14px;
+        text-align: center;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5">
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0">🔲 공조기 필터교체-E68</h1>
+          <!-- 뒤로가기 -->
+          <a
+            href="../work_guide.html"
+            class="btn btn-outline-light btn-sm rounded-pill px-3 py-1 fw-bold"
+            style="font-size: 12px"
+          >
+            가이드 목록
+          </a>
+        </div>
+      </header>
+
+      <main class="p-3">
+        <!-- 준비 및 사전 참고사항 -->
+        <div class="prep-box">
+          <h5 class="fw-bold mb-3 text-primary">✅ Ready (준비 및 참고사항)</h5>
+          <ul class="mb-3" style="padding-left: 20px">
+            <li>
+              <strong>준비물:</strong> 필터교체 자석스티커, 일자 시계드라이버,
+              윈도우 닦을 걸레/휴지
+            </li>
+            <li>E8-B1 게이트에서 하이엠 외부 업체 인솔</li>
+            <li>LG 또는 SNI 담당자에게서 <strong>LOTO 대장</strong> 수령</li>
+          </ul>
+          <hr style="border-color: #b6d4fe" />
+          <ul class="mb-0" style="padding-left: 20px">
+            <li>
+              <strong>사전 요청:</strong> E8-8F 공조실1 BPP (나라컨트롤 요청),
+              공조실2 LS-05 (CA 중앙관제 02-6987-1112 OFF 요청)
+            </li>
+            <li>
+              <strong>작업 중 확인:</strong> 윈도우를 깨끗이 닦고,
+              <strong
+                >벨트 상태(장력, 세로크랙, 뜯김) 점검 및 필요시 사진
+                촬영/보고</strong
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- E8-B1 구역 -->
+        <div class="section-card">
+          <div class="section-title">📍 E8-B1-실험동물공조실</div>
+          <p class="text-danger fw-bold" style="font-size: 13px">
+            * 나라컨트롤 담당자에게 공조기 작업 순서 공지<br />
+            * 예비 004는 작업 제외, 001~003 순서로 작업
+          </p>
+
+          <div class="sub-title">AHU-001 작업 순서</div>
+          <ol class="step-list">
+            <li>004 예비 공조기 ON & 001 공조기 OFF</li>
+            <li>제어반패널 REM → PNL 전환</li>
+            <li>LOTO 대장 "부착일시" 작성</li>
+            <li>하이엠 작업자 작업 시작 지시</li>
+            <li>1,2층 여재(부직포 필터) 작업</li>
+            <li>작업 완료 후 차압계 영점 조정</li>
+            <li>제어반패널 PNL → REM 전환</li>
+            <li>LOTO 대장 "제거일시" 작성</li>
+            <li>나라컨트롤 담당자에게 001 작업 완료 통보</li>
+            <li>
+              나라컨트롤 담당자가 004 공조기를 OFF 하고 001 공조기를 재가동
+            </li>
+          </ol>
+        </div>
+
+        <!-- E8-B2 구역 -->
+        <div class="section-card">
+          <div class="section-title">📍 E8-B2-기계실</div>
+          <p class="text-secondary fw-bold" style="font-size: 13px">
+            * 직접 AHU-LS-1~3 전원 제어<br />
+            * 실험실 공조기가 아니므로 전원을 임의로 껐다 켜도 무방함
+          </p>
+
+          <ol class="step-list">
+            <li>LOTO 대장 "부착일시" 작성</li>
+            <li>전원 OFF (공조기 옆 제어 LCD 패널 이용)</li>
+            <li>공조기 양쪽 컨트롤러 레버 "자동 → 수동" 전환</li>
+            <li>하이엠 작업자 작업 시작 지시</li>
+            <li>여재(부직포 필터) 작업</li>
+            <li>작업 완료 후 차압계 영점 조정</li>
+            <li>공조기 재가동</li>
+            <li>컨트롤러 레버 "수동 → 자동" 전환</li>
+            <li>LOTO 대장 "제거일시" 작성</li>
+          </ol>
+        </div>
+
+        <!-- E8-8F 구역 -->
+        <div class="section-card">
+          <div class="section-title">📍 E8-8F 공조실</div>
+          <div
+            class="alert alert-warning py-2 mb-3"
+            style="font-size: 13px; font-weight: bold"
+          >
+            ⏱ BPP와 LS-05는 반드시 13:00~14:00 사이에 작업을 맞춰야 하므로 먼저
+            작업을 시작합니다.
+          </div>
+
+          <div class="sub-title">공조실1: BPP 작업</div>
+          <p style="font-size: 14px; margin-bottom: 5px">
+            * 나라컨트롤 담당자가 공조기 OFF
+          </p>
+
+          <div class="sub-title">공조실2: LS-05 작업 순서</div>
+          <ol class="step-list mb-3">
+            <li>CA 중앙관제 (02-6987-1112) 전화</li>
+            <li>공조기 OFF 요청 → 꺼짐 확인</li>
+            <li>제어반패널 REM → PNL 전환</li>
+            <li>LOTO 대장 "부착일시" 작성</li>
+            <li>하이엠 작업자 작업 시작 지시</li>
+            <li>1,2층 여재(부직포 필터) 작업</li>
+            <li>작업 완료 후 차압계 영점 조정</li>
+            <li>제어반패널 PNL → REM 전환</li>
+            <li>LOTO 대장 "제거일시" 작성</li>
+            <li>CA 중앙관제 (02-6987-1112) 전화</li>
+            <li>작업 완료 통보 및 공조기 재가동 요청</li>
+            <li>모츄럴 댐퍼를 가리키는 램프 점등 확인</li>
+          </ol>
+
+          <div class="sub-title">LS-05 외 나머지 (1278, 3456)</div>
+          <div
+            class="alert alert-danger py-2 mb-2"
+            style="font-size: 13px; font-weight: bold"
+          >
+            * 1278, 3456에서 동시에 2대가 꺼지면 절대 안 됨!<br />
+            * 단, 양쪽에 한 대씩 두 대가 동시에 꺼지는 건 가능.
+          </div>
+
+          <div class="map-box">
+            [North 공조실2] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            [공조실1]<br />
+            &nbsp;&nbsp;&nbsp;3 &nbsp;&nbsp; 1
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            6 &nbsp;&nbsp; 8<br />
+            &nbsp;&nbsp;&nbsp;4 &nbsp;&nbsp; 2
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            5 &nbsp;&nbsp; 7
+          </div>
+
+          <ol class="step-list mt-3">
+            <li>공조기 OFF (직접 전원 제어) → 꺼짐 확인</li>
+            <li>제어반패널 REM → PNL 전환</li>
+            <li>LOTO 대장 "부착일시" 작성</li>
+            <li>하이엠 작업자 작업 시작 지시</li>
+            <li>1,2층 여재(부직포 필터) 작업</li>
+            <li>작업 완료 후 차압계 영점 조정</li>
+            <li>공조기 ON → 켜짐 확인</li>
+            <li>제어반패널 PNL → REM 전환</li>
+            <li>LOTO 대장 "제거일시" 작성</li>
+            <li>모츄럴 댐퍼를 가리키는 램프 점등 확인</li>
+          </ol>
+        </div>
+
+        <!-- 트러블슈팅 -->
+        <div class="warning-box shadow-sm">
+          <strong class="d-block mb-2 text-danger"
+            >⚠️ 공조기 재기동시 벨트가 돌지 않을 경우</strong
+          >
+          <p style="margin-bottom: 10px">
+            주변 공조기 의풍합 때문에 급기와 환기가 역류하여 팬이 돌지 못하는
+            현상입니다. 주변 공조기의 모터 속도를 낮춰야 합니다.
+          </p>
+          <ul class="mb-0" style="padding-left: 20px">
+            <li>주위 공조기 인버터에서 <strong>Hand 버튼</strong> 클릭</li>
+            <li>
+              Hz를 강제로 낮추기 위해 <strong>아래 화살표(⬇)</strong> 여러 번
+              누름
+            </li>
+            <li>
+              공조기의 벨트가 도는 걸 확인 후 <strong>Auto 버튼</strong>을 눌러
+              원복
+            </li>
+          </ul>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer class="text-center text-secondary p-3" style="font-size: 12px">
+        <span class="d-inline-block">&copy; Designed By mvcweb</span>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
