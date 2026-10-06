@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 - 공조기 필터교체 (E57)</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI', sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .prep-box {
+        background-color: #e8f4fd;
+        border: 1px solid #b6d4fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #052c65;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .info-box {
+        background-color: #e2e3e5;
+        border: 1px solid #d3d6d8;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #383d41;
+      }
+      .section-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        border-top: 5px solid #17324d;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #17324d;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eef2f5;
+      }
+      .step-list {
+        padding-left: 0;
+        list-style: none;
+        counter-reset: step-counter;
+        margin-bottom: 0;
+      }
+      .step-list li {
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.6;
+      }
+      .step-list li::before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #3498db;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .msg-bubble {
+        display: inline-block;
+        background-color: #ffe812;
+        color: #3b1e1e;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #f6d600;
+      }
+      .highlight-text {
+        font-weight: bold;
+        color: #0d6efd;
+      }
+      .warning-box {
+        background-color: #fff3cd;
+        border: 1px solid #ffe69c;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #664d03;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5">
+      
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0">
+            🔲 공조기 필터교체-E57
+          </h1>
+          <a href="../work_guide.html" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1 fw-bold" style="font-size: 12px">
+            가이드 목록
+          </a>
+        </div>
+      </header>
+
+      <main class="p-3">
+        
+        <!-- 교체할 필터 종류 -->
+        <div class="info-box shadow-sm">
+          <strong class="d-block mb-2">🏷 교체할 필터 종류</strong>
+          <ul class="mb-0" style="padding-left: 20px;">
+            <li>프리필터(부직포)</li>
+            <li>프리필터+프레임 = 앗세이</li>
+            <li>Medium Filter</li>
+          </ul>
+        </div>
+
+        <!-- 준비 및 사전 참고사항 -->
+        <div class="prep-box">
+          <h5 class="fw-bold mb-3 text-primary">✅ Ready (작업 준비)</h5>
+          <ul class="mb-3" style="padding-left: 20px;">
+            <li><strong>준비물:</strong> 필터교체 자석스티커, 일자 시계드라이버, 윈도우 닦을 걸레나 휴지</li>
+            <li><strong>LOTO 대장:</strong> LG 또는 SNI 담당자에게 수령</li>
+          </ul>
+          <hr style="border-color: #b6d4fe;">
+          <p class="mb-0 fw-bold" style="font-size: 13.5px;">
+            🚶 외부업체(하이엠) 인솔 가이드
+          </p>
+          <p class="mb-0 mt-1" style="font-size: 13px;">
+            E57 B1 중앙게이트로 외부업체가 입장하므로 게이트에서 대기 후 작업장 인솔. 작업 종료 시 다시 B1 게이트로 인솔 후, LOTO 리스트를 LG 담당자에게 제출.
+          </p>
+        </div>
+
+        <!-- E57 특징 및 구조 설명 -->
+        <div class="alert alert-danger py-3 mb-3 shadow-sm" style="font-size: 13.5px;">
+          <strong class="d-block mb-1">⚠️ E57 작업의 핵심 주의사항</strong>
+          E57은 E68과 달리 공조기에 컨트롤러가 없으므로 <strong>반드시 방재실(자동제어 담당자)과 연락하여 원격으로 전원을 끄고 켜야 합니다.</strong> (E68은 자체 제어 가능하므로 통신 불필요)
+        </div>
+
+        <!-- 작업 순서 -->
+        <div class="section-card">
+          <div class="section-title">⚙️ E5/7 필터/벨트 교체 과정</div>
+          
+          <div class="alert alert-info py-2 mb-4" style="font-size: 12.5px;">
+            <strong>💡 참고: 왜 4-3, 4-4 연번으로 끄지 않을까?</strong><br>
+            E5 실험실 공조기는 북쪽 기준 <strong>왼쪽(홀수)과 오른쪽(짝수)이 묶여 있기 때문</strong>입니다. (단, 오피스는 남/북으로 묶임). 좌/우 1대씩 균형 있게 OFF 해야 하며, 실험실 공조기 6대 가동 유지를 위해 OFF 시 휴지 중인 공조기(예: 4-5, 4-8)를 교대 가동시킵니다.
+          </div>
+
+          <ol class="step-list">
+            <li>
+              <strong>방재실 연락 및 전원 OFF:</strong><br>
+              방재실(자동제어 담당자)이 교체할 공조기를 알려주면 전원 OFF 확인 (예: AHU-4-3, 4-6 OFF).
+            </li>
+            <li>
+              <strong>제어반 안전 조치:</strong><br>
+              제어반 자물쇠를 풀고 급기/배기 레버를 <strong>REM ⇨ PNL</strong>로 전환합니다. (방재실 원격 가동 방지용) 이후 안전을 위해 다시 자물쇠로 잠급니다.
+            </li>
+            <li>
+              <strong>LOTO(잠금/표지) 부착:</strong><br>
+              SF/RF 인버터 사이에 "조작금지 자석스티커" 부착.<br>
+              LOTO 대장 <strong>(부착일시, 부착자)</strong> 항목 작성 (예: 09:30, 홍길동).<br>
+              <span class="text-secondary" style="font-size: 12px;">* 목록에 공조기가 없다면 수기로 작성</span>
+            </li>
+            <li>
+              <strong>방재실 작업 통보:</strong><br>
+              방재실 담당자에게 작업 시작을 알립니다.<br>
+              <span class="msg-bubble">📱 카톡: "AHU-4-3 교체작업중..."</span>
+            </li>
+            <li>
+              <strong>필터 교체 시작:</strong><br>
+              하이엠솔루텍 작업자(3명)에게 공조기 번호를 알리고 필터 교체를 진행시킵니다.
+            </li>
+            <li>
+              <strong>내 담당 업무 (작업 중):</strong><br>
+              ① 윈도우 깨끗이 닦기<br>
+              ② 차압계 영점조정 (일자 시계드라이버)<br>
+              ③ 벨트 상태 점검 (장력, 세로크랙, 뜯김) 및 필요시 사진 보고
+            </li>
+            <li>
+              <strong>개별 작업 완료 및 원복:</strong><br>
+              AHU-4-3 교체 완료 시, 작업자를 다음 공조기(4-6)로 이동시킵니다.<br>
+              AHU-4-3 제어반을 <strong>PNL ⇨ REM</strong>으로 복구하고 방재실에 연락합니다.<br>
+              <span class="msg-bubble">📱 카톡: "4-3 교체작업 완료 ⇨ 전원 ON 요청"</span>
+            </li>
+            <li>
+              <strong>정상 가동 확인:</strong><br>
+              AHU-4-3 가동 후 벨트가 정상 작동하는지 육안 확인 후 제어반 자물쇠를 잠급니다.<br>
+              <span class="msg-bubble">📱 카톡: "AHU-4-3 정상작동 확인완료"</span><br>
+              이후 방재실에서 다음번 교체할 공조기(예: 4-2)를 알려주고 OFF 시킵니다.
+            </li>
+            <li>
+              <strong>LOTO 제거 작성:</strong><br>
+              LOTO 대장 <strong>(제거일시, 제거자)</strong> 항목을 작성합니다. (예: 09:50, 홍길동)
+            </li>
+            <li>
+              <strong>다음 공조기 진행:</strong><br>
+              AHU-4-6으로 이동하여 LOTO 대장(부착일시) 작성 후, <strong>4번 과정부터 다시 반복</strong>합니다.
+            </li>
+          </ol>
+        </div>
+
+      </main>
+      <!-- Footer -->
+      <footer class="text-center text-secondary p-3" style="font-size: 12px">
+        <span class="d-inline-block">&copy; Designed By mvcweb</span>
+      </footer>
+    </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
