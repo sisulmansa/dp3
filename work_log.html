@@ -438,12 +438,7 @@
             <ul class="mb-2">
               <li>프리+미디엄 필터교체</li>
             </ul>
-            <!-- 
-            <strong></strong>
-            <ul class="mb-2">
-              <li></li>
-            </ul>            
--->
+
             <strong>기동중인 E8-BSL 배기팬</strong>
             <ul class="mb-2">
               <li>EF22 6313호</li>
@@ -552,6 +547,20 @@
     <script>
       const STORAGE_KEY = 'workJournalData_v4'
 
+      // 커서 위치 추적을 위한 전역 변수
+      let lastFocusedInput = null
+
+      // 입력창에 포커스가 갈 때마다 기록
+      document.addEventListener('focusin', function (e) {
+        if (
+          e.target.tagName === 'INPUT' ||
+          e.target.tagName === 'TEXTAREA' ||
+          e.target.tagName === 'SELECT'
+        ) {
+          lastFocusedInput = e.target
+        }
+      })
+
       const dailyItems = [
         '1. 흡착탑 정압설정(오전/오후)',
         '2. 오전 기계설비점검',
@@ -564,7 +573,7 @@
         '9. 마이크로필터 교체(15일,30일)',
       ]
 
-      // [기능 추가] 주간/야간/당직 선택에 따른 타이틀 변경
+      // 주간/야간/당직 선택에 따른 타이틀 변경
       function changeTitle() {
         const shift = document.getElementById('workShift').value
         const mainTitle = document.getElementById('mainTitle')
@@ -592,7 +601,7 @@
                         <td><input type="text" class="form-control text-center" placeholder="00:00~00:00"></td>
                         <td><input type="text" class="form-control text-center" maxlength="4" placeholder="분류"></td>
                         <td><input type="checkbox" class="form-check-input my-work-chk"></td>
-                        <td><input type="text" class="form-control" placeholder="업무내용 / 참석자"></td>
+                        <td><input type="text" class="form-control"></td>
                         <td class="no-print">
                             <div class="d-flex justify-content-center gap-1">
                                 <button class="btn btn-sm btn-outline-secondary py-0 px-1" onclick="moveRow(this, -1)">▲</button>
@@ -609,9 +618,20 @@
         tbody.insertAdjacentHTML('beforeend', getRowHtml(type))
       }
 
+      // 커서 위치 기준으로 행 삭제
       function removeRow(tbodyId) {
         const tbody = document.getElementById(tbodyId)
         if (tbody.children.length > 1) {
+          // 마지막으로 포커스되었던 입력창이 현재 tbody 내부에 있을 경우 해당 행 삭제
+          if (lastFocusedInput && tbody.contains(lastFocusedInput)) {
+            const rowToRemove = lastFocusedInput.closest('tr')
+            if (rowToRemove) {
+              tbody.removeChild(rowToRemove)
+              lastFocusedInput = null // 삭제 후 초기화
+              return
+            }
+          }
+          // 포커스된 항목이 없거나 다른 테이블에 있다면 기존처럼 맨 마지막 행 삭제
           tbody.removeChild(tbody.lastElementChild)
         }
       }

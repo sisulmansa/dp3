@@ -169,17 +169,6 @@
               공
             </a>
             <a
-              href="#cat-chiller"
-              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
-              style="
-                font-size: 12px;
-                font-weight: 500;
-                border-color: rgba(255, 255, 255, 0.4);
-              "
-            >
-              냉
-            </a>
-            <a
               href="#cat-tower"
               class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
               style="
@@ -190,6 +179,18 @@
             >
               탑
             </a>
+            <a
+              href="#cat-chiller"
+              class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
+              style="
+                font-size: 12px;
+                font-weight: 500;
+                border-color: rgba(255, 255, 255, 0.4);
+              "
+            >
+              냉
+            </a>
+
             <a
               href="#cat-absorber"
               class="btn btn-outline-light text-white btn-sm rounded-pill px-2 py-1 quick-link-btn"
@@ -521,107 +522,6 @@
             '이상한 점 : E5-AHU-01 가동 중 비정상적 기계 소음 발생 (현장확인 요)',
         },
 
-        // 2. 흡수식냉동기
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '고장경보 알람',
-          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉동기 #1 펌프 인버터 고장 및 용액결정 경보',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '운전상태',
-          desc: '냉동기 운전조건과 실제 운전상태가 일치하지 않거나, 운전이 필요한 냉동기가 정지해 있는 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉동기 #2 기동 지령 내려갔으나 점화 실패로 기동 안됨',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '이상패턴',
-          desc: '동일한 운전조건의 다른 냉동기와 비교했을 때 냉수온도·냉각수온도·운전상태 등이 확연히 다른 냉동기가 있는가?',
-          details:
-            '동일 조건인가?<br>다른 냉동기들은 비슷한 값을 보이는가?<br>특정 냉동기만 확연하게 다른가?<br>그 차이가 일시적인가, 지속되는가?<br>설정값·운전조건과 비교해도 설명되지 않는 차이인가?',
-          placeholder:
-            '이상한 점 : 냉동기 #3 타 장비 대비 냉수 출수온도 회복이 확연히 느림',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉각탑 운전상태',
-          desc: '냉동기 운전상태 및 냉각탑 사전지정 조건과 실제 냉각탑의 ON/OFF·Hz 상태가 일치하지 않는 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 연동 냉각탑 #1 가동되어야 하나 시스템상 정지 상태 유지됨',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉각탑 팬 Hz',
-          desc: '운전 중인 냉각탑 팬의 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적으로 높거나 낮은 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉각수 입수온도 33℃(고온)이나 냉각탑 팬 인버터 25Hz 저속 고정',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉각수 온도',
-          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉각수 온도를 보이는 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉동기 #1 냉각수 입구 35℃ / 출구 40℃로 정상범위 초과',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉수 온도',
-          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉수 온도를 보이는 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉동기 #2 냉수 출수 11℃ 지속되어 설정치(7℃) 미달',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉수 순환펌프 운전상태',
-          desc: '냉수 순환펌프의 운전상태가 냉동기 및 냉방부하 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
-          details:
-            '냉동기가 정지했는데 펌프가 잠시 운전하는 것은 후행운전이나 보호제어 때문에 정상일 수도 있습니다. 따라서 순간적인 ON/OFF만으로 이상이라고 판단하면 안 됩니다.',
-          placeholder:
-            '이상한 점 : 냉수 펌프 #2 자동 모드 설정되어 있으나 가동 신호 없음',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉수 순환펌프 Hz',
-          desc: '운전 중인 냉수 순환펌프의 인버터 Hz가 운전조건이나 동일 조건의 다른 펌프와 비교하여 비정상적인 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 배관 차압이 설정치보다 낮음에도 펌프 인버터 35Hz에서 안 올라감',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '냉수 차압',
-          desc: '냉수 공급계통의 차압이 설정값을 지속적으로 벗어나거나 정상적으로 추종하지 못하는 경우가 있는가?',
-          details:
-            '냉수 차압의 설정값과 실제값을 비교하고, 차압 편차가 장시간 지속되는지 확인한다.',
-          placeholder:
-            '이상한 점 : 냉수 메인 헤더 차압 0.4 bar로 설정 기준(1.2 bar) 미달 현상',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '중온수 열원',
-          desc: '냉동기에 공급되는 중온수 공급·환수온도가 냉동기 운전조건 또는 정상 운전범위를 벗어나는 경우가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 중온수 공급온도 80℃로 냉동기 100% 가동 조건치(95℃)에 미달',
-        },
-        {
-          cat: '▣ 흡수식 냉동기',
-          title: '열원설비 현장확인',
-          desc: '자동제어 화면에서 이상이 발견되어 흡수식 냉동기·냉각탑·펌프 등의 현장 확인이 필요한 설비가 있는가?',
-          details: '',
-          placeholder:
-            '이상한 점 : 냉동기 #1 추기펌프 가동 불량 의심되어 현장 확인 요망',
-        },
-
         // 3. 냉각탑
         {
           cat: '▣ 냉각탑',
@@ -760,6 +660,107 @@
           details: '',
           placeholder:
             '이상한 점 : 냉각탑 #3 감속기 오일 누유 의심되어 현장 확인 요망',
+        },
+
+        // 2. 흡수식냉동기
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '고장경보 알람',
+          desc: '열원설비에 고장·경보가 발생한 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 펌프 인버터 고장 및 용액결정 경보',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '운전상태',
+          desc: '냉동기 운전조건과 실제 운전상태가 일치하지 않거나, 운전이 필요한 냉동기가 정지해 있는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #2 기동 지령 내려갔으나 점화 실패로 기동 안됨',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '이상패턴',
+          desc: '동일한 운전조건의 다른 냉동기와 비교했을 때 냉수온도·냉각수온도·운전상태 등이 확연히 다른 냉동기가 있는가?',
+          details:
+            '동일 조건인가?<br>다른 냉동기들은 비슷한 값을 보이는가?<br>특정 냉동기만 확연하게 다른가?<br>그 차이가 일시적인가, 지속되는가?<br>설정값·운전조건과 비교해도 설명되지 않는 차이인가?',
+          placeholder:
+            '이상한 점 : 냉동기 #3 타 장비 대비 냉수 출수온도 회복이 확연히 느림',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 운전상태',
+          desc: '냉동기 운전상태 및 냉각탑 사전지정 조건과 실제 냉각탑의 ON/OFF·Hz 상태가 일치하지 않는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 연동 냉각탑 #1 가동되어야 하나 시스템상 정지 상태 유지됨',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각탑 팬 Hz',
+          desc: '운전 중인 냉각탑 팬의 Hz가 냉각수 온도조건이나 동일 조건의 다른 냉각탑과 비교하여 비정상적으로 높거나 낮은 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉각수 입수온도 33℃(고온)이나 냉각탑 팬 인버터 25Hz 저속 고정',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉각수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉각수 온도를 보이는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 냉각수 입구 35℃ / 출구 40℃로 정상범위 초과',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 온도',
+          desc: '출수·입수온도가 정상 운전범위를 벗어나거나, 다른 운전 중 냉동기와 비교하여 비정상적인 냉수 온도를 보이는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #2 냉수 출수 11℃ 지속되어 설정치(7℃) 미달',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 운전상태',
+          desc: '냉수 순환펌프의 운전상태가 냉동기 및 냉방부하 조건과 일치하지 않거나, 운전이 필요한 펌프가 정지해 있는 경우가 있는가?',
+          details:
+            '냉동기가 정지했는데 펌프가 잠시 운전하는 것은 후행운전이나 보호제어 때문에 정상일 수도 있습니다. 따라서 순간적인 ON/OFF만으로 이상이라고 판단하면 안 됩니다.',
+          placeholder:
+            '이상한 점 : 냉수 펌프 #2 자동 모드 설정되어 있으나 가동 신호 없음',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 순환펌프 Hz',
+          desc: '운전 중인 냉수 순환펌프의 인버터 Hz가 운전조건이나 동일 조건의 다른 펌프와 비교하여 비정상적인 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 배관 차압이 설정치보다 낮음에도 펌프 인버터 35Hz에서 안 올라감',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '냉수 차압',
+          desc: '냉수 공급계통의 차압이 설정값을 지속적으로 벗어나거나 정상적으로 추종하지 못하는 경우가 있는가?',
+          details:
+            '냉수 차압의 설정값과 실제값을 비교하고, 차압 편차가 장시간 지속되는지 확인한다.',
+          placeholder:
+            '이상한 점 : 냉수 메인 헤더 차압 0.4 bar로 설정 기준(1.2 bar) 미달 현상',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '중온수 열원',
+          desc: '냉동기에 공급되는 중온수 공급·환수온도가 냉동기 운전조건 또는 정상 운전범위를 벗어나는 경우가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 중온수 공급온도 80℃로 냉동기 100% 가동 조건치(95℃)에 미달',
+        },
+        {
+          cat: '▣ 흡수식 냉동기',
+          title: '열원설비 현장확인',
+          desc: '자동제어 화면에서 이상이 발견되어 흡수식 냉동기·냉각탑·펌프 등의 현장 확인이 필요한 설비가 있는가?',
+          details: '',
+          placeholder:
+            '이상한 점 : 냉동기 #1 추기펌프 가동 불량 의심되어 현장 확인 요망',
         },
 
         // 4. 흡착탑
@@ -913,10 +914,10 @@
                       <label class="fw-bold mb-2 d-block" style="font-size:14px; color:#17324d;">🕒 흡착탑 점검 시간대 선택</label>
                       <div class="btn-group w-100" role="group">
                           <input type="radio" class="btn-check" name="shiftToggle" id="shiftDay" autocomplete="off" onchange="toggleShift('day')" ${currentShift === 'day' ? 'checked' : ''}>
-                          <label class="btn btn-outline-primary fw-bold" for="shiftDay" style="font-size:13px;">주간 (06:00~17:30)</label>
+                          <label class="btn btn-outline-primary fw-bold" for="shiftDay" style="font-size:13px;">주간 (07:30~17:30)</label>
                           
                           <input type="radio" class="btn-check" name="shiftToggle" id="shiftNight" autocomplete="off" onchange="toggleShift('night')" ${currentShift === 'night' ? 'checked' : ''}>
-                          <label class="btn btn-outline-primary fw-bold" for="shiftNight" style="font-size:13px;">야간 (17:30~06:00)</label>
+                          <label class="btn btn-outline-primary fw-bold" for="shiftNight" style="font-size:13px;">야간 (17:30~07:30)</label>
                       </div>
                   </div>
                 `,
