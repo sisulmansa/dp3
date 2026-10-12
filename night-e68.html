@@ -71,7 +71,7 @@
             <h1 class="h5 text-center text-primary fw-bold mb-2">E68 야간순찰 체크리스트</h1>
             <div class="d-flex justify-content-between align-items-center px-2">
                 <nav class="nav">
-                    <a class="nav-link py-1 px-2 text-dark" href="/dp3/">🏠 Home</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e6">⬇ E6동</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e8">⬇ E8동</a>
                 </nav>
@@ -113,7 +113,7 @@
 
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk2_1">
-                    <label class="form-check-label" for="chk2_1">3번째 난방 순환 펌프 패널에 부착된 <span class="barcode">바코드 체크</span></label>            
+                    <label class="form-check-label" for="chk2_1">3번째 난방순환펌프 패널 <span class="barcode">바코드 체크</span></label>            
                 </div>
                 <hr>
                 <div class="mb-3">
@@ -505,7 +505,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">E8-B1-북측</h5>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_18">
-                    <label class="form-check-label" for="chk4_18">공조실 - <span class="barcode">바코드 체크</span> (나라컨트롤)</label>
+                    <label class="form-check-label" for="chk4_18">공조실 - <span class="barcode">바코드 체크</span></label>
                 </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_19">
@@ -580,7 +580,7 @@
     <!-- 하단 고정 컨트롤 바 -->
     <footer class="fixed-bottom bg-white border-top shadow-lg p-3">
       <div class="container d-flex justify-content-between gap-2">
-        <button class="btn btn-primary flex-fill fw-bold" onclick="saveData()">
+        <button class="btn btn-primary flex-fill fw-bold" onclick="manualSave()">
           저장
         </button>
         <button class="btn btn-danger flex-fill fw-bold" onclick="clearData()">
@@ -600,8 +600,26 @@
         const checkboxes = document.querySelectorAll('.chk-item');
         const recordInputs = document.querySelectorAll('.record-input');
         const progressText = document.getElementById('progress-text');
+        const STORAGE_KEY = 'e68_night_patrol_data';
 
-        // 1. 체크박스 카운터 업데이트
+        // 빈 값 처리용 헬퍼 함수
+        const val = (id) => document.getElementById(id).value.trim() || '-';
+
+        // 1. 상태 자동저장 함수 (입력/체크 시 실시간 갱신)
+        function autoSave() {
+            const data = { checkboxes: {}, inputs: {} };
+            checkboxes.forEach(cb => data.checkboxes[cb.id] = cb.checked);
+            recordInputs.forEach(input => data.inputs[input.id] = input.value);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        // 수동 저장 버튼용 (알림 포함)
+        function manualSave() {
+            autoSave();
+            alert('현재 상태가 성공적으로 저장되었습니다.');
+        }
+
+        // 2. 체크박스 카운터 업데이트
         function updateCounter() {
             const total = checkboxes.length;
             const checked = document.querySelectorAll('.chk-item:checked').length;
@@ -609,86 +627,60 @@
         }
 
         checkboxes.forEach(cb => {
-            cb.addEventListener('change', updateCounter);
+            cb.addEventListener('change', () => {
+                updateCounter();
+                autoSave();
+            });
         });
 
-        // 빈 값 처리용 헬퍼 함수
-        const val = (id) => document.getElementById(id).value.trim() || '-';
-
-        // 2. 결과 텍스트 동적 포맷팅
+        // 3. 결과 텍스트 동적 포맷팅
         function calculateResults() {
-            // E6 B1F HWP
             document.getElementById('res_e6_hwp').innerText = 
                 `결과 : E6 B1F HWP(난방순환펌프) ${val('e6_hwp_hz')}Hz(${val('e6_hwp_pump')}호기) 난방펌프 압력 ${val('e6_hwp_k')}K`;
             
-            // E6 B1F CHWP
             document.getElementById('res_e6_chwp').innerText = 
                 `결과 : E6 B1F CHWP(냉수순환펌프) ${val('e6_chwp_hz')}Hz(${val('e6_chwp_pump')}호기) 입 ${val('e6_chwp_in_t')}℃/${val('e6_chwp_in_k')}K, 출 ${val('e6_chwp_out_t')}℃/${val('e6_chwp_out_k')}K`;
             
-            // E6 8F 실험실냉각탑 (슬래시(/) 단위별 '℃' 붙이기)
             let t_parts = val('e6_8f_t').split('/').map(p => p !== '-' ? p + '℃' : '-').join('/');
             if(t_parts === '-') t_parts = '-℃';
             document.getElementById('res_e6_8f').innerText = 
                 `결과 : E6 8F 실험실냉각탑 ${val('e6_8f_pump')}호기 가동중 ${val('e6_8f_hz')}Hz ${t_parts}`;
 
-            // E6 B2F 냉각수
             document.getElementById('res_e6_b2_cw').innerText = 
                 `결과 : E6 B2F 냉각탑냉각수 ${val('e6_cw1_pump')}호기 ${val('e6_cw1_t')}℃/${val('e6_cw1_k')}K/${val('e6_cw1_hz')}Hz / 중형 실험실냉각수 ${val('e6_cw2_pump')}호기 ${val('e6_cw2_t')}℃/${val('e6_cw2_k')}K/${val('e6_cw2_hz')}Hz`;
 
-            // E6 발전기
             document.getElementById('res_e6_gen').innerText = 
                 `결과 : E6-B4 발전기 ${val('e6_gen_t')}℃, ${val('e6_gen_v')}V, ${val('e6_gen_l')}L`;
 
-            // E8 발전기
             document.getElementById('res_e8_gen').innerText = 
                 `결과 : E8-B4 발전기 ${val('e8_gen_t')}℃, ${val('e8_gen_v')}V, ${val('e8_gen_l')}L`;
 
-            // E8 BSL 차압/온습도
             document.getElementById('res_e8_bsl').innerText = 
                 `결과 : E8 5,6F 6개소 BSL실험실 차압 및 온 습도 상태점검 (6층 ${val('e8_6f_t_min')}℃ ~ ${val('e8_6f_t_max')}℃/${val('e8_6f_h_min')}% ~ ${val('e8_6f_h_max')}%, 5311호 ${val('e8_5f_t')}℃/${val('e8_5f_h')}%)`;
 
-            // E8 B2F CHWP
             document.getElementById('res_e8_chwp').innerText = 
                 `결과 : E8 B2F CHWP(냉수순환펌프) ${val('e8_chwp_hz')}Hz(${val('e8_chwp_pump')}호기) 입 ${val('e8_chwp_in_t')}℃/${val('e8_chwp_in_k')}K, 출 ${val('e8_chwp_out_t')}℃/${val('e8_chwp_out_k')}K`;
 
-            // E8 B2F HWP
             document.getElementById('res_e8_hwp').innerText = 
                 `결과 : E8 B2F HWP(난방순환펌프) ${val('e8_hwp_hz')}Hz(${val('e8_hwp_pump')}호기) 난방펌프 압력 ${val('e8_hwp_k')}K`;
         }
 
-        // 모든 입력창에 계산 이벤트 리스너 부착
         recordInputs.forEach(input => {
-            input.addEventListener('input', calculateResults);
+            input.addEventListener('input', () => {
+                calculateResults();
+                autoSave();
+            });
         });
 
-        // 3. 로컬 스토리지 저장 및 초기화
-        const STORAGE_KEY = 'e68_night_patrol_data';
-
-        function saveData() {
-            const data = { checkboxes: {}, inputs: {} };
-            
-            checkboxes.forEach(cb => {
-                data.checkboxes[cb.id] = cb.checked;
-            });
-            
-            recordInputs.forEach(input => {
-                data.inputs[input.id] = input.value;
-            });
-            
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            alert('데이터가 저장되었습니다.');
-        }
-
+        // 4. 로드 및 초기화
         function loadData() {
             const stored = localStorage.getItem(STORAGE_KEY);
             if (stored) {
                 const data = JSON.parse(stored);
-                
                 for (const id in data.checkboxes) {
                     const el = document.getElementById(id);
                     if (el) el.checked = data.checkboxes[id];
                 }
-                
                 for (const id in data.inputs) {
                     const el = document.getElementById(id);
                     if (el) el.value = data.inputs[id];
@@ -705,7 +697,7 @@
             }
         }
 
-        // 4. PDF 내보내기 (결과 텍스트만 추출)
+        // 5. PDF 내보내기 (가상의 DIV를 body에 부착하여 렌더링 문제 해결)
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -713,10 +705,15 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
-            // 임시 Div를 생성하여 결과 텍스트만 복사
             const tempDiv = document.createElement('div');
+            // 브라우저가 화면을 렌더링할 수 있도록 요소를 Body에 잠시 삽입하되, 시야에 방해되지 않도록 바깥으로 빼둠
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px';
+            tempDiv.style.top = '0';
             tempDiv.style.padding = '30px';
+            tempDiv.style.width = '210mm'; // A4 width
             tempDiv.style.fontFamily = 'Malgun Gothic, sans-serif';
+            tempDiv.style.backgroundColor = '#fff';
             tempDiv.innerHTML = `<h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2><hr style="margin-bottom:20px;">`;
             
             const results = document.querySelectorAll('.result-text');
@@ -725,26 +722,32 @@
                 p.style.fontSize = '14px';
                 p.style.lineHeight = '1.8';
                 p.style.marginBottom = '10px';
+                p.style.color = '#333';
                 p.innerText = res.innerText;
                 tempDiv.appendChild(p);
             });
 
-            // html2pdf 옵션 설정 및 실행
+            document.body.appendChild(tempDiv);
+
             const opt = {
                 margin:       10,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             html2pdf().set(opt).from(tempDiv).save().then(() => {
-                alert('PDF 파일이 다운로드 되었습니다.');
+                document.body.removeChild(tempDiv);
+                alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
             });
         }
 
-        // 페이지 로드 시 실행
+        // 브라우저 뒤로가기(bfcache) 등을 대응하기 위해 DOMContentLoaded 및 pageshow 이벤트 활용
         window.addEventListener('DOMContentLoaded', loadData);
+        window.addEventListener('pageshow', (e) => {
+            if(e.persisted) loadData(); 
+        });
     </script>
 </body>
 </html>
