@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
-            /* 고정된 헤더 높이만큼 여백 확보 (공백 축소) */
+            /* 고정된 헤더 높이만큼 여백 확보 */
             padding-top: 75px;
             padding-bottom: 80px;
             background-color: #f8f9fa;
@@ -30,7 +30,7 @@
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        /* 앵커 이동 시 헤더에 가리지 않도록 위치 조정 (공백 축소) */
+        /* 앵커 이동 시 헤더에 가리지 않도록 위치 조정 */
         section {
             scroll-margin-top: 85px;
         }
@@ -220,19 +220,19 @@
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_9">
-                    <label class="form-check-label" for="chk3_9">제습공조기(DHU-03) 터스크린 알람 확인</label>
+                    <label class="form-check-label" for="chk3_9">제습공조기(DHU-03) 터치스크린 알람 확인</label>
                 </div>
                 
                 <div class="record-box mb-4">
                     <h6 class="fw-bold text-primary mb-1">실험실 냉각탑 온도 <strong>기록작성</strong></h6>
                     <span class="desc d-block mb-3">(인버터 보고 Hz 작성, 트립 났는지 체크)</span>
                     <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text" style="width: 140px;">가동중 설비(호기)</span>
-                        <input type="text" class="form-control record-input" id="e6_8f_pump" placeholder="2,3">
-                    </div>
-                    <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 140px;">인버터 Hz</span>
                         <input type="text" class="form-control record-input" id="e6_8f_hz" placeholder="30.0">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text" style="width: 140px;">가동중 설비(호기)</span>
+                        <input type="text" class="form-control record-input" id="e6_8f_pump" placeholder="2,3">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 140px;">블로우다운 온도(℃)</span>
@@ -280,35 +280,35 @@
                     
                     <h6 class="fw-bold mt-4">냉각탑냉각수</h6>
                     <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text" style="width: 100px;">Hz</span>
+                        <input type="text" class="form-control record-input" id="e6_cw1_hz" placeholder="55.0">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
                         <input type="text" class="form-control record-input" id="e6_cw1_pump" placeholder="1">
                     </div>
-                    <div class="input-group input-group-sm mb-2">
+                    <div class="input-group input-group-sm mb-4">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
                         <input type="text" class="form-control record-input" id="e6_cw1_t" placeholder="23.8">
                         <span class="input-group-text">입력(K)</span>
                         <input type="text" class="form-control record-input" id="e6_cw1_k" placeholder="6.9">
                     </div>                           
-                    <div class="input-group input-group-sm mb-4">
-                        <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e6_cw1_hz" placeholder="55.0">
-                    </div>
 
                     <h6 class="fw-bold">중형 실험실냉각수</h6>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text" style="width: 100px;">Hz</span>
+                        <input type="text" class="form-control record-input" id="e6_cw2_hz" placeholder="50.0">
+                    </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
                         <input type="text" class="form-control record-input" id="e6_cw2_pump" placeholder="1">
                     </div>
-                    <div class="input-group input-group-sm mb-2">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
                         <input type="text" class="form-control record-input" id="e6_cw2_t" placeholder="23.0">
                         <span class="input-group-text">입력(K)</span>
                         <input type="text" class="form-control record-input" id="e6_cw2_k" placeholder="6.4">
                     </div>                           
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e6_cw2_hz" placeholder="50.0">
-                    </div>
                     <p class="result-text" id="res_e6_b2_cw"></p>
                 </div>
 
@@ -521,12 +521,12 @@
                 <div class="record-box mb-3">
                     <h6 class="fw-bold text-primary mb-3">냉수순환펌프 기록작성</h6>
                     <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_pump" placeholder="1">
-                    </div>
-                    <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
                         <input type="text" class="form-control record-input" id="e8_chwp_hz" placeholder="33.6">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text" style="width: 100px;">펌프번호</span>
+                        <input type="text" class="form-control record-input" id="e8_chwp_pump" placeholder="1">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
@@ -546,12 +546,12 @@
                 <div class="record-box mb-4">
                     <h6 class="fw-bold text-primary mb-3">난방순환펌프 기록작성</h6>
                     <div class="input-group input-group-sm mb-2">
-                        <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e8_hwp_pump" placeholder="6">
-                    </div>
-                    <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
                         <input type="text" class="form-control record-input" id="e8_hwp_hz" placeholder="30.3">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text" style="width: 100px;">펌프번호</span>
+                        <input type="text" class="form-control record-input" id="e8_hwp_pump" placeholder="6">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 100px;">압력(K)</span>
@@ -623,7 +623,10 @@
         const STORAGE_KEY = 'e68_night_patrol_data';
 
         // 빈 값 처리용 헬퍼 함수
-        const val = (id) => document.getElementById(id).value.trim() || '-';
+        const val = (id) => {
+            const element = document.getElementById(id);
+            return (element && element.value.trim() !== '') ? element.value.trim() : '-';
+        };
 
         // 1. 상태 자동저장 함수
         function autoSave() {
@@ -716,7 +719,7 @@
             }
         }
 
-        // 5. PDF 내보내기 (렌더링 누락을 방지하기 위해 가상 DOM 엘리먼트를 활용한 변환)
+        // 5. PDF 내보내기 (화면에 직접 의존하지 않는 안전한 텍스트 파싱)
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -724,42 +727,36 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
-            // HTML 문자열로 직접 구성된 가상의 DOM 컨테이너를 본문 가장 뒤에 임시 생성
-            const tempDiv = document.createElement('div');
-            tempDiv.style.position = 'absolute';
-            tempDiv.style.width = '800px'; 
-            tempDiv.style.padding = '40px';
-            tempDiv.style.backgroundColor = '#ffffff';
-            tempDiv.style.zIndex = '-1000'; // 화면 뒤쪽으로 이동
-            tempDiv.style.top = '0';
-            tempDiv.style.left = '0';
-
             let htmlContent = `
-                <div style="font-family: 'Malgun Gothic', sans-serif;">
+                <div style="width: 800px; padding: 30px; font-family: 'Malgun Gothic', sans-serif; background-color: #fff; color: #000;">
                     <h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2>
                     <hr style="margin-bottom:20px; border: 1px solid #ddd;">
             `;
             
             const results = document.querySelectorAll('.result-text');
             results.forEach(res => {
-                htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; color: #333; word-break: keep-all;">${res.innerText}</p>`;
+                // innerText 대신 textContent를 사용하여 브라우저 렌더링 상태에 관계없이 텍스트를 가져옴
+                const text = res.textContent || res.innerText || '';
+                htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; word-break: keep-all;">${text}</p>`;
             });
             
             htmlContent += `</div>`;
-            tempDiv.innerHTML = htmlContent;
-            document.body.appendChild(tempDiv);
 
+            // 설정 (PDF 생성에 필요한 옵션)
             const opt = {
                 margin:       10,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, width: 800, windowWidth: 800 },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(tempDiv).save().then(() => {
-                document.body.removeChild(tempDiv);
+            // html 문자열 자체를 from에 넣어서 PDF 생성 (DOM 렌더링 회피)
+            html2pdf().set(opt).from(htmlContent).save().then(() => {
                 alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
+            }).catch((err) => {
+                console.error("PDF 생성 에러:", err);
+                alert("PDF 생성 중 문제가 발생했습니다.");
             });
         }
 
