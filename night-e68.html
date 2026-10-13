@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
-            /* 고정된 헤더와 푸터 높이만큼 여백 확보 */
-            padding-top: 130px;
+            /* 고정된 헤더 높이만큼 여백 확보 (공백 축소) */
+            padding-top: 75px;
             padding-bottom: 80px;
             background-color: #f8f9fa;
         }
@@ -30,9 +30,9 @@
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        /* 앵커 이동 시 헤더에 가리지 않도록 위치 조정 */
+        /* 앵커 이동 시 헤더에 가리지 않도록 위치 조정 (공백 축소) */
         section {
-            scroll-margin-top: 140px;
+            scroll-margin-top: 85px;
         }
         
         /* 체크박스 UI 크기 확대 (업무일지 스타일) */
@@ -716,7 +716,7 @@
             }
         }
 
-        // 5. PDF 내보내기 (문자열 직접 주입 방식)
+        // 5. PDF 내보내기 (렌더링 누락을 방지하기 위해 가상 DOM 엘리먼트를 활용한 변환)
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -724,30 +724,41 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
+            // HTML 문자열로 직접 구성된 가상의 DOM 컨테이너를 본문 가장 뒤에 임시 생성
+            const tempDiv = document.createElement('div');
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.width = '800px'; 
+            tempDiv.style.padding = '40px';
+            tempDiv.style.backgroundColor = '#ffffff';
+            tempDiv.style.zIndex = '-1000'; // 화면 뒤쪽으로 이동
+            tempDiv.style.top = '0';
+            tempDiv.style.left = '0';
+
             let htmlContent = `
-                <div style="padding: 20px; font-family: 'Malgun Gothic', sans-serif; background-color: #fff; width: 100%;">
+                <div style="font-family: 'Malgun Gothic', sans-serif;">
                     <h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2>
                     <hr style="margin-bottom:20px; border: 1px solid #ddd;">
             `;
             
             const results = document.querySelectorAll('.result-text');
             results.forEach(res => {
-                // '-' 만 있는 빈 결과물은 출력에서 제외하고 싶다면 아래 주석을 해제하세요
-                // if (res.innerText.includes('-')) return; 
-                htmlContent += `<p style="font-size: 14px; line-height: 1.8; margin-bottom: 12px; color: #333; word-break: keep-all;">${res.innerText}</p>`;
+                htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; color: #333; word-break: keep-all;">${res.innerText}</p>`;
             });
             
             htmlContent += `</div>`;
+            tempDiv.innerHTML = htmlContent;
+            document.body.appendChild(tempDiv);
 
             const opt = {
                 margin:       10,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
+                html2canvas:  { scale: 2, useCORS: true, width: 800, windowWidth: 800 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(htmlContent).save().then(() => {
+            html2pdf().set(opt).from(tempDiv).save().then(() => {
+                document.body.removeChild(tempDiv);
                 alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
             });
         }
