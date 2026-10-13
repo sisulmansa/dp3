@@ -68,15 +68,15 @@
     <!-- 상단 고정 헤더 -->
     <header class="fixed-top bg-white border-bottom shadow-sm pt-3 pb-2">
         <div class="container">
-            <h1 class="h5 text-center text-primary fw-bold mb-2">E68 야간순찰 체크리스트</h1>
+            <h1 class="visually-hidden h5 text-center text-primary fw-bold mb-2">E68 야간순찰 체크리스트</h1>
             <div class="d-flex justify-content-between align-items-center px-2">
                 <nav class="nav">
-                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠Home</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e6">⬇ E6동</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e8">⬇ E8동</a>
                 </nav>
                 <div class="badge bg-primary fs-6 py-2 px-3">
-                    진행률 : <span id="progress-text">0 / 0</span>
+                    야간순찰 : <span id="progress-text">0 / 0</span>
                 </div>
             </div>
         </div>
@@ -575,6 +575,26 @@
                 </div>
             </div>
         </section>
+
+        <!-- 기타부분 추가 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-secondary text-white fw-bold h5 mb-0">기타</div>
+            <div class="card-body">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_1">
+                    <label class="form-check-label" for="chk_etc_1">야간검침 (PM 10:30)</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
+                    <label class="form-check-label" for="chk_etc_2">당직 업무일지</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_3">
+                    <label class="form-check-label" for="chk_etc_3">엣지파트너 센터상황일지 작성</label>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <!-- 하단 고정 컨트롤 바 -->
@@ -696,7 +716,7 @@
             }
         }
 
-        // 5. PDF 내보내기 (문자열 직접 주입 방식으로 변경)
+        // 5. PDF 내보내기 (문자열 직접 주입 방식)
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -704,7 +724,6 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
-            // HTML 문자열로 직접 구성하여 렌더링 누락 원천 차단
             let htmlContent = `
                 <div style="padding: 20px; font-family: 'Malgun Gothic', sans-serif; background-color: #fff; width: 100%;">
                     <h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2>
