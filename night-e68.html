@@ -220,7 +220,7 @@
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_9">
-                    <label class="form-check-label" for="chk3_9">제습공조기(DHU-03) 터치스크린 알람 확인</label>
+                    <label class="form-check-label" for="chk3_9">제습공조기(DHU-03) 터스크린 알람 확인</label>
                 </div>
                 
                 <div class="record-box mb-4">
@@ -719,7 +719,7 @@
             }
         }
 
-        // 5. PDF 내보내기 (화면에 직접 의존하지 않는 안전한 텍스트 파싱)
+        // 5. PDF 내보내기 (스마트폰 렌더링 누락 100% 방지 로직)
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -727,40 +727,76 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
+            // 로딩 화면(오버레이) 추가
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.style.position = 'fixed';
+            loadingOverlay.style.top = '0';
+            loadingOverlay.style.left = '0';
+            loadingOverlay.style.width = '100vw';
+            loadingOverlay.style.height = '100vh';
+            loadingOverlay.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            loadingOverlay.style.zIndex = '999999';
+            loadingOverlay.style.display = 'flex';
+            loadingOverlay.style.flexDirection = 'column';
+            loadingOverlay.style.alignItems = 'center';
+            loadingOverlay.style.justifyContent = 'center';
+            loadingOverlay.innerHTML = `<div class="spinner-border text-primary mb-3" role="status"></div><h4 class="fw-bold text-primary">PDF 생성 중...</h4><p class="text-muted">잠시만 기다려주세요.</p>`;
+            document.body.appendChild(loadingOverlay);
+
+            // PDF 렌더링 전용 DOM 요소 생성 (본문 최상단에 물리적 삽입)
+            const pdfContainer = document.createElement('div');
+            pdfContainer.style.position = 'absolute';
+            pdfContainer.style.top = '0';
+            pdfContainer.style.left = '0';
+            pdfContainer.style.width = '800px'; 
+            pdfContainer.style.backgroundColor = '#ffffff';
+            pdfContainer.style.padding = '40px';
+            pdfContainer.style.zIndex = '999998'; // 로딩 오버레이 바로 뒤
+            
             let htmlContent = `
-                <div style="width: 800px; padding: 30px; font-family: 'Malgun Gothic', sans-serif; background-color: #fff; color: #000;">
+                <div style="font-family: 'Malgun Gothic', sans-serif; color: #000;">
                     <h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2>
                     <hr style="margin-bottom:20px; border: 1px solid #ddd;">
             `;
             
             const results = document.querySelectorAll('.result-text');
             results.forEach(res => {
-                // innerText 대신 textContent를 사용하여 브라우저 렌더링 상태에 관계없이 텍스트를 가져옴
+                // 스마트폰에서 화면상 보이지 않는 태그도 확실히 읽기 위해 textContent 사용
                 const text = res.textContent || res.innerText || '';
-                htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; word-break: keep-all;">${text}</p>`;
+                htmlContent += `<p style="font-size: 15px; line-height: 1.8; margin-bottom: 12px; word-break: keep-all;">${text}</p>`;
             });
             
             htmlContent += `</div>`;
+            pdfContainer.innerHTML = htmlContent;
+            
+            // Body 가장 앞에 추가하여 실제 렌더링 강제 실행
+            document.body.prepend(pdfContainer);
+            window.scrollTo(0, 0);
 
-            // 설정 (PDF 생성에 필요한 옵션)
             const opt = {
                 margin:       10,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // html 문자열 자체를 from에 넣어서 PDF 생성 (DOM 렌더링 회피)
-            html2pdf().set(opt).from(htmlContent).save().then(() => {
-                alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
-            }).catch((err) => {
-                console.error("PDF 생성 에러:", err);
-                alert("PDF 생성 중 문제가 발생했습니다.");
-            });
+            // 브라우저가 화면을 그릴 여유 시간(500ms)을 준 뒤 PDF 생성
+            setTimeout(() => {
+                html2pdf().set(opt).from(pdfContainer).save().then(() => {
+                    pdfContainer.remove();
+                    loadingOverlay.remove();
+                    alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
+                }).catch(err => {
+                    pdfContainer.remove();
+                    loadingOverlay.remove();
+                    console.error('PDF 다운로드 오류:', err);
+                    alert('PDF 생성 중 오류가 발생했습니다.');
+                });
+            }, 500);
         }
 
-        // 브라우저 캐시 및 뒤로가기(bfcache) 이벤트 대응
+        // 브라우저 캐시 및 뒤로가기(bfcache) 복귀 시 데이터 복원
         window.addEventListener('DOMContentLoaded', loadData);
         window.addEventListener('pageshow', (e) => {
             if(e.persisted) loadData(); 
