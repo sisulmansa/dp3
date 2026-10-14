@@ -132,15 +132,15 @@
                         <h6 class="fw-bold text-primary mb-3">E6 HWP(난방순환펌프)</h6>
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text" style="width: 100px;">Hz</span>
-                            <input type="text" class="form-control record-input" id="e6_hwp_hz" placeholder="예: 31.7">
+                            <input type="text" class="form-control record-input" id="e6_hwp_hz">
                         </div>
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text" style="width: 100px;">펌프번호(호기)</span>
-                            <input type="text" class="form-control record-input" id="e6_hwp_pump" placeholder="예: 5">
+                            <input type="text" class="form-control record-input" id="e6_hwp_pump">
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="width: 100px;">압력(K)</span>
-                            <input type="text" class="form-control record-input" id="e6_hwp_k" placeholder="예: 7.2">
+                            <input type="text" class="form-control record-input" id="e6_hwp_k">
                         </div>
                         <p class="result-text" id="res_e6_hwp"></p>
                     </div>
@@ -159,23 +159,23 @@
                         <h6 class="fw-bold text-primary mb-3">E6 CHWP(냉수순환펌프)</h6>
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text" style="width: 100px;">Hz</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_hz" placeholder="35.0">
+                            <input type="text" class="form-control record-input" id="e6_chwp_hz">
                         </div>
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text" style="width: 100px;">펌프번호(호기)</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_pump" placeholder="1">
+                            <input type="text" class="form-control record-input" id="e6_chwp_pump">
                         </div>
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text" style="width: 100px;">입력(℃)</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_in_t" placeholder="16.0">
+                            <input type="text" class="form-control record-input" id="e6_chwp_in_t">
                             <span class="input-group-text">입력(K)</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_in_k" placeholder="5.8">
+                            <input type="text" class="form-control record-input" id="e6_chwp_in_k">
                         </div>                
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="width: 100px;">출력(℃)</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_out_t" placeholder="8.5">
+                            <input type="text" class="form-control record-input" id="e6_chwp_out_t">
                             <span class="input-group-text">출력(K)</span>
-                            <input type="text" class="form-control record-input" id="e6_chwp_out_k" placeholder="6.4">
+                            <input type="text" class="form-control record-input" id="e6_chwp_out_k">
                         </div>      
                         <p class="result-text" id="res_e6_chwp"></p>
                     </div>
@@ -190,19 +190,19 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2">E6-9F</h5>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_1">
-                    <label class="form-check-label" for="chk3_1">에어컨실 - <span class="barcode">바코드 체크</span>, 누수상태, 에어컨 작동 이상유무</label>
-                </div>
-                <div class="form-check form-switch mb-3">
-                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_2">
-                    <label class="form-check-label" for="chk3_2">옆에 EPS - 오른쪽 <span class="barcode">바코드 체크</span> (남측 배기팬 전원반)</label>
+                    <label class="form-check-label" for="chk3_1"><span class="barcode">에어컨실</span> 누수상태, 에어컨 이상유무</label>
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_3">
-                    <label class="form-check-label" for="chk3_3">왼쪽 <span class="barcode">바코드 체크</span> (옥상 태양광 패널) - 1 고압 가스 저장소실 순찰</label>                    
+                    <label class="form-check-label" for="chk3_3">EPS실 - <span class="barcode">옥상태양광패널</span> 가스저장소실 순찰</label>                    
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_2">
+                    <label class="form-check-label" for="chk3_2">EPS실 - <span class="barcode">남측 배기팬 전원반</span></label>
                 </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk3_4">
-                    <label class="form-check-label" for="chk3_4">흡착탑 순찰(Fan 운영정보 필요함)</label>
+                    <label class="form-check-label" for="chk3_4">흡착탑 순찰 (Fan 운영정보 비교)</label>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">E6-8F</h5>
@@ -228,15 +228,15 @@
                     <span class="desc d-block mb-3">(인버터 보고 Hz 작성, 트립 났는지 체크)</span>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 140px;">인버터 Hz</span>
-                        <input type="text" class="form-control record-input" id="e6_8f_hz" placeholder="30.0">
+                        <input type="text" class="form-control record-input" id="e6_8f_hz">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 140px;">가동중 설비(호기)</span>
-                        <input type="text" class="form-control record-input" id="e6_8f_pump" placeholder="2,3">
+                        <input type="text" class="form-control record-input" id="e6_8f_pump">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 140px;">블로우다운 온도(℃)</span>
-                        <input type="text" class="form-control record-input" id="e6_8f_t" placeholder="24.3/22.3/-210.0">
+                        <input type="text" class="form-control record-input" id="e6_8f_t" value="24.3/22.3/-210.0">
                     </div>       
                     <p class="result-text" id="res_e6_8f"></p>
                 </div>
@@ -281,33 +281,33 @@
                     <h6 class="fw-bold mt-4">냉각탑냉각수</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e6_cw1_hz" placeholder="55.0">
+                        <input type="text" class="form-control record-input" id="e6_cw1_hz">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e6_cw1_pump" placeholder="1">
+                        <input type="text" class="form-control record-input" id="e6_cw1_pump">
                     </div>
                     <div class="input-group input-group-sm mb-4">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
-                        <input type="text" class="form-control record-input" id="e6_cw1_t" placeholder="23.8">
+                        <input type="text" class="form-control record-input" id="e6_cw1_t">
                         <span class="input-group-text">입력(K)</span>
-                        <input type="text" class="form-control record-input" id="e6_cw1_k" placeholder="6.9">
+                        <input type="text" class="form-control record-input" id="e6_cw1_k">
                     </div>                           
 
                     <h6 class="fw-bold">중형 실험실냉각수</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e6_cw2_hz" placeholder="50.0">
+                        <input type="text" class="form-control record-input" id="e6_cw2_hz">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e6_cw2_pump" placeholder="1">
+                        <input type="text" class="form-control record-input" id="e6_cw2_pump">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
-                        <input type="text" class="form-control record-input" id="e6_cw2_t" placeholder="23.0">
+                        <input type="text" class="form-control record-input" id="e6_cw2_t">
                         <span class="input-group-text">입력(K)</span>
-                        <input type="text" class="form-control record-input" id="e6_cw2_k" placeholder="6.4">
+                        <input type="text" class="form-control record-input" id="e6_cw2_k">
                     </div>                           
                     <p class="result-text" id="res_e6_b2_cw"></p>
                 </div>
@@ -340,15 +340,15 @@
                     <h6 class="fw-bold text-primary mb-3">E6 발전기 기록(주말만)</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">냉각수온도(℃)</span>
-                        <input type="text" class="form-control record-input" id="e6_gen_t" placeholder="35">
+                        <input type="text" class="form-control record-input" id="e6_gen_t">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">배터리전압(Vdc)</span>
-                        <input type="text" class="form-control record-input" id="e6_gen_v" placeholder="26">
+                        <input type="text" class="form-control record-input" id="e6_gen_v"">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 120px;">현재경유량(L)</span>
-                        <input type="text" class="form-control record-input" id="e6_gen_l" placeholder="690">
+                        <input type="text" class="form-control record-input" id="e6_gen_l">
                     </div>
                     <p class="result-text" id="res_e6_gen"></p>
                 </div>
@@ -363,15 +363,15 @@
                     <h6 class="fw-bold text-primary mb-3">E8 발전기 기록(주말만)</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">냉각수온도(℃)</span>
-                        <input type="text" class="form-control record-input" id="e8_gen_t" placeholder="46">
+                        <input type="text" class="form-control record-input" id="e8_gen_t">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">배터리전압(Vdc)</span>
-                        <input type="text" class="form-control record-input" id="e8_gen_v" placeholder="25.75">
+                        <input type="text" class="form-control record-input" id="e8_gen_v">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 120px;">현재경유량(L)</span>
-                        <input type="text" class="form-control record-input" id="e8_gen_l" placeholder="750">
+                        <input type="text" class="form-control record-input" id="e8_gen_l">
                     </div>
                     <p class="result-text" id="res_e8_gen"></p>
                 </div>
@@ -416,13 +416,13 @@
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">6F 최저온도</span>
-                                <input type="text" class="form-control record-input" id="e8_6f_t_min" placeholder="21.6">
+                                <input type="text" class="form-control record-input" id="e8_6f_t_min">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">6F 최고온도</span>
-                                <input type="text" class="form-control record-input" id="e8_6f_t_max" placeholder="23.0">
+                                <input type="text" class="form-control record-input" id="e8_6f_t_max">
                             </div>
                         </div>
                     </div>
@@ -430,13 +430,13 @@
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">6F 최저습도</span>
-                                <input type="text" class="form-control record-input" id="e8_6f_h_min" placeholder="76.4">
+                                <input type="text" class="form-control record-input" id="e8_6f_h_min">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">6F 최고습도</span>
-                                <input type="text" class="form-control record-input" id="e8_6f_h_max" placeholder="83.2">
+                                <input type="text" class="form-control record-input" id="e8_6f_h_max">
                             </div>
                         </div>
                     </div>
@@ -444,13 +444,13 @@
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">5311호 온도</span>
-                                <input type="text" class="form-control record-input" id="e8_5f_t" placeholder="24.1">
+                                <input type="text" class="form-control record-input" id="e8_5f_t">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text" style="width: 80px;">5311호 습도</span>
-                                <input type="text" class="form-control record-input" id="e8_5f_h" placeholder="70.0">
+                                <input type="text" class="form-control record-input" id="e8_5f_h">
                             </div>
                         </div>
                     </div>
@@ -522,23 +522,23 @@
                     <h6 class="fw-bold text-primary mb-3">냉수순환펌프 기록작성</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_hz" placeholder="33.6">
+                        <input type="text" class="form-control record-input" id="e8_chwp_hz">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_pump" placeholder="1">
+                        <input type="text" class="form-control record-input" id="e8_chwp_pump">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">입력(℃)</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_in_t" placeholder="15.0">
+                        <input type="text" class="form-control record-input" id="e8_chwp_in_t">
                         <span class="input-group-text">입력(K)</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_in_k" placeholder="7.0">
+                        <input type="text" class="form-control record-input" id="e8_chwp_in_k">
                     </div>  
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">출력(℃)</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_out_t" placeholder="10.3">
+                        <input type="text" class="form-control record-input" id="e8_chwp_out_t">
                         <span class="input-group-text">출력(K)</span>
-                        <input type="text" class="form-control record-input" id="e8_chwp_out_k" placeholder="7.0">
+                        <input type="text" class="form-control record-input" id="e8_chwp_out_k">
                     </div>  
                     <p class="result-text" id="res_e8_chwp"></p>                       
                 </div>
@@ -547,15 +547,15 @@
                     <h6 class="fw-bold text-primary mb-3">난방순환펌프 기록작성</h6>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">Hz</span>
-                        <input type="text" class="form-control record-input" id="e8_hwp_hz" placeholder="30.3">
+                        <input type="text" class="form-control record-input" id="e8_hwp_hz">
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 100px;">펌프번호</span>
-                        <input type="text" class="form-control record-input" id="e8_hwp_pump" placeholder="6">
+                        <input type="text" class="form-control record-input" id="e8_hwp_pump">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 100px;">압력(K)</span>
-                        <input type="text" class="form-control record-input" id="e8_hwp_k" placeholder="8.0">
+                        <input type="text" class="form-control record-input" id="e8_hwp_k">
                     </div> 
                     <p class="result-text" id="res_e8_hwp"></p>                            
                 </div>
