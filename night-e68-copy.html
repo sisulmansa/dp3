@@ -1,0 +1,62 @@
+// 5. 완벽하게 수정된 PDF 내보내기 함수
+        function exportPDF() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
+
+            // 1. 임시 Div를 생성하여 결과 텍스트만 복사
+            const tempDiv = document.createElement('div');
+            
+            // 핵심: 화면 바깥으로 빼서 눈에 안 보이게 하되, Body에 물리적으로 존재하게 만듦
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px';
+            tempDiv.style.top = '0';
+            tempDiv.style.width = '800px'; // 모바일에서도 깨지지 않게 고정 너비 부여
+            tempDiv.style.padding = '30px';
+            tempDiv.style.backgroundColor = '#ffffff';
+            tempDiv.style.fontFamily = "'Malgun Gothic', sans-serif";
+            
+            tempDiv.innerHTML = `<h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2><hr style="margin-bottom:20px;">`;
+            
+            const results = document.querySelectorAll('.result-text');
+            results.forEach(res => {
+                const p = document.createElement('p');
+                p.style.fontSize = '14px';
+                p.style.lineHeight = '1.8';
+                p.style.marginBottom = '10px';
+                p.style.color = '#000000';
+                // innerText 대신 textContent를 사용해 텍스트 증발 방지
+                p.textContent = res.textContent || res.innerText || '';
+                
+                // 빈 내용이 아닐 때만 추가
+                if(p.textContent.trim() !== '') {
+                    tempDiv.appendChild(p);
+                }
+            });
+
+            // 2. 가상 요소가 아닌 실제 브라우저 DOM(Body)에 부착하여 크기 계산을 강제함
+            document.body.appendChild(tempDiv);
+
+            const opt = {
+                margin:       10,
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // 3. 브라우저가 화면을 렌더링할 0.2초(200ms)의 여유를 둔 뒤 캡처 실행
+            setTimeout(() => {
+                html2pdf().set(opt).from(tempDiv).save().then(() => {
+                    // 4. PDF 다운로드 완료 후 Body에 붙여둔 임시 요소 깨끗하게 삭제
+                    document.body.removeChild(tempDiv);
+                    alert('PDF 파일이 성공적으로 다운로드 되었습니다.');
+                }).catch(err => {
+                    document.body.removeChild(tempDiv);
+                    console.error("PDF 생성 에러:", err);
+                    alert("PDF 생성 중 문제가 발생했습니다.");
+                });
+            }, 200);
+        }
