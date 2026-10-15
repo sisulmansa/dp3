@@ -595,7 +595,7 @@
                         </div>
                         <input type="text" class="form-control form-control-sm record-input" id="off_duty_name" placeholder="휴무자명" style="width: 100px;">
                     </div>
-                    <p class="result-text ms-5 mt-2" id="res_off_duty" style="display: none;"></p>
+                    <!-- <p class="result-text ms-5 mt-2" id="res_off_duty" style="display: none;"></p> -->
                 </div>
                 
                 <div class="form-check form-switch mb-2">
@@ -697,15 +697,15 @@
                 `결과 : E8 B2F HWP(난방순환펌프) ${val('e8_hwp_hz')}Hz(${val('e8_hwp_pump')}호기) 난방펌프 압력 ${val('e8_hwp_k')}K`;
                 
             // 휴무자명 결과 렌더링
-            const offDuty = val('off_duty_name');
-            const resOffDuty = document.getElementById('res_off_duty');
-            if(offDuty !== '-') {
-                resOffDuty.innerText = `휴무자 : ${offDuty}`;
-                resOffDuty.style.display = 'block';
-            } else {
-                resOffDuty.innerText = '';
-                resOffDuty.style.display = 'none';
-            }
+            // const offDuty = val('off_duty_name');
+            // const resOffDuty = document.getElementById('res_off_duty');
+            // if(offDuty !== '-') {
+            //     resOffDuty.innerText = `휴무자 : ${offDuty}`;
+            //     resOffDuty.style.display = 'block';
+            // } else {
+            //     resOffDuty.innerText = '';
+            //     resOffDuty.style.display = 'none';
+            // }
         }
 
         recordInputs.forEach(input => {
