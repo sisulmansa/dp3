@@ -72,7 +72,6 @@
             <div class="d-flex justify-content-between align-items-center px-2">
                 <nav class="nav">
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠</a>
-                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="#" onclick="window.scrollTo(0,0); return false;">TOP</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e6">⬇ E6동</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e8">⬇ E8동</a>
                 </nav>
@@ -345,7 +344,7 @@
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">배터리전압(Vdc)</span>
-                        <input type="text" class="form-control record-input" id="e6_gen_v"">
+                        <input type="text" class="form-control record-input" id="e6_gen_v">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 120px;">현재경유량(L)</span>
@@ -390,7 +389,7 @@
                 </div>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_2">
-                    <label class="form-check-label" for="chk4_2">공조실2 - AHU-1278/3456(묶임)</label>
+                    <label class="form-check-label" for="chk4_2">공조실2 순찰 - AHU-1278/3456(묶임)</label>
                 </div>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_3">
@@ -587,10 +586,18 @@
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_1">
                     <label class="form-check-label" for="chk_etc_1">야간검침 (PM 10:30)</label>
                 </div>
-                <div class="form-check form-switch mb-3">
-                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
-                    <label class="form-check-label" for="chk_etc_2">당직 업무일지</label>
+                
+                <div class="mb-3">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
+                            <label class="form-check-label me-2" for="chk_etc_2" style="white-space: nowrap;">당직 업무일지</label>
+                        </div>
+                        <input type="text" class="form-control form-control-sm record-input" id="off_duty_name" placeholder="휴무자명" style="width: 100px;">
+                    </div>
+                    <p class="result-text ms-5 mt-2" id="res_off_duty" style="display: none;"></p>
                 </div>
+                
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_3">
                     <label class="form-check-label" for="chk_etc_3">엣지파트너 센터상황일지 작성</label>
@@ -688,6 +695,17 @@
 
             document.getElementById('res_e8_hwp').innerText = 
                 `결과 : E8 B2F HWP(난방순환펌프) ${val('e8_hwp_hz')}Hz(${val('e8_hwp_pump')}호기) 난방펌프 압력 ${val('e8_hwp_k')}K`;
+                
+            // 휴무자명 결과 렌더링
+            const offDuty = val('off_duty_name');
+            const resOffDuty = document.getElementById('res_off_duty');
+            if(offDuty !== '-') {
+                resOffDuty.innerText = `휴무자 : ${offDuty}`;
+                resOffDuty.style.display = 'block';
+            } else {
+                resOffDuty.innerText = '';
+                resOffDuty.style.display = 'none';
+            }
         }
 
         recordInputs.forEach(input => {
@@ -722,7 +740,7 @@
             }
         }
 
-        // 5. PDF 내보내기 (정상 작동했던 원본 코드 복구)
+        // 5. 완벽하게 수정된 PDF 내보내기 함수
         function exportPDF() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -730,10 +748,18 @@
             const dd = String(today.getDate()).padStart(2, '0');
             const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
 
-            // 임시 Div를 생성하여 결과 텍스트만 복사
+            // 1. 임시 Div를 생성하여 결과 텍스트만 복사
             const tempDiv = document.createElement('div');
+            
+            // 핵심: 화면 바깥으로 빼서 눈에 안 보이게 하되, Body에 물리적으로 존재하게 만듦
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.left = '-9999px';
+            tempDiv.style.top = '0';
+            tempDiv.style.width = '800px'; // 모바일에서도 깨지지 않게 고정 너비 부여
             tempDiv.style.padding = '30px';
-            tempDiv.style.fontFamily = 'Malgun Gothic, sans-serif';
+            tempDiv.style.backgroundColor = '#ffffff';
+            tempDiv.style.fontFamily = "'Malgun Gothic', sans-serif";
+            
             tempDiv.innerHTML = `<h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E68 야간순찰 기록결과</h2><hr style="margin-bottom:20px;">`;
             
             const results = document.querySelectorAll('.result-text');
@@ -742,22 +768,39 @@
                 p.style.fontSize = '14px';
                 p.style.lineHeight = '1.8';
                 p.style.marginBottom = '10px';
-                p.innerText = res.innerText;
-                tempDiv.appendChild(p);
+                p.style.color = '#000000';
+                // innerText 대신 textContent를 사용해 텍스트 증발 방지
+                p.textContent = res.textContent || res.innerText || '';
+                
+                // 빈 내용이 아닐 때만 추가
+                if(p.textContent.trim() !== '') {
+                    tempDiv.appendChild(p);
+                }
             });
 
-            // html2pdf 옵션 설정 및 실행
+            // 2. 가상 요소가 아닌 실제 브라우저 DOM(Body)에 부착하여 크기 계산을 강제함
+            document.body.appendChild(tempDiv);
+
             const opt = {
                 margin:       10,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(tempDiv).save().then(() => {
-                alert('PDF 파일이 다운로드 되었습니다.');
-            });
+            // 3. 브라우저가 화면을 렌더링할 0.2초(200ms)의 여유를 둔 뒤 캡처 실행
+            setTimeout(() => {
+                html2pdf().set(opt).from(tempDiv).save().then(() => {
+                    // 4. PDF 다운로드 완료 후 Body에 붙여둔 임시 요소 깨끗하게 삭제
+                    document.body.removeChild(tempDiv);
+                    alert('PDF 파일이 성공적으로 다운로드 되었습니다.');
+                }).catch(err => {
+                    document.body.removeChild(tempDiv);
+                    console.error("PDF 생성 에러:", err);
+                    alert("PDF 생성 중 문제가 발생했습니다.");
+                });
+            }, 200);
         }
 
         // 브라우저 캐시 및 뒤로가기(bfcache) 이벤트 대응
