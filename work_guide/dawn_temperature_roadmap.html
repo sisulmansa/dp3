@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#17324d" />
+    <title>작업 가이드 - 겨울철 새벽 온도순찰 로드맵</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      body {
+        background-color: #eef2f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI', sans-serif;
+      }
+      .app-container {
+        max-width: 720px;
+        margin: auto;
+      }
+      .header-bar {
+        background-color: #17324d;
+        z-index: 1020;
+      }
+      .roadmap-info {
+        background-color: #e8f4fd;
+        border: 1px solid #b6d4fe;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 20px;
+        font-size: 14.5px;
+        color: #052c65;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .step-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-left: 4px solid #3498db;
+      }
+      .step-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .step-title-wrap {
+        display: flex;
+        align-items: center;
+      }
+      .step-number {
+        background-color: #3498db;
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+      .step-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 0;
+      }
+      .step-desc {
+        font-size: 14.5px;
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 0;
+        padding-left: 40px;
+      }
+      
+      /* iOS 스타일 토글 스위치 CSS */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: .4s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      }
+      input:checked + .slider {
+        background-color: #34c759; /* iOS Green */
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #34c759;
+      }
+      input:checked + .slider:before {
+        transform: translateX(22px);
+      }
+      .slider.round {
+        border-radius: 34px;
+      }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      .highlight-text {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container pb-5">
+      
+      <!-- Header 영역 -->
+      <header class="header-bar text-white p-3 sticky-top shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h1 class="h5 fw-bold mb-0">
+            🌡️ 겨울철 새벽 온도순찰
+          </h1>
+          <!-- 뒤로가기 -->
+          <a href="../work_guide.html" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1 fw-bold" style="font-size: 12px">
+            가이드 목록
+          </a>
+        </div>
+      </header>
+
+      <main class="p-3">
+        
+        <!-- 순찰 정보 -->
+        <div class="roadmap-info text-center">
+          <strong class="d-block mb-1 text-primary">⏰ 순찰 주기 및 시간</strong>
+          <span style="font-weight: bold; color: #333;">당직 시 03시 (8일에 한 번)</span> 온도 체크를 수행합니다.<br>
+          <span style="font-size: 12.5px; font-weight: normal; color: #666; display: inline-block; margin-top: 5px;">(해당 지점 온도 확인 후 우측 스위치를 눌러 체크하세요)</span>
+        </div>
+
+        <!-- 순찰 지점 1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title-wrap">
+              <div class="step-number">1</div>
+              <h2 class="step-title">E6 M층 폐액탱크실</h2>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+          </div>
+          <p class="step-desc">
+            E6 M층 화물엘리베이터 쪽 중문을 열고 <span class="highlight-text">왼쪽 폐액탱크실 내부</span>의 온도계를 확인합니다.
+          </p>
+        </div>
+
+        <!-- 순찰 지점 2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title-wrap">
+              <div class="step-number">2</div>
+              <h2 class="step-title">E6 M층 화물엘베 옆</h2>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+          </div>
+          <p class="step-desc">
+            폐액탱크실에서 나오자마자 직진하여 안으로 끝까지 계속 진입하면 <span class="highlight-text">화물엘리베이터 옆</span>에 있는 온도계를 확인합니다.
+          </p>
+        </div>
+
+        <!-- 순찰 지점 3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title-wrap">
+              <div class="step-number">3</div>
+              <h2 class="step-title">E6 B2층 썬큰(Sunken)</h2>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+          </div>
+          <p class="step-desc">
+            뒤돌아서 중문을 열자마자 오른쪽 문을 열고 들어갑니다 (E6 북측 전산센터). 옆 엘리베이터를 타고 <strong>B2층</strong>으로 내려와 남쪽으로 이동 후 <span class="highlight-text">오른쪽 썬큰 쪽</span>의 온도계를 확인합니다.
+          </p>
+        </div>
+
+        <!-- 순찰 지점 4 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title-wrap">
+              <div class="step-number">4</div>
+              <h2 class="step-title">E6 B4층 1층 에스컬레이터 앞</h2>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+          </div>
+          <p class="step-desc">
+            E8-B2 중앙엘리베이터를 타고 1층으로 올라와 남쪽 밖으로 나갑니다. <strong>E6-B4 식당 쪽</strong>으로 이동하여 <span class="highlight-text">1층 에스컬레이터 앞</span> 온도계를 확인합니다.
+          </p>
+        </div>
+
+        <!-- 순찰 지점 5 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title-wrap">
+              <div class="step-number">5</div>
+              <h2 class="step-title">E5 화전문 옆</h2>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+          </div>
+          <p class="step-desc">
+            밖에서 E5로 진입한 후 식당 쪽으로 이동하여 <span class="highlight-text">화전문 옆</span>에 위치한 온도계를 확인합니다.
+          </p>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
