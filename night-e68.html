@@ -762,31 +762,8 @@
 
             window.scrollTo(0, 0);
 
-            const opt = {
-                margin:       10,
-                filename:     filename,
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 2, useCORS: true, windowWidth: 800, scrollY: 0, scrollX: 0 },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
 
-            setTimeout(() => {
-                html2pdf().set(opt).from(printArea).save().then(() => {
-                    // 원상 복구
-                    printArea.classList.remove('pdf-mode');
-                    printArea.style.display = 'none';
-                    printArea.innerHTML = '';
-                    if(mainContainer) mainContainer.style.display = 'block';
-                    
-                    alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
-                }).catch((err) => {
-                    printArea.classList.remove('pdf-mode');
-                    printArea.style.display = 'none';
-                    if(mainContainer) mainContainer.style.display = 'block';
-                    console.error("PDF 생성 에러:", err);
-                    alert("PDF 생성 중 문제가 발생했습니다.");
-                });
-            }, 300);
+
         }
 
         // 브라우저 캐시 및 뒤로가기(bfcache) 이벤트 대응
