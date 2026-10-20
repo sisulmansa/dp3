@@ -74,6 +74,7 @@
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e6">⬇ E6동</a>
                     <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e8">⬇ E8동</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="./work_log.html">업무일지</a>
                 </nav>
                 <div class="badge bg-primary fs-6 py-2 px-3">
                     <span id="progress-text">0 / 0</span>
@@ -98,9 +99,11 @@
         <section class="card mb-4 shadow-sm border-0">
             <div class="card-header bg-primary text-white fw-bold">방재실</div>
             <div class="card-body">
-                <div class="form-check form-switch">
+                <div class="form-check form-switch d-flex align-items-center flex-wrap">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk1_1">
-                    <label class="form-check-label" for="chk1_1">자동제어 현황확인</label>
+                    <label class="form-check-label me-4" for="chk1_1">자동제어 현황확인</label>
+                    <input type="text" class="form-control form-control-sm record-input" id="off_duty_name" placeholder="휴무자명" style="width: 100px;">
+                    
                 </div>
             </div>
         </section>
@@ -113,7 +116,7 @@
 
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk2_1">
-                    <label class="form-check-label" for="chk2_1">3번째 난방순환펌프 패널 <span class="barcode">바코드 체크</span></label>            
+                    <label class="form-check-label" for="chk2_1">3번째 난방순환펌프 패널 <span class="barcode">B1 서브기계실</span></label>            
                 </div>
                 <hr>
                 <div class="mb-3">
@@ -288,9 +291,9 @@
                         <input type="text" class="form-control record-input" id="e6_cw1_pump">
                     </div>
                     <div class="input-group input-group-sm mb-4">
-                        <span class="input-group-text" style="width: 100px;">입력(℃)</span>
+                        <span class="input-group-text" style="width: 100px;">출력(℃)</span>
                         <input type="text" class="form-control record-input" id="e6_cw1_t">
-                        <span class="input-group-text">입력(K)</span>
+                        <span class="input-group-text">출력(K)</span>
                         <input type="text" class="form-control record-input" id="e6_cw1_k">
                     </div>                           
 
@@ -304,9 +307,9 @@
                         <input type="text" class="form-control record-input" id="e6_cw2_pump">
                     </div>
                     <div class="input-group input-group-sm">
-                        <span class="input-group-text" style="width: 100px;">입력(℃)</span>
+                        <span class="input-group-text" style="width: 100px;">출력(℃)</span>
                         <input type="text" class="form-control record-input" id="e6_cw2_t">
-                        <span class="input-group-text">입력(K)</span>
+                        <span class="input-group-text">출력(K)</span>
                         <input type="text" class="form-control record-input" id="e6_cw2_k">
                     </div>                           
                     <p class="result-text" id="res_e6_b2_cw"></p>
@@ -413,7 +416,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">6F 사무동 순찰</h5>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_7">
-                    <label class="form-check-label" for="chk4_7">차압계 정상범위 확인</label>
+                    <label class="form-check-label" for="chk4_7">BSL 음압 정상범위 확인</label>
                 </div>
                 
                 <div class="record-box mb-3">
@@ -477,13 +480,13 @@
                 </div>                
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">5F 사무동 순찰</h5>
-                <div class="form-check form-switch mb-2">
-                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_12">
-                    <label class="form-check-label" for="chk4_12">PS#1 냉장냉동실험실 - 프레온 압축기</label>
-                </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_13">
                     <label class="form-check-label" for="chk4_13">EPS-North <span class="barcode">바코드 체크</span></label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_12">
+                    <label class="form-check-label" for="chk4_12">PS#1 냉장냉동실험실 - 프레온 압축기</label>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">4F~2F 저층부</h5>
@@ -593,7 +596,6 @@
                             <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
                             <label class="form-check-label me-2" for="chk_etc_2" style="white-space: nowrap;">당직 업무일지</label>
                         </div>
-                        <input type="text" class="form-control form-control-sm record-input" id="off_duty_name" placeholder="휴무자명" style="width: 100px;">
                     </div>
                     <!-- <p class="result-text ms-5 mt-2" id="res_off_duty" style="display: none;"></p> -->
                 </div>
