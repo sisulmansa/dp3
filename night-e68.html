@@ -6,8 +6,6 @@
     <title>E68 순찰로드맵</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- html2pdf 라이브러리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             /* 고정된 헤더 높이만큼 여백 확보 */
@@ -62,17 +60,16 @@
             word-break: keep-all;
         }
 
-        /* PDF 인쇄용 CSS (스마트폰 빈화면/쏠림 방지) */
-        .pdf-mode {
+        /* 결과 출력 화면 (스마트폰 전체화면 덮기) */
+        .print-mode {
             position: absolute !important;
             top: 0 !important;
             left: 0 !important;
             margin: 0 !important;
-            padding: 30px !important;
-            width: 800px !important;
-            max-width: none !important;
+            padding: 20px !important;
+            width: 100% !important;
             background-color: white !important;
-            z-index: 9999 !important;
+            z-index: 99999 !important;
             min-height: 100vh;
         }
     </style>
@@ -360,7 +357,7 @@
                     </div>
                     <div class="input-group input-group-sm mb-2">
                         <span class="input-group-text" style="width: 120px;">배터리전압(Vdc)</span>
-                        <input type="text" class="form-control record-input" id="e6_gen_v">
+                        <input type="text" class="form-control record-input" id="e6_gen_v"">
                     </div>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" style="width: 120px;">현재경유량(L)</span>
@@ -429,7 +426,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">6F 사무동 순찰</h5>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_7">
-                    <label class="form-check-label" for="chk4_7">차압계 정상범위 확인</label>
+                    <label class="form-check-label" for="chk4_7">BSL 음압 정상범위 확인</label>
                 </div>
                 
                 <div class="record-box mb-3">
@@ -437,13 +434,13 @@
                     <div class="row g-2 mb-2">
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">6F 최저온도</span>
+                                <span class="input-group-text" style="width: 80px;">최저온도</span>
                                 <input type="text" class="form-control record-input" id="e8_6f_t_min">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">6F 최고온도</span>
+                                <span class="input-group-text" style="width: 80px;">최고온도</span>
                                 <input type="text" class="form-control record-input" id="e8_6f_t_max">
                             </div>
                         </div>
@@ -451,13 +448,13 @@
                     <div class="row g-2 mb-3">
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">6F 최저습도</span>
+                                <span class="input-group-text" style="width: 80px;">최저습도</span>
                                 <input type="text" class="form-control record-input" id="e8_6f_h_min">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">6F 최고습도</span>
+                                <span class="input-group-text" style="width: 80px;">최고습도</span>
                                 <input type="text" class="form-control record-input" id="e8_6f_h_max">
                             </div>
                         </div>
@@ -465,13 +462,13 @@
                     <div class="row g-2 mb-2">
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">5311호 온도</span>
+                                <span class="input-group-text" style="width: 80px;">5311 온도</span>
                                 <input type="text" class="form-control record-input" id="e8_5f_t">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group input-group-sm">
-                                <span class="input-group-text" style="width: 80px;">5311호 습도</span>
+                                <span class="input-group-text" style="width: 80px;">5311 습도</span>
                                 <input type="text" class="form-control record-input" id="e8_5f_h">
                             </div>
                         </div>
@@ -489,17 +486,17 @@
                 </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_11">
-                    <label class="form-check-label" for="chk4_11">바이오 CMC 연구소 순찰</label>
+                    <label class="form-check-label" for="chk4_11">바이오 CMC 연구소 BSL 순찰</label>
                 </div>                
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">5F 사무동 순찰</h5>
-                <div class="form-check form-switch mb-2">
-                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_12">
-                    <label class="form-check-label" for="chk4_12">PS#1 냉장냉동실험실 - 프레온 압축기</label>
-                </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_13">
                     <label class="form-check-label" for="chk4_13">EPS-North <span class="barcode">바코드 체크</span></label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_12">
+                    <label class="form-check-label" for="chk4_12">PS#1 냉장냉동실험실 - 프레온 압축기</label>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">4F~2F 저층부</h5>
@@ -593,6 +590,44 @@
                 </div>
             </div>
         </section>
+
+        <!-- 기타부분 추가 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-secondary text-white fw-bold h5 mb-0">기타</div>
+            <div class="card-body">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_1">
+                    <label class="form-check-label" for="chk_etc_1">야간검침 시작 (PM 10:30)</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
+                    <label class="form-check-label" for="chk_etc_2">지역난방 검침 <span class="barcode">엣지</span></label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_3">
+                    <label class="form-check-label" for="chk_etc_3">E8 수도계량기  <span class="barcode">엣지 5개</span></label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_4">
+                    <label class="form-check-label" for="chk_etc_4">E6-B2 PS#1 (북쪽)  <span class="barcode">엣지 3개</span></label>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_5">
+                            <label class="form-check-label me-2" for="chk_etc_5" style="white-space: nowrap;">당직 업무일지</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_6">
+                    <label class="form-check-label" for="chk_etc_6">엣지파트너 센터상황일지 (기타-E68) </label>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <!-- PDF 출력을 위한 숨김 컨테이너 -->
@@ -608,7 +643,7 @@
           초기화
         </button>
         <button class="btn btn-success flex-fill fw-bold" onclick="exportPDF()">
-          PDF
+          출력
         </button>
       </div>
     </footer>
@@ -721,22 +756,16 @@
             }
         }
 
-        // 5. 완벽하게 수정된 PDF 내보내기 함수
+        // PDF 내보내기 삭제, 결과 화면 출력 기능으로 대체
         function exportPDF() {
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const dd = String(today.getDate()).padStart(2, '0');
-            const filename = `${yyyy}-${mm}-${dd}-E68야간순찰.pdf`;
-
             const printArea = document.getElementById('print-area');
             
             let htmlContent = `
+                <div style="padding: 10px;">
                 <h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px; font-weight:bold;">E68 야간순찰 기록결과</h2>
                 <hr style="margin-bottom:20px; border: 1px solid #ddd;">
             `;
             
-            // 휴무자명이 입력된 경우 맨 위에 출력
             const offDuty = val('off_duty_name');
             if(offDuty !== '-') {
                 htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; color: #333; font-weight: bold;">휴무자 : ${offDuty}</p>`;
@@ -750,20 +779,43 @@
                 }
             });
             
+            // 닫기 버튼 추가
+            htmlContent += `
+                <div class="mt-4 text-center">
+                    <button class="btn btn-secondary btn-lg fw-bold w-100" onclick="closeResults()">닫기</button>
+                </div>
+                </div>
+            `;
+            
             printArea.innerHTML = htmlContent;
             
-            // PDF 모드 활성화 및 최상단으로 스크롤 (이 부분이 가장 중요)
             printArea.style.display = 'block';
-            printArea.classList.add('pdf-mode');
+            printArea.classList.add('print-mode');
             
-            // 핵심: 원래 컨테이너를 잠깐 숨겨 렌더링 충돌/밀림 방지
             const mainContainer = document.getElementById('main-container');
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            
             if(mainContainer) mainContainer.style.display = 'none';
+            if(header) header.style.display = 'none';
+            if(footer) footer.style.display = 'none';
 
             window.scrollTo(0, 0);
+        }
 
+        function closeResults() {
+            const printArea = document.getElementById('print-area');
+            const mainContainer = document.getElementById('main-container');
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
 
-
+            printArea.classList.remove('print-mode');
+            printArea.style.display = 'none';
+            printArea.innerHTML = '';
+            
+            if(mainContainer) mainContainer.style.display = '';
+            if(header) header.style.display = '';
+            if(footer) footer.style.display = '';
         }
 
         // 브라우저 캐시 및 뒤로가기(bfcache) 이벤트 대응
