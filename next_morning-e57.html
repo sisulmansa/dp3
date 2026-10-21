@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>E57 순찰로드맵</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- html2pdf 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            /* 고정된 헤더 높이만큼 여백 확보 */
+            padding-top: 75px;
+            padding-bottom: 80px;
+            background-color: #f8f9fa;
+        }
+        .barcode {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .desc {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .record-box {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        /* 앵커 이동 시 헤더에 가리지 않도록 위치 조정 */
+        section {
+            scroll-margin-top: 85px;
+        }
+        
+        /* 체크박스 UI 크기 확대 (업무일지 스타일) */
+        .form-switch .form-check-input {
+            width: 3.5em;
+            height: 1.75em;
+            margin-top: 0.1em;
+            cursor: pointer;
+        }
+        .form-switch .form-check-label {
+            font-size: 1.1em;
+            padding-left: 0.7em;
+            padding-top: 0.3em;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 고정 헤더 -->
+    <header class="fixed-top bg-white border-bottom shadow-sm pt-3 pb-2">
+        <div class="container">
+            <h1 class="visually-hidden h5 text-center text-primary fw-bold mb-2">E57 아침순찰 체크리스트</h1>
+            <div class="d-flex justify-content-between align-items-center px-2">
+                <nav class="nav">
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="/dp3/">🏠</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="./work_log.html">📝 업무일지</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e5">⬇ E5동</a>
+                    <a class="nav-link py-1 px-2 text-dark fw-bold" href="#e7">⬇ E7동</a>
+                </nav>
+                <div class="badge bg-primary fs-6 py-2 px-3">
+                    <span id="progress-text">0 / 0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 공지사항 -->
+        <div class="alert alert-warning shadow-sm mb-4">
+            <h3 class="h6 fw-bold">📢 새벽순찰</h3>
+            <ul class="mb-0 small">
+                <li><span class="barcode">흡착탑 정압설정 - 07:30</span></li>  
+                <li>자동제어 현황 파악후 순찰시 비교</li>
+                <li>Issue는 조장에게 전달</li>
+            </ul>
+        </div>  
+        
+        <!-- 방재실 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-primary text-white fw-bold">방재실</div>
+            <div class="card-body">
+                <div class="form-check form-switch d-flex align-items-center flex-wrap mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk1_2">
+                    <label class="form-check-label me-4" for="chk1_2">07:10 알람설정</label>
+                </div>
+                <div class="form-check form-switch d-flex align-items-center flex-wrap">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk1_1">
+                    <label class="form-check-label me-4" for="chk1_1">방재실 자동제어 현황</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- E5-North 시작 -->
+        <section id="e5" class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-dark text-white fw-bold h5 mb-0">E5-North</div>
+            <div class="card-body">
+                
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2">9F-흡착탑</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_9f_1">
+                    <label class="form-check-label" for="e5n_9f_1">화물 E/V 내려서 오른쪽</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_9f_3">
+                    <label class="form-check-label" for="e5n_9f_3">가스저장소 모니터링실</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_9f_6">
+                    <label class="form-check-label" for="e5n_9f_6">흡착탑 정상가동 점검</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">8F-냉각탑</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_8f_1">
+                    <label class="form-check-label" for="e5n_8f_1">흡수식냉각탑 8대</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_8f_2">
+                    <label class="form-check-label" for="e5n_8f_2">실험실 냉각탑 4대</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">7F</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_7f_2">
+                    <label class="form-check-label" for="e5n_7f_2">공조실 북쪽 전진->인버터 확인</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_7f_3">
+                    <label class="form-check-label" for="e5n_7f_3">유턴하면서 Left AHU</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_7f_4">
+                    <label class="form-check-label" for="e5n_7f_4">유턴하면서 Right AHU</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B3</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_b3_1">
+                    <label class="form-check-label" for="e5n_b3_1">화물E/V - 오수중계조1</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B4</h5>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5n_b4_1">
+                    <label class="form-check-label" for="e5n_b4_1">왼쪽에 전기실</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- E5-South 시작 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-dark text-white fw-bold h5 mb-0">E5-South</div>
+            <div class="card-body">
+                
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2">B1-기계실</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5s_b1_1">
+                    <label class="form-check-label" for="e5s_b1_1">냉동기, 펌프, 열교환기</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B3</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5s_b3_1">
+                    <label class="form-check-label" for="e5s_b3_1">오수 중계조 (PP6 .7알람)</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B4</h5>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e5s_b4_1">
+                    <label class="form-check-label" for="e5s_b4_1">폐수 중계조</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- E7 시작 -->
+        <section id="e7" class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-dark text-white fw-bold h5 mb-0">E7</div>
+            <div class="card-body">
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_intro_1">
+                    <label class="form-check-label" for="e7_intro_1">화물 E/V 타고 9F 이동</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">9F-흡착탑</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_9f_1">
+                    <label class="form-check-label" for="e7_9f_1">흡착탑 정상가동 점검</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">8F-냉각탑</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_8f_1">
+                    <label class="form-check-label" for="e7_8f_1">공용냉각탑 누수확인</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">7F-공조실</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_7f_1">
+                    <label class="form-check-label" for="e7_7f_1">북쪽 전진하면서 인버터 확인</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_7f_2">
+                    <label class="form-check-label" for="e7_7f_2">유턴하면서 Left AHU</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_7f_3">
+                    <label class="form-check-label" for="e7_7f_3">유턴하면서 Right AHU</label>
+                </div>
+                
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B1</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_b1_2">
+                    <label class="form-check-label" for="e7_b1_2">기계실 지나 남쪽으로 이동후 B2</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B2</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_b2_1">
+                    <label class="form-check-label" for="e7_b2_1">기계실 지나 화물 E/V 타고 B4</label>
+                </div>
+                
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B4</h5>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7_b4_1">
+                    <label class="form-check-label" for="e7_b4_1">전기실 점검후 1F으로 이동</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- E7-South 시작 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-dark text-white fw-bold h5 mb-0">E7-South</div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2">B4</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7s_b4_1">
+                    <label class="form-check-label" for="e7s_b4_1">폐수중계조</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="e7s_b4_2">
+                    <label class="form-check-label" for="e7s_b4_2">PS#7 졸라펌프실(미사용 中)</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 누수구역 집중 점검 시작 -->
+        <section id="leak" class="card mb-4 shadow-sm border-0 border-danger">
+            <div class="card-header bg-danger text-white fw-bold h5 mb-0">누수구역 집중점검</div>
+            <div class="card-body">
+                
+                <h4 class="fw-bold mt-2 mb-3 text-danger border-bottom pb-1">E5동 누수구역</h4>
+                
+                <h5 class="card-title fw-bold text-primary mt-3">3F</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_3f_1">
+                    <label class="form-check-label" for="leak_e5_3f_1">310~307 FCU</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_3f_2">
+                    <label class="form-check-label" for="leak_e5_3f_2">307앞 제습공조실 페이퍼</label>
+                </div>
+                <div class="alert alert-info py-2 small mb-4">
+                    <ul class="mb-0 ps-3 text-dark">
+                        <li><strong>3층 제습공조기 :</strong> 이성실 책임 010-6417-3127</li>
+                        <li><strong>프로그램:</strong> 김인석 선임 010-9255-7405</li>
+                    </ul>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">MF</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_mf_1">
+                    <label class="form-check-label" for="leak_e5_mf_1">중간통로 천정-물통</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">B1</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b1_1">
+                    <label class="form-check-label" for="leak_e5_b1_1">501 철 계단 위 물통(천장에어컨)</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b1_2">
+                    <label class="form-check-label" for="leak_e5_b1_2">302 페이퍼</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b1_3">
+                    <label class="form-check-label" for="leak_e5_b1_3">201 맞은편</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b1_4">
+                    <label class="form-check-label" for="leak_e5_b1_4">107 벽면 누수</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">B2</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b2_1">
+                    <label class="form-check-label" for="leak_e5_b2_1">301~302 페이퍼</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b2_2">
+                    <label class="form-check-label" for="leak_e5_b2_2">썬큰 점검 - 보양중 물통 비움</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_b2_3">
+                    <label class="form-check-label" for="leak_e5_b2_3">205 실험실 (North E/V EPS#3 옆)</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">외부</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e5_out_1">
+                    <label class="form-check-label" for="leak_e5_out_1">식당가</label>
+                </div>
+
+                <h4 class="fw-bold mt-5 mb-3 text-danger border-bottom pb-1">E7동 누수구역</h4>
+                
+                <h5 class="card-title fw-bold text-primary mt-3">4F</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e7_4f_1">
+                    <label class="form-check-label" for="leak_e7_4f_1">313 항온항습기 냉수배관 결로</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">3F</h5>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e7_3f_1">
+                    <label class="form-check-label" for="leak_e7_3f_1">312 오른쪽 옆 소화가스저장실</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary mt-4">외부</h5>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="leak_e7_out_1">
+                    <label class="form-check-label" for="leak_e7_out_1">식당가</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 기타부분 -->
+        <section class="card mb-4 shadow-sm border-0">
+            <div class="card-header bg-secondary text-white fw-bold h5 mb-0">기타</div>
+            <div class="card-body">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_1">
+                    <label class="form-check-label" for="chk_etc_1">야간검침 엣지(PM 10:30)</label>
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
+                    <label class="form-check-label" for="chk_etc_2">수변전실 MOF 엣지</label>
+                </div>
+
+                <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">방재실 유량계표 캡처</h5>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_3">
+                    <label class="form-check-label" for="chk_etc_3">E57 &gt; 기타설비 &gt; 시중수유량계</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_4">
+                    <label class="form-check-label" for="chk_etc_4">계측기기 &gt; E6~E8 유량계표</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_5">
+                    <label class="form-check-label" for="chk_etc_5">UT &gt; E57 FlowMeter &gt; 유량계표</label>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 하단 고정 컨트롤 바 -->
+    <footer class="fixed-bottom bg-white border-top shadow-lg p-3">
+      <div class="container d-flex justify-content-between gap-2">
+        <button class="btn btn-primary flex-fill fw-bold" onclick="manualSave()">
+          저장
+        </button>
+        <button class="btn btn-danger flex-fill fw-bold" onclick="clearData()">
+          초기화
+        </button>
+        <button class="btn btn-success flex-fill fw-bold" onclick="exportPDF()">
+          PDF
+        </button>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 기능 구현 Javascript -->
+    <script>
+        const checkboxes = document.querySelectorAll('.chk-item');
+        const progressText = document.getElementById('progress-text');
+        
+        // 데이터 충돌을 피하기 위해 E57 전용 Storage Key 사용
+        const STORAGE_KEY = 'e57_night_patrol_data';
+
+        // 1. 상태 자동저장 함수
+        function autoSave() {
+            const data = { checkboxes: {} };
+            checkboxes.forEach(cb => data.checkboxes[cb.id] = cb.checked);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function manualSave() {
+            autoSave();
+            alert('현재 상태가 성공적으로 저장되었습니다.');
+        }
+
+        // 2. 체크박스 카운터 업데이트
+        function updateCounter() {
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.chk-item:checked').length;
+            progressText.innerText = `${checked} / ${total}`;
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateCounter();
+                autoSave();
+            });
+        });
+
+        // 3. 로드 및 초기화
+        function loadData() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                const data = JSON.parse(stored);
+                for (const id in data.checkboxes) {
+                    const el = document.getElementById(id);
+                    if (el) el.checked = data.checkboxes[id];
+                }
+            }
+            updateCounter();
+        }
+
+        function clearData() {
+            if(confirm('저장된 데이터를 모두 삭제하고 초기화하시겠습니까?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        // 4. PDF 내보내기 (E57의 경우 전체 점검 완료 내역을 문자열로 주입하여 변환)
+        function exportPDF() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const filename = `${yyyy}-${mm}-${dd}-E57야간순찰.pdf`;
+
+            // 임시 Div를 생성하여 목록 복사
+            const tempDiv = document.createElement('div');
+            tempDiv.style.padding = '30px';
+            tempDiv.style.fontFamily = 'Malgun Gothic, sans-serif';
+            tempDiv.innerHTML = `<h2 style="text-align:center; color:#0d6efd; margin-bottom: 20px;">E57 야간순찰 점검결과</h2><hr style="margin-bottom:20px;">`;
+            
+            const ul = document.createElement('ul');
+            ul.style.listStyle = 'none';
+            ul.style.padding = '0';
+            
+            // 모든 체크박스의 라벨 텍스트와 상태를 추출하여 목록으로 생성
+            checkboxes.forEach(cb => {
+                const labelElement = document.querySelector(`label[for='${cb.id}']`);
+                const labelText = labelElement ? (labelElement.textContent || labelElement.innerText).trim() : '항목';
+                
+                const li = document.createElement('li');
+                li.style.fontSize = '14px';
+                li.style.lineHeight = '1.8';
+                li.style.marginBottom = '8px';
+                li.style.borderBottom = '1px dashed #eee';
+                li.style.paddingBottom = '4px';
+                
+                if (cb.checked) {
+                    li.style.color = '#333';
+                    li.innerHTML = `<span style="color: blue; font-weight: bold; margin-right: 10px;">[완료]</span> ${labelText}`;
+                } else {
+                    li.style.color = '#777';
+                    li.innerHTML = `<span style="color: red; font-weight: bold; margin-right: 10px;">[미완료]</span> ${labelText}`;
+                }
+                ul.appendChild(li);
+            });
+            
+            tempDiv.appendChild(ul);
+
+            const opt = {
+                margin:       10,
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(tempDiv).save().then(() => {
+                alert('PDF 파일이 정상적으로 다운로드 되었습니다.');
+            }).catch(err => {
+                console.error("PDF 생성 에러:", err);
+                alert("PDF 생성 중 문제가 발생했습니다.");
+            });
+        }
+
+        // 브라우저 캐시 및 뒤로가기(bfcache) 이벤트 대응
+        window.addEventListener('DOMContentLoaded', loadData);
+        window.addEventListener('pageshow', (e) => {
+            if(e.persisted) loadData(); 
+        });
+    </script>
+</body>
+</html>
