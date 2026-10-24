@@ -307,7 +307,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">6F~1F 사무동 순찰</h5>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk6_1">
-                    <label class="form-check-label" for="chk6_1"><span class="barcode">파일럿 공조기</span> 2대</label>
+                    <label class="form-check-label" for="chk6_1">좌우 실험실 누수</label>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B1-North-R 기계실</h5>
@@ -630,7 +630,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">B3-North</h5>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk33_19">
-                    <label class="form-check-label" for="chk33_19"><span class="barcode">졸라펌프실</span></label>
+                    <label class="form-check-label" for="chk33_19">졸라펌프실</label>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">E8-South</h5>
@@ -664,7 +664,7 @@
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
-                    <label class="form-check-label" for="chk_etc_2">지역난방 검침 <span class="barcode">엣지</span></label>
+                    <label class="form-check-label" for="chk_etc_2">E8-B2 지역난방 검침 <span class="barcode">엣지</span></label>
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_3">
@@ -757,33 +757,33 @@
         // 3. 결과 텍스트 동적 포맷팅
         function calculateResults() {
             document.getElementById('res_e6_hwp').innerText = 
-                `결과 : E6 B1F HWP(난방순환펌프) ${val('e6_hwp_hz')}Hz(${val('e6_hwp_pump')}호기) 난방펌프 압력 ${val('e6_hwp_k')}K`;
+                `1 - E6 B1F HWP(난방순환펌프) ${val('e6_hwp_hz')}Hz(${val('e6_hwp_pump')}호기) 난방펌프 압력 ${val('e6_hwp_k')}K`;
             
             document.getElementById('res_e6_chwp').innerText = 
-                `결과 : E6 B1F CHWP(냉수순환펌프) ${val('e6_chwp_hz')}Hz(${val('e6_chwp_pump')}호기) 입 ${val('e6_chwp_in_t')}℃/${val('e6_chwp_in_k')}K, 출 ${val('e6_chwp_out_t')}℃/${val('e6_chwp_out_k')}K`;
+                `2 - E6 B1F CHWP(냉수순환펌프) ${val('e6_chwp_hz')}Hz(${val('e6_chwp_pump')}호기) 입 ${val('e6_chwp_in_t')}℃/${val('e6_chwp_in_k')}K, 출 ${val('e6_chwp_out_t')}℃/${val('e6_chwp_out_k')}K`;
             
             let t_parts = val('e6_8f_t').split('/').map(p => p !== '-' ? p + '℃' : '-').join('/');
             if(t_parts === '-') t_parts = '-℃';
             document.getElementById('res_e6_8f').innerText = 
-                `결과 : E6 8F 실험실냉각탑 ${val('e6_8f_pump')}호기 가동중 ${val('e6_8f_hz')}Hz ${t_parts}`;
+                `3 - E6 8F 실험실냉각탑 ${val('e6_8f_pump')}호기 가동중 ${val('e6_8f_hz')}Hz ${t_parts}`;
 
             document.getElementById('res_e6_b2_cw').innerText = 
-                `결과 : E6 B2F 냉각탑냉각수 ${val('e6_cw1_pump')}호기 ${val('e6_cw1_t')}℃/${val('e6_cw1_k')}K/${val('e6_cw1_hz')}Hz / 중형 실험실냉각수 ${val('e6_cw2_pump')}호기 ${val('e6_cw2_t')}℃/${val('e6_cw2_k')}K/${val('e6_cw2_hz')}Hz`;
+                `4 - E6 B2F 냉각탑냉각수 ${val('e6_cw1_pump')}호기 ${val('e6_cw1_t')}℃/${val('e6_cw1_k')}K/${val('e6_cw1_hz')}Hz / 중형 실험실냉각수 ${val('e6_cw2_pump')}호기 ${val('e6_cw2_t')}℃/${val('e6_cw2_k')}K/${val('e6_cw2_hz')}Hz`;
 
             document.getElementById('res_e6_gen').innerText = 
-                `결과 : E6-B4 발전기 ${val('e6_gen_t')}℃, ${val('e6_gen_v')}V, ${val('e6_gen_l')}L`;
+                `E6-B4 발전기 ${val('e6_gen_t')}℃, ${val('e6_gen_v')}V, ${val('e6_gen_l')}L`;
 
             document.getElementById('res_e8_gen').innerText = 
-                `결과 : E8-B4 발전기 ${val('e8_gen_t')}℃, ${val('e8_gen_v')}V, ${val('e8_gen_l')}L`;
+                `E8-B4 발전기 ${val('e8_gen_t')}℃, ${val('e8_gen_v')}V, ${val('e8_gen_l')}L`;
 
             document.getElementById('res_e8_bsl').innerText = 
-                `결과 : E8 5,6F 6개소 BSL실험실 차압 및 온습도 상태점검 (6층 ${val('e8_6f_t_min')}℃ ~ ${val('e8_6f_t_max')}℃/${val('e8_6f_h_min')}% ~ ${val('e8_6f_h_max')}%, 5311호 ${val('e8_5f_t')}℃/${val('e8_5f_h')}%)`;
+                `5 - E8 5,6F 6개소 BSL실험실 차압 및 온습도 상태점검 (6층 ${val('e8_6f_t_min')}℃ ~ ${val('e8_6f_t_max')}℃/${val('e8_6f_h_min')}% ~ ${val('e8_6f_h_max')}%, 5311호 ${val('e8_5f_t')}℃/${val('e8_5f_h')}%)`;
 
             document.getElementById('res_e8_chwp').innerText = 
-                `결과 : E8 B2F CHWP(냉수순환펌프) ${val('e8_chwp_hz')}Hz(${val('e8_chwp_pump')}호기) 입 ${val('e8_chwp_in_t')}℃/${val('e8_chwp_in_k')}K, 출 ${val('e8_chwp_out_t')}℃/${val('e8_chwp_out_k')}K`;
+                `6 - E8 B2F CHWP(냉수순환펌프) ${val('e8_chwp_hz')}Hz(${val('e8_chwp_pump')}호기) 입 ${val('e8_chwp_in_t')}℃/${val('e8_chwp_in_k')}K, 출 ${val('e8_chwp_out_t')}℃/${val('e8_chwp_out_k')}K`;
 
             document.getElementById('res_e8_hwp').innerText = 
-                `결과 : E8 B2F HWP(난방순환펌프) ${val('e8_hwp_hz')}Hz(${val('e8_hwp_pump')}호기) 난방펌프 압력 ${val('e8_hwp_k')}K`;
+                `7 - E8 B2F HWP(난방순환펌프) ${val('e8_hwp_hz')}Hz(${val('e8_hwp_pump')}호기) 난방펌프 압력 ${val('e8_hwp_k')}K`;
                 
         }
 
