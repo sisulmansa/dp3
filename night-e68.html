@@ -104,7 +104,15 @@
                 <li>엣지 체크시 무조건 5분 이상 경과후 확인 처리</li>
                 <li>Issue는 조장에게 전달</li>
             </ul>
-        </div>    
+        </div>   
+         
+        <!-- 근무지시사항 -->
+        <section class="card mb-4 shadow-sm border-0 border-primary">
+            <div class="card-header bg-primary text-white fw-bold">근무 지시사항</div>
+            <div class="card-body">
+                <textarea class="form-control record-input shadow-none" rows="3" id="work_instructions" placeholder="전달받은 근무지시사항을 입력하세요..."></textarea>
+            </div>
+        </section>
 
         <!-- 방재실 -->
         <section class="card mb-4 shadow-sm border-0">
@@ -446,7 +454,7 @@
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_1">
                     <label class="form-check-label" for="chk4_1">EPS실 <span class="barcode">태양광패널</span> (9층)</label>
-                    <p class="small text-muted px-4">※ 비상계단으로 가는 8층 태양광패널 인버터실</p>
+                    <p class="small text-muted px-4">※ 비상계단 방향 8층 태양광패널 인버터실</p>
                 </div>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_2">
@@ -474,7 +482,7 @@
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">6F 사무동 순찰</h5>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_7">
-                    <label class="form-check-label" for="chk4_7">BSL 음압 정상범위 확인</label>
+                    <label class="form-check-label" for="chk4_7">BSL 음압(-) 정상범위 확인</label>
                 </div>
                 
                 <div class="record-box mb-3">
@@ -531,12 +539,32 @@
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_10">
                     <label class="form-check-label" for="chk4_10">EPS옆 PS#3 냉장냉동실험실</label>
-                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 확인 - 알람X, 트림X)</p>
+                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 - 알람X, 트림X)</p>
                 </div>
                 <div class="form-check form-switch mb-4">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_11">
                     <label class="form-check-label" for="chk4_11">바이오 CMC 연구소 BSL 순찰</label>
                 </div>                
+                        
+                        
+                <div class="record-box mb-3">
+                    <h6 class="fw-bold mb-3 text-primary">연구소내부 6302호 차압기록</h6>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text" style="width: 80px;">외압(Pa)</span>
+                                <input type="text" class="form-control" id="e8_6302_out">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text" style="width: 80px;">내압(Pa)</span>
+                                <input type="text" class="form-control" id="e8_6302_in">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">5F 사무동 순찰</h5>
                 <div class="form-check form-switch mb-2">
@@ -546,7 +574,7 @@
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_12">
                     <label class="form-check-label" for="chk4_12">PS#1 냉장냉동실험실 - 프레온 압축기</label>
-                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 확인 - 알람X, 트림X)</p>
+                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 - 알람X, 트림X)</p>
                 </div>
 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">4F~2F 저층부</h5>
@@ -557,7 +585,7 @@
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_15">
                     <label class="form-check-label" for="chk4_15">PS#3 냉장냉동실험실 - 프레온 압축기</label>
-                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 확인 - 알람X, 트림X)</p>
+                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 - 알람X, 트림X)</p>
                 </div>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_16">
@@ -645,7 +673,7 @@
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_24">
                     <label class="form-check-label" for="chk4_24">EPS 맞은편 PS#3 냉장냉동실험실</label>
-                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 확인 - 알람X, 트림X)</p>
+                    <p class="small text-muted px-4">※ 프레온 가스점검 (계기판 - 알람X, 트림X)</p>
                 </div>
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk4_26">
@@ -660,7 +688,7 @@
             <div class="card-body">
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_1">
-                    <label class="form-check-label" for="chk_etc_1">야간검침 시작 (PM 10:30)</label>
+                    <label class="form-check-label" for="chk_etc_1">야간검침 시작 (PM 11:00)</label>
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input chk-item" type="checkbox" role="switch" id="chk_etc_2">
