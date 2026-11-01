@@ -48,7 +48,7 @@
         }
 
         /* 결과 텍스트 강조 */
-        .result-text {
+        .result-text, .result-text-generator, .result-text-pa {
             font-weight: 700;
             color: #0d6efd;
             background-color: #fff;
@@ -418,7 +418,7 @@
                         <span class="input-group-text" style="width: 120px;">경유량(L)</span>
                         <input type="text" class="form-control record-input" id="e6_gen_l">
                     </div>
-                    <p class="result-text" id="res_e6_gen"></p>
+                    <p class="result-text-generator" id="res_e6_gen"></p>
                 </div>
             </div>
         </section>
@@ -441,7 +441,7 @@
                         <span class="input-group-text" style="width: 120px;">경유량(L)</span>
                         <input type="text" class="form-control record-input" id="e8_gen_l">
                     </div>
-                    <p class="result-text" id="res_e8_gen"></p>
+                    <p class="result-text-generator" id="res_e8_gen"></p>
                 </div>
                 
                 <h5 class="card-title fw-bold text-primary border-bottom pb-2 mt-4">1F</h5>
@@ -563,7 +563,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="result-text">정상외압 : 6.23Pa 이상, &nbsp;&nbsp;&nbsp;정상내압 : 12.45Pa 이상</p>
+                    <p class="result-text-pa">정상외압 : 6.23Pa 이상, &nbsp;&nbsp;&nbsp;정상내압 : 12.45Pa 이상</p>
                 </div>
 
 
@@ -881,6 +881,15 @@
                     htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; color: #333; word-break: keep-all;">${text}</p>`;
                 }
             });
+
+          const results_generator = document.querySelectorAll('.result-text-generator');
+            results_generator.forEach(res => {
+                const text = res.textContent || res.innerText || '';
+                if(text.trim() !== '') {
+
+                    htmlContent += `<p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px; color: #333; word-break: keep-all;">${text}</p>`;
+                }
+            });            
             
             // 닫기 버튼 추가
             htmlContent += `
