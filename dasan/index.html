@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>다산에듀 전기기사</title>
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #eef2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI', sans-serif;
+            color: #333;
+        }
+        
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 상단 고정 헤더 */
+        .header-bar {
+            background-color: #17324d;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-bar h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .home-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 5px 14px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .home-btn:hover {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* 메인 콘텐츠 영역 */
+        main {
+            flex: 1;
+            padding: 20px 15px;
+        }
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #17324d;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #eef2f5;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: '📘';
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* 리스트 메뉴 스타일 */
+        .custom-list-group {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #eef2f5;
+        }
+        .custom-list-item {
+            background-color: #f8f9fa;
+            border: none;
+            border-bottom: 1px solid #eef2f5;
+            padding: 14px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .custom-list-item:last-child {
+            border-bottom: none;
+        }
+        .custom-list-item:hover, .custom-list-item:active {
+            background-color: #e2e6ea;
+            color: #17324d;
+        }
+        .custom-list-item::after {
+            content: '›';
+            font-size: 20px;
+            color: #adb5bd;
+            line-height: 1;
+        }
+
+        /* 푸터 */
+        .footer-bar {
+            text-align: center;
+            padding: 20px;
+            color: #868e96;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- 헤더 -->
+        <header class="header-bar">
+            <h1>전기기사 기본기출문제</h1>
+            <a href="../index.html" class="home-btn">Home</a>
+        </header>
+
+        <!-- 메인 콘텐츠 -->
+        <main>
+            <section class="content-card">
+                <h2 class="section-title">5. 전기설비기술기준</h2>
+                
+                <div class="list-group custom-list-group">
+                    <a href="./5_equipment/chap1_39.html" class="custom-list-item">01장-공통사항</a>
+                    <a href="#" class="custom-list-item">02장-전선로</a>
+                    <a href="#" class="custom-list-item">03장-저압 전기설비</a>
+                    <a href="#" class="custom-list-item">04장-고압&middot;특고압 전기설비</a>
+                    <a href="#" class="custom-list-item">05장-전기철도설비</a>
+                    <a href="#" class="custom-list-item">06장-분산형전원설비</a>
+                    <a href="#" class="custom-list-item">07장-전기설비기술기준</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="footer-bar">
+            @Designed By mvcweb
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

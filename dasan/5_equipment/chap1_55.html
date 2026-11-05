@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>전기기사 문제 풀이</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        body {
+            background-color: #f4f7f9;
+            color: #333;
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+        header {
+            background-color: #11477D;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding-top: max(15px, env(safe-area-inset-top));
+        }
+        header a.home-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 15px;
+        }
+        header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .question-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            word-break: keep-all;
+        }
+        .question-num {
+            color: #11477D;
+            font-weight: 900;
+            margin-right: 5px;
+        }
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 15px;
+            text-align: left;
+            transition: all 0.2s;
+            cursor: pointer;
+            word-break: keep-all;
+        }
+        .option-btn:disabled {
+            cursor: default;
+        }
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+            text-decoration: line-through;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #495057;
+            border-left: 4px solid #11477D;
+        }
+        .explanation strong {
+            color: #11477D;
+        }
+        .explanation table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background: white;
+            font-size: 13px;
+            text-align: center;
+        }
+        .explanation th, .explanation td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .explanation th {
+            background-color: #f1f1f1;
+            white-space: nowrap;
+        }
+        #final-score-container {
+            display: none;
+            background-color: #11477D;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 20px;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .footer-btn {
+            flex: 1;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ced4da;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .footer-btn.primary {
+            background-color: #11477D;
+            color: white;
+            border-color: #11477D;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="home-btn">Home</a>
+        <h1>제1장 공통사항</h1>
+    </header>
+
+    <div class="container">
+        <div id="final-score-container"></div>
+        <div id="quiz-container"></div>
+    </div>
+
+    <footer>
+        <a href="./chap1_54.html" class="footer-btn">이전문제</a>
+        <button class="footer-btn primary" onclick="initQuiz()">새로고침</button>
+        <a href="./chap1_56.html" class="footer-btn">다음문제</a>
+    </footer>
+
+    <script>
+        const rawData = [
+            {
+                id: "40",
+                text: "선도체의 단면적이 16㎟인 경우 보호도체와 선도체의 재질이 같을 때 보호도체의 단면적은?",
+                options: ["10", "16", "25", "50"],
+                correct: "16",
+                explanation: `
+                    <strong>[해설]</strong><br>
+                    <table>
+                        <tr>
+                            <th rowspan="2">선도체의 단면적 S<br>(㎟, 구리)</th>
+                            <th colspan="2">보호도체의 최소 단면적 (㎟, 구리)</th>
+                        </tr>
+                        <tr>
+                            <th>보호도체의 재질이<br>선도체와 같은 경우</th>
+                            <th>보호도체의 재질이<br>선도체와 다른 경우</th>
+                        </tr>
+                        <tr>
+                            <td>16㎟ 이하</td>
+                            <td>S</td>
+                            <td>(k₁/k₂) × S</td>
+                        </tr>
+                        <tr>
+                            <td>16㎟ 초과 35㎟ 이하</td>
+                            <td>16</td>
+                            <td>(k₁/k₂) × 16</td>
+                        </tr>
+                        <tr>
+                            <td>35㎟ 초과</td>
+                            <td>S/2</td>
+                            <td>(k₁/k₂) × (S/2)</td>
+                        </tr>
+                    </table>
+                `
+            },
+            {
+                id: "41",
+                text: "전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐를 때 보호도체가 하나인 경우 단면적 몇 ㎟ 이상의 알루미늄선으로 보강해야 하는가?",
+                options: ["10", "16", "25", "50"],
+                correct: "16",
+                explanation: `
+                    <strong>[해설]</strong><br>
+                    <strong>보호도체의 단면적 보강</strong><br>
+                    ① 보호도체는 정상 운전상태에서 전류의 전도성 경로로 사용되지 않아야 한다.<br>
+                    ② 전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐르는 경우, 다음에 의해 보호도체를 증강하여 사용하여야 한다.<br>
+                    <table>
+                        <tr>
+                            <th>구분</th>
+                            <th>구리</th>
+                            <th>알루미늄</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">보호도체가 하나인 경우</td>
+                            <td>10㎟ 이상</td>
+                            <td>16㎟ 이상</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">추가로 보호도체를 위한 별도의 단자가 구비된 경우</td>
+                            <td>10㎟ 이상</td>
+                            <td>16㎟ 이상</td>
+                        </tr>
+                    </table>
+                `
+            },
+            {
+                id: "42",
+                text: "보호도체와 중성선의 겸용선은?",
+                options: ["PEN", "PEL", "PEM", "PEO"],
+                correct: "PEN",
+                explanation: `
+                    <strong>[해설]</strong><br>
+                    <strong>보호도체와 계통도체 겸용</strong><br>
+                    ① 중성선과 겸용 (PEN) &nbsp;&nbsp;② 선도체와 겸용 (PEL) &nbsp;&nbsp;③ 중간도체와 겸용 (PEM)
+                `
+            }
+        ];
+
+        let currentScore = 0;
+        let answeredQuestions = 0;
+        const totalQuestions = rawData.length;
+
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function initQuiz() {
+            currentScore = 0;
+            answeredQuestions = 0;
+            
+            const container = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('final-score-container');
+            
+            container.innerHTML = '';
+            scoreContainer.style.display = 'none';
+
+            const shuffledQuestions = shuffleArray(rawData);
+
+            shuffledQuestions.forEach((q, qIndex) => {
+                const shuffledOptions = shuffleArray(q.options);
+
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${qIndex}`;
+
+                const title = document.createElement('div');
+                title.className = 'question-title';
+                title.innerHTML = `<span class="question-num">${q.id}.</span> ${q.text}`;
+                card.appendChild(title);
+
+                const optionsGroup = document.createElement('div');
+                optionsGroup.className = 'options-group';
+
+                shuffledOptions.forEach((opt, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    const circleNum = ['①', '②', '③', '④'][optIndex];
+                    btn.innerHTML = `${circleNum} ${opt}`;
+                    
+                    btn.onclick = () => handleAnswer(qIndex, btn, opt, q.correct, optionsGroup, card);
+                    optionsGroup.appendChild(btn);
+                });
+                card.appendChild(optionsGroup);
+
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.id = `explanation-${qIndex}`;
+                explanationDiv.innerHTML = q.explanation;
+                card.appendChild(explanationDiv);
+
+                container.appendChild(card);
+            });
+            
+            window.scrollTo(0, 0);
+        }
+
+        function handleAnswer(qIndex, clickedBtn, selectedText, correctText, optionsGroup, card) {
+            const buttons = optionsGroup.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedText === correctText) {
+                clickedBtn.classList.add('correct');
+                currentScore += 1;
+            } else {
+                clickedBtn.classList.add('incorrect');
+                buttons.forEach(btn => {
+                    if (btn.innerText.includes(correctText)) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            const explanation = card.querySelector(`#explanation-${qIndex}`);
+            explanation.style.display = 'block';
+
+            answeredQuestions += 1;
+            if (answeredQuestions === totalQuestions) {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            const scoreContainer = document.getElementById('final-score-container');
+            const scorePercent = Math.round((currentScore / totalQuestions) * 100);
+            scoreContainer.innerHTML = `최종 점수: ${currentScore} / ${totalQuestions} 문제 (${scorePercent}점)`;
+            scoreContainer.style.display = 'block';
+            
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+        }
+
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
