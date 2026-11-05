@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- 아이폰 등 모바일 디바이스에서 최적화 및 확대 방지, 안전 영역(Safe Area) 확보 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>전기기사 문제 풀이</title>
+    <style>
+        /* 기본 초기화 및 폰트 설정 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        body {
+            background-color: #f4f7f9;
+            color: #333;
+            /* 하단 고정 푸터에 내용이 가려지지 않도록 여백 확보 */
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+
+        /* Header 영역 (요청사항 12, 13) */
+        header {
+            background-color: #11477D;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding-top: max(15px, env(safe-area-inset-top));
+        }
+        header a.home-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 15px;
+        }
+        header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Main 컨텐츠 영역 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 개별 문제 카드 디자인 */
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .question-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            word-break: keep-all;
+        }
+        .question-num {
+            color: #11477D;
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        /* 예시(옵션) 버튼 디자인 */
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 15px;
+            text-align: left;
+            transition: all 0.2s;
+            cursor: pointer;
+            word-break: keep-all;
+        }
+        .option-btn:disabled {
+            cursor: default;
+        }
+        
+        /* 정답/오답 상태 클래스 */
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+            text-decoration: line-through;
+        }
+
+        /* 해설 영역 */
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #495057;
+            border-left: 4px solid #11477D;
+        }
+        
+        /* 해설 내 표(Table) 스타일 */
+        .explanation table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            font-size: 12px;
+            text-align: center;
+        }
+        .explanation th, .explanation td {
+            border: 1px solid #ccc;
+            padding: 6px;
+        }
+        .explanation th {
+            background-color: #f1f1f1;
+        }
+
+        /* 점수 출력 영역 */
+        #final-score-container {
+            display: none;
+            background-color: #11477D;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 하단 고정 Footer (요청사항 14, 15) */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 20px;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .footer-btn {
+            flex: 1;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ced4da;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .footer-btn.primary {
+            background-color: #11477D;
+            color: white;
+            border-color: #11477D;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 Header -->
+    <header>
+        <a href="../index.html" class="home-btn">Home</a>
+        <h1>제1장 공통사항</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- 결과 점수 출력 영역 -->
+        <div id="final-score-container"></div>
+        <!-- 문제 출력 영역 -->
+        <div id="quiz-container"></div>
+    </div>
+
+    <!-- 하단 고정 Footer -->
+    <footer>
+        <a href="#prev.html" class="footer-btn">이전문제</a>
+        <button class="footer-btn primary" onclick="initQuiz()">새로고침</button>
+        <a href="./chap1_40.html" class="footer-btn">다음문제</a>
+    </footer>
+
+    <script>
+        // 사진(036.jpg)에서 추출한 문제 데이터 객체 배열
+        const rawData = [
+            {
+                id: "01",
+                text: "전압의 종별에서 교류 600V는 무엇으로 분류하는가?",
+                options: ["저압", "고압", "특고압", "초고압"],
+                correct: "저압",
+                explanation: `
+                    <strong>[해설]</strong><br>
+                    <table>
+                        <tr><th>구분</th><th>교류</th><th>직류</th></tr>
+                        <tr><td>저압</td><td>1kV 이하</td><td>1.5kV 이하</td></tr>
+                        <tr><td>고압</td><td>1kV 초과 7kV 이하</td><td>1.5kV 초과 7kV 이하</td></tr>
+                        <tr><td>특고압</td><td>7kV 초과</td><td>7kV 초과</td></tr>
+                    </table>
+                `
+            },
+            {
+                id: "02",
+                text: "관등회로라고 하는 것은?",
+                options: [
+                    "분기점으로부터 안정기까지의 전로",
+                    "스위치로부터 방전등까지의 전로",
+                    "스위치로부터 안정기까지의 전로",
+                    "방전등용 안정기로부터 방전관까지의 전로"
+                ],
+                correct: "방전등용 안정기로부터 방전관까지의 전로",
+                explanation: "<strong>[해설]</strong><br>\"관등회로\"란 방전등용 안정기(방전등용 변압기를 포함)로부터 방전관까지의 전로를 말한다."
+            },
+            {
+                id: "03",
+                text: "전력 계통의 운용에 관한 지시를 하는 곳은?",
+                options: ["급전소", "개폐소", "변전소", "발전소"],
+                correct: "급전소",
+                explanation: "<strong>[해설]</strong><br>\"급전소\"란 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다."
+            }
+        ];
+
+        let currentScore = 0;
+        let answeredQuestions = 0;
+        const totalQuestions = rawData.length;
+
+        // 배열 랜덤 셔플 함수
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // 문제 초기화 및 렌더링 함수
+        function initQuiz() {
+            currentScore = 0;
+            answeredQuestions = 0;
+            
+            const container = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('final-score-container');
+            
+            container.innerHTML = '';
+            scoreContainer.style.display = 'none';
+
+            // 1. 문제의 순서 랜덤 배치
+            const shuffledQuestions = shuffleArray(rawData);
+
+            shuffledQuestions.forEach((q, qIndex) => {
+                // 2. 예시(보기) 순서 랜덤 배치
+                const shuffledOptions = shuffleArray(q.options);
+
+                // 카드 DOM 생성
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${qIndex}`;
+
+                // 제목 추가 (업로드 이미지 표기 번호 유지)
+                const title = document.createElement('div');
+                title.className = 'question-title';
+                title.innerHTML = `<span class="question-num">${q.id}.</span> ${q.text}`;
+                card.appendChild(title);
+
+                // 옵션 버튼 그룹
+                const optionsGroup = document.createElement('div');
+                optionsGroup.className = 'options-group';
+
+                shuffledOptions.forEach((opt, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    // 보기 번호(①, ②, ③, ④) 텍스트 동적 부여
+                    const circleNum = ['①', '②', '③', '④'][optIndex];
+                    btn.innerHTML = `${circleNum} ${opt}`;
+                    
+                    // 정답 체크 이벤트
+                    btn.onclick = () => handleAnswer(qIndex, btn, opt, q.correct, optionsGroup, card);
+                    optionsGroup.appendChild(btn);
+                });
+                card.appendChild(optionsGroup);
+
+                // 해설 영역 생성
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.id = `explanation-${qIndex}`;
+                explanationDiv.innerHTML = q.explanation;
+                card.appendChild(explanationDiv);
+
+                container.appendChild(card);
+            });
+            
+            // 맨 위로 스크롤
+            window.scrollTo(0, 0);
+        }
+
+        // 정답 판별 및 처리 함수
+        function handleAnswer(qIndex, clickedBtn, selectedText, correctText, optionsGroup, card) {
+            const buttons = optionsGroup.querySelectorAll('.option-btn');
+            
+            // 해당 문제의 모든 버튼 비활성화 (중복 풀이 방지)
+            buttons.forEach(btn => btn.disabled = true);
+
+            // 정답/오답 디자인 적용
+            if (selectedText === correctText) {
+                clickedBtn.classList.add('correct');
+                currentScore += 1;
+            } else {
+                clickedBtn.classList.add('incorrect');
+                // 오답을 골랐을 때 정답인 버튼도 표시
+                buttons.forEach(btn => {
+                    if (btn.innerText.includes(correctText)) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            // 해설 출력
+            const explanation = card.querySelector(`#explanation-${qIndex}`);
+            explanation.style.display = 'block';
+
+            // 모든 문제를 풀었을 때 점수 출력
+            answeredQuestions += 1;
+            if (answeredQuestions === totalQuestions) {
+                showFinalScore();
+            }
+        }
+
+        // 최종 점수 화면 출력 함수
+        function showFinalScore() {
+            const scoreContainer = document.getElementById('final-score-container');
+            const scorePercent = Math.round((currentScore / totalQuestions) * 100);
+            scoreContainer.innerHTML = `최종 점수: ${currentScore} / ${totalQuestions} 문제 (${scorePercent}점)`;
+            scoreContainer.style.display = 'block';
+            
+            // 점수 확인 후 화면 상단으로 스크롤 이동
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+        }
+
+        // 페이지 로드 시 최초 실행
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
