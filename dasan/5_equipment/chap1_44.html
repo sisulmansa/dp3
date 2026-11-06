@@ -1,353 +1,399 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>전기기사 문제 풀이</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-        }
-        body {
-            background-color: #f4f7f9;
-            color: #333;
-            padding-bottom: calc(80px + env(safe-area-inset-bottom));
-        }
-        header {
-            background-color: #11477D;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding-top: max(15px, env(safe-area-inset-top));
-        }
-        header a.home-btn {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.5);
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-right: 15px;
-        }
-        header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .question-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .question-title {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            word-break: keep-all;
-        }
-        .question-num {
-            color: #11477D;
-            font-weight: 900;
-            margin-right: 5px;
-        }
-        .options-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option-btn {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-size: 15px;
-            text-align: left;
-            transition: all 0.2s;
-            cursor: pointer;
-            word-break: keep-all;
-        }
-        .option-btn:disabled {
-            cursor: default;
-        }
-        .option-btn.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-            font-weight: bold;
-        }
-        .option-btn.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
-            text-decoration: line-through;
-        }
-        .explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #495057;
-            border-left: 4px solid #11477D;
-        }
-        .explanation table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            background: white;
-            font-size: 13px;
-            text-align: left;
-        }
-        .explanation th, .explanation td {
-            border: 1px solid #ccc;
-            padding: 8px;
-        }
-        .explanation th {
-            background-color: #f1f1f1;
-            text-align: center;
-            white-space: nowrap;
-        }
-        .notice-text {
-            display: block;
-            font-size: 12px;
-            color: #777;
-            font-weight: normal;
-            margin-bottom: 5px;
-        }
-        #final-score-container {
-            display: none;
-            background-color: #11477D;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            padding: 10px 20px;
-            padding-bottom: max(10px, env(safe-area-inset-bottom));
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        .footer-btn {
-            flex: 1;
-            text-align: center;
-            background-color: #f8f9fa;
-            color: #333;
-            border: 1px solid #ced4da;
-            padding: 12px 0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-        .footer-btn.primary {
-            background-color: #11477D;
-            color: white;
-            border-color: #11477D;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <!-- 아이폰 13 프로 화면에 맞춘 반응형 뷰포트 설정 (더블탭 확대 방지 포함) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#11477D" />
+  <title>전기기사 기출문제</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI', sans-serif;
+      padding-bottom: 130px; /* 고정된 footer 영역만큼 여백 확보 */
+    }
+    
+    .app-container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* 12, 13. h1 배경색, 가운데 정렬 및 home 버튼 */
+    .header-bar {
+      background-color: #11477D;
+      color: white;
+      position: relative;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header-bar h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: bold;
+    }
+    .btn-home {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      background-color: rgba(255,255,255,0.1);
+    }
+    .btn-home:hover {
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    /* 문제 카드 스타일 */
+    .question-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    .q-num {
+      font-weight: 900;
+      color: #11477D;
+      font-size: 1.4rem;
+      margin-right: 10px;
+      line-height: 1;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #333;
+      word-break: keep-all;
+      margin: 0;
+    }
+    .strike-through {
+      text-decoration: line-through;
+    }
+
+    /* 보기 버튼 스타일 */
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 8px;
+      padding: 12px 15px;
+      border: 1px solid #dee2e6;
+      background-color: #fff;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #495057;
+      transition: all 0.2s;
+    }
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+    .option-btn.correct {
+      background-color: #d1e7dd !important;
+      border-color: #198754 !important;
+      color: #0f5132 !important;
+      font-weight: bold;
+    }
+    .option-btn.wrong {
+      background-color: #f8d7da !important;
+      border-color: #dc3545 !important;
+      color: #842029 !important;
+    }
+    .option-btn:disabled {
+      opacity: 0.8;
+    }
+
+    /* 피드백 및 해설 스타일 */
+    .feedback {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      display: none;
+    }
+    .text-correct { color: #198754; }
+    .text-wrong { color: #dc3545; }
+    
+    .exp-btn {
+      margin-top: 15px;
+      width: 100%;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .explanation {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #11477D;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #555;
+      display: none;
+      word-break: keep-all;
+    }
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .exp-table th, .exp-table td {
+      border: 1px solid #ced4da;
+      padding: 8px;
+      text-align: center;
+    }
+    .exp-table th { background-color: #e9ecef; font-weight: bold; }
+
+    /* 14. 하단 고정 Footer */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      z-index: 1000;
+    }
+    .footer-container {
+      max-width: 600px;
+      margin: auto;
+    }
+    /* 10. 최종 점수 출력 영역 */
+    .score-display {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .score-display span {
+      color: #11477D;
+      font-size: 1.3rem;
+    }
+    /* 15. 버튼들 동일한 디자인 Flex 배치 */
+    .footer-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .footer-buttons a, .footer-buttons button {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+    }
+    .btn-nav { background-color: #e9ecef; color: #495057; }
+    .btn-refresh { background-color: #11477D; color: white; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="../index.html" class="home-btn">Home</a>
-        <h1>제1장 공통사항</h1>
-    </header>
+  <header class="header-bar sticky-top">
+    <!-- 13. home으로 이동하는 <a> 태그 -->
+    <a href="../index.html" class="btn-home">Home</a>
+    <!-- 12. h1 내용 설정 -->
+    <h1>제1장 공통사항</h1>
+  </header>
 
-    <div class="container">
-        <div id="final-score-container"></div>
-        <div id="quiz-container"></div>
+  <main class="app-container" id="quiz-container">
+    <!-- 퀴즈 렌더링 영역 -->
+  </main>
+
+  <footer class="footer-bar">
+    <div class="footer-container">
+      <!-- 10. 최종 점수 출력 -->
+      <div class="score-display">
+        현재 점수: <span id="score-text">0 / 0</span>
+      </div>
+      
+      <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
+      <div class="footer-buttons">
+        <a href="./chap1_43.html" class="btn-nav">이전문제</a>
+        <!-- 6. 새로고침 버튼 -->
+        <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
+        <a href="./chap1_45.html" class="btn-nav">다음문제</a>
+      </div>
     </div>
+  </footer>
 
-    <footer>
-        <a href="./chap1_43.html" class="footer-btn">이전문제</a>
-        <button class="footer-btn primary" onclick="initQuiz()">새로고침</button>
-        <a href="./chap1_45.html" class="footer-btn">다음문제</a>
-    </footer>
+  <script>
+    // 044.jpg 문제 데이터 반영[cite: 6]
+    const rawQuestions = [
+      {
+        num: "14",
+        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 절연전선으로 <span class='strike-through'>「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에 KS에 적합한 것으로서</span> 사용할 수 없는 것은?",
+        answer: "450/750V 알루미늄 절연전선",
+        options: [
+          "450/750V 고무절연전선",
+          "450/750V 비닐절연전선",
+          "450/750V 알루미늄 절연전선",
+          "450/750V 저독성 난연 폴리올레핀 절연전선"
+        ],
+        explanation: `[해설]<br>저압 절연전선 및 케이블의 종류
+          <table class="exp-table">
+            <tr><td style="width:30%; background-color:#e9ecef; font-weight:bold;">저압 절연전선</td><td style="text-align:left;">절연전선은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
+            <tr><td style="background-color:#e9ecef; font-weight:bold;">저압 케이블</td><td style="text-align:left;">사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
+          </table>
+          ※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
+      },
+      {
+        num: "15",
+        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 케이블의 종류가 아닌 것은?",
+        answer: "콤바인 덕트 케이블",
+        options: ["0.6/1kV 연피 케이블", "클로로프렌 외장 케이블", "폴리에틸렌 외장 케이블", "콤바인 덕트 케이블"],
+        explanation: `[해설]<br>저압 케이블<br>사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.<br>※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
+      }
+    ];
 
-    <script>
-        const rawData = [
-            {
-                id: "14",
-                text: "<span class='notice-text'>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</span>저압 절연전선으로 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에 KS에 적합한 것으로서 사용할 수 없는 것은?",
-                options: [
-                    "450/750V 고무절연전선", 
-                    "450/750V 비닐절연전선", 
-                    "450/750V 알루미늄 절연전선", 
-                    "450/750V 저독성 난연 폴리올레핀 절연전선"
-                ],
-                correct: "450/750V 알루미늄 절연전선",
-                explanation: `
-                    <strong>[해설]</strong><br>
-                    저압 절연전선 및 케이블의 종류
-                    <table>
-                        <tr>
-                            <th>저압 절연전선</th>
-                            <td>절연전선은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td>
-                        </tr>
-                        <tr>
-                            <th>저압 케이블</th>
-                            <td>사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td>
-                        </tr>
-                    </table>
-                    <span style="font-size: 13px;">※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.</span>
-                `
-            },
-            {
-                id: "15",
-                text: "<span class='notice-text'>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</span>저압 케이블의 종류가 아닌 것은?",
-                options: [
-                    "0.6/1kV 연피 케이블", 
-                    "클로로프렌 외장 케이블", 
-                    "폴리에틸렌 외장 케이블", 
-                    "콤바인 덕트 케이블"
-                ],
-                correct: "콤바인 덕트 케이블",
-                explanation: `
-                    <strong>[해설]</strong><br>
-                    저압 케이블<br>
-                    사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.<br><br>
-                    <span style="font-size: 13px;">※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.</span>
-                `
-            }
-        ];
+    // 셔플 함수
+    function shuffleArray(array) {
+      let curId = array.length;
+      while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+      }
+      return array;
+    }
 
-        let currentScore = 0;
-        let answeredQuestions = 0;
-        const totalQuestions = rawData.length;
+    let currentScore = 0;
+    let totalAnswered = 0;
+    const totalQuestions = rawQuestions.length;
 
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
+    // 퀴즈 초기화
+    function initQuiz() {
+      const container = document.getElementById("quiz-container");
+      container.innerHTML = "";
+      
+      currentScore = 0;
+      totalAnswered = 0;
+      updateScore();
+
+      // 8. 문제 순서 랜덤
+      let questions = JSON.parse(JSON.stringify(rawQuestions));
+      shuffleArray(questions);
+
+      const circleNumbers = ['①', '②', '③', '④'];
+
+      questions.forEach((q, qIndex) => {
+        // 7. 예시 순서 랜덤
+        shuffleArray(q.options);
+
+        let card = document.createElement("div");
+        card.className = "question-card";
+
+        // HTML 구조 생성 (9. 업로드한 번호 사용)
+        let html = `
+          <div class="q-header">
+            <div class="q-num">${q.num}</div>
+            <div class="q-text">${q.text}</div>
+          </div>
+          <div class="options-container" id="opts-${qIndex}">
+        `;
+
+        q.options.forEach((opt, optIndex) => {
+          let isCorrect = (opt === q.answer) ? "true" : "false";
+          html += `
+            <button class="option-btn" 
+                    onclick="checkAnswer(this, ${qIndex}, ${isCorrect})" 
+                    data-correct="${isCorrect}">
+              ${circleNumbers[optIndex]} ${opt}
+            </button>
+          `;
+        });
+
+        html += `
+          </div>
+          <div id="feedback-${qIndex}" class="feedback"></div>
+          
+          <!-- 5. 해설 보임/안보임 버튼 -->
+          <button class="btn btn-outline-secondary exp-btn" onclick="toggleExp(${qIndex})">해설 보임</button>
+          <div id="exp-${qIndex}" class="explanation">${q.explanation}</div>
+        `;
+
+        card.innerHTML = html;
+        container.appendChild(card);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 2, 4. 채점 및 피드백
+    function checkAnswer(btn, qIndex, isCorrect) {
+      const container = document.getElementById(`opts-${qIndex}`);
+      const buttons = container.querySelectorAll('.option-btn');
+      const feedback = document.getElementById(`feedback-${qIndex}`);
+      
+      if (buttons[0].disabled) return;
+
+      buttons.forEach(b => {
+        b.disabled = true;
+        // 3. 정답만 정답으로 시각적 인정
+        if (b.dataset.correct === "true") {
+          b.classList.add("correct");
         }
+      });
 
-        function initQuiz() {
-            currentScore = 0;
-            answeredQuestions = 0;
-            
-            const container = document.getElementById('quiz-container');
-            const scoreContainer = document.getElementById('final-score-container');
-            
-            container.innerHTML = '';
-            scoreContainer.style.display = 'none';
+      totalAnswered++;
 
-            const shuffledQuestions = shuffleArray(rawData);
+      if (isCorrect) {
+        btn.classList.add("correct");
+        feedback.innerHTML = "⭕ 정답입니다!";
+        feedback.className = "feedback text-correct";
+        currentScore++;
+      } else {
+        btn.classList.add("wrong");
+        feedback.innerHTML = "❌ 오답입니다!";
+        feedback.className = "feedback text-wrong";
+      }
 
-            shuffledQuestions.forEach((q, qIndex) => {
-                const shuffledOptions = shuffleArray(q.options);
+      feedback.style.display = "block";
+      updateScore();
+    }
 
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.id = `q-card-${qIndex}`;
+    // 5. 해설 토글 함수
+    function toggleExp(qIndex) {
+      const expDiv = document.getElementById(`exp-${qIndex}`);
+      const btn = event.target;
+      
+      if (expDiv.style.display === "none" || expDiv.style.display === "") {
+        expDiv.style.display = "block";
+        btn.innerText = "해설 안보임";
+        btn.classList.replace('btn-outline-secondary', 'btn-secondary');
+      } else {
+        expDiv.style.display = "none";
+        btn.innerText = "해설 보임";
+        btn.classList.replace('btn-secondary', 'btn-outline-secondary');
+      }
+    }
 
-                const title = document.createElement('div');
-                title.className = 'question-title';
-                title.innerHTML = `<span class="question-num">${q.id}.</span> ${q.text}`;
-                card.appendChild(title);
+    // 점수 갱신
+    function updateScore() {
+      let finalScore = Math.round((currentScore / totalQuestions) * 100);
+      let scoreText = (totalAnswered === 0) ? "0 / 0" : `${finalScore}점 ( ${currentScore} / ${totalQuestions} )`;
+      document.getElementById("score-text").innerText = scoreText;
+    }
 
-                const optionsGroup = document.createElement('div');
-                optionsGroup.className = 'options-group';
-
-                shuffledOptions.forEach((opt, optIndex) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'option-btn';
-                    const circleNum = ['①', '②', '③', '④'][optIndex];
-                    btn.innerHTML = `${circleNum} ${opt}`;
-                    
-                    btn.onclick = () => handleAnswer(qIndex, btn, opt, q.correct, optionsGroup, card);
-                    optionsGroup.appendChild(btn);
-                });
-                card.appendChild(optionsGroup);
-
-                const explanationDiv = document.createElement('div');
-                explanationDiv.className = 'explanation';
-                explanationDiv.id = `explanation-${qIndex}`;
-                explanationDiv.innerHTML = q.explanation;
-                card.appendChild(explanationDiv);
-
-                container.appendChild(card);
-            });
-            
-            window.scrollTo(0, 0);
-        }
-
-        function handleAnswer(qIndex, clickedBtn, selectedText, correctText, optionsGroup, card) {
-            const buttons = optionsGroup.querySelectorAll('.option-btn');
-            
-            buttons.forEach(btn => btn.disabled = true);
-
-            if (selectedText === correctText) {
-                clickedBtn.classList.add('correct');
-                currentScore += 1;
-            } else {
-                clickedBtn.classList.add('incorrect');
-                buttons.forEach(btn => {
-                    if (btn.innerText.includes(correctText)) {
-                        btn.classList.add('correct');
-                    }
-                });
-            }
-
-            const explanation = card.querySelector(`#explanation-${qIndex}`);
-            explanation.style.display = 'block';
-
-            answeredQuestions += 1;
-            if (answeredQuestions === totalQuestions) {
-                showFinalScore();
-            }
-        }
-
-        function showFinalScore() {
-            const scoreContainer = document.getElementById('final-score-container');
-            const scorePercent = Math.round((currentScore / totalQuestions) * 100);
-            scoreContainer.innerHTML = `최종 점수: ${currentScore} / ${totalQuestions} 문제 (${scorePercent}점)`;
-            scoreContainer.style.display = 'block';
-            
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 300);
-        }
-
-        window.onload = initQuiz;
-    </script>
+    window.onload = initQuiz;
+  </script>
 </body>
 </html>

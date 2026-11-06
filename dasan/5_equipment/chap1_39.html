@@ -1,381 +1,415 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <!-- 아이폰 등 모바일 디바이스에서 최적화 및 확대 방지, 안전 영역(Safe Area) 확보 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>전기기사 문제 풀이</title>
-    <style>
-        /* 기본 초기화 및 폰트 설정 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-        }
-        body {
-            background-color: #f4f7f9;
-            color: #333;
-            /* 하단 고정 푸터에 내용이 가려지지 않도록 여백 확보 */
-            padding-bottom: calc(80px + env(safe-area-inset-bottom));
-        }
+  <meta charset="utf-8" />
+  <!-- 아이폰 13 프로 화면에 맞춘 반응형 뷰포트 설정 (더블탭 확대 방지 포함) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#11477D" />
+  <title>전기기사 기출문제</title>
 
-        /* Header 영역 (요청사항 12, 13) */
-        header {
-            background-color: #11477D;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding-top: max(15px, env(safe-area-inset-top));
-        }
-        header a.home-btn {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.5);
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-right: 15px;
-        }
-        header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0;
-        }
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-        /* Main 컨텐츠 영역 */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', 'Segoe UI', sans-serif;
+      padding-bottom: 130px; /* 고정된 footer 영역만큼 여백 확보 */
+    }
+    
+    .app-container {
+      max-width: 600px; /* 모바일 및 데스크탑 화면 중앙 정렬 */
+      margin: auto;
+    }
 
-        /* 개별 문제 카드 디자인 */
-        .question-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .question-title {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 15px;
-            word-break: keep-all;
-        }
-        .question-num {
-            color: #11477D;
-            font-weight: 900;
-            margin-right: 5px;
-        }
+    /* 12. h1 배경색 및 가운데 정렬, 13. home 태그 */
+    .header-bar {
+      background-color: #11477D;
+      color: white;
+      position: relative;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header-bar h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: bold;
+    }
+    .btn-home {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      background-color: rgba(255,255,255,0.1);
+    }
+    .btn-home:hover {
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+    }
 
-        /* 예시(옵션) 버튼 디자인 */
-        .options-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option-btn {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-size: 15px;
-            text-align: left;
-            transition: all 0.2s;
-            cursor: pointer;
-            word-break: keep-all;
-        }
-        .option-btn:disabled {
-            cursor: default;
-        }
-        
-        /* 정답/오답 상태 클래스 */
-        .option-btn.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-            font-weight: bold;
-        }
-        .option-btn.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
-            text-decoration: line-through;
-        }
+    /* 문제 카드 스타일 */
+    .question-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    .q-num {
+      font-weight: 900;
+      color: #11477D;
+      font-size: 1.4rem;
+      margin-right: 10px;
+      line-height: 1;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #333;
+      word-break: keep-all;
+      margin: 0;
+    }
 
-        /* 해설 영역 */
-        .explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #495057;
-            border-left: 4px solid #11477D;
-        }
-        
-        /* 해설 내 표(Table) 스타일 */
-        .explanation table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: white;
-            font-size: 12px;
-            text-align: center;
-        }
-        .explanation th, .explanation td {
-            border: 1px solid #ccc;
-            padding: 6px;
-        }
-        .explanation th {
-            background-color: #f1f1f1;
-        }
+    /* 보기 버튼 스타일 */
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 8px;
+      padding: 12px 15px;
+      border: 1px solid #dee2e6;
+      background-color: #fff;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #495057;
+      transition: all 0.2s;
+    }
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+    .option-btn.correct {
+      background-color: #d1e7dd !important;
+      border-color: #198754 !important;
+      color: #0f5132 !important;
+      font-weight: bold;
+    }
+    .option-btn.wrong {
+      background-color: #f8d7da !important;
+      border-color: #dc3545 !important;
+      color: #842029 !important;
+    }
+    .option-btn:disabled {
+      opacity: 0.8;
+    }
 
-        /* 점수 출력 영역 */
-        #final-score-container {
-            display: none;
-            background-color: #11477D;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+    /* 피드백 및 해설 스타일 */
+    .feedback {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      display: none;
+    }
+    .text-correct { color: #198754; }
+    .text-wrong { color: #dc3545; }
+    
+    .exp-btn {
+      margin-top: 15px;
+      width: 100%;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .explanation {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #11477D;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #555;
+      display: none;
+      word-break: keep-all;
+    }
 
-        /* 하단 고정 Footer (요청사항 14, 15) */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            padding: 10px 20px;
-            padding-bottom: max(10px, env(safe-area-inset-bottom));
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        .footer-btn {
-            flex: 1;
-            text-align: center;
-            background-color: #f8f9fa;
-            color: #333;
-            border: 1px solid #ced4da;
-            padding: 12px 0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-        .footer-btn.primary {
-            background-color: #11477D;
-            color: white;
-            border-color: #11477D;
-        }
-    </style>
+    /* 해설 내 표 스타일 (1번 문제) */
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .exp-table th, .exp-table td {
+      border: 1px solid #ced4da;
+      padding: 8px;
+      text-align: center;
+    }
+    .exp-table th { background-color: #e9ecef; font-weight: bold; }
+
+    /* 14. 하단 고정 Footer */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      z-index: 1000;
+    }
+    .footer-container {
+      max-width: 600px;
+      margin: auto;
+    }
+    /* 10. 최종 점수 출력 영역 */
+    .score-display {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .score-display span {
+      color: #11477D;
+      font-size: 1.3rem;
+    }
+    /* 15. 버튼들 동일한 디자인 Flex 배치 */
+    .footer-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .footer-buttons a, .footer-buttons button {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+    }
+    .btn-nav { background-color: #e9ecef; color: #495057; }
+    .btn-refresh { background-color: #11477D; color: white; }
+  </style>
 </head>
 <body>
 
-    <!-- 상단 Header -->
-    <header>
-        <a href="../index.html" class="home-btn">Home</a>
-        <h1>제1장 공통사항</h1>
-    </header>
+  <header class="header-bar sticky-top">
+    <!-- 13. home으로 이동하는 <a> 태그 -->
+    <a href="../index.html" class="btn-home">Home</a>
+    <!-- 12. h1 내용 설정 -->
+    <h1>제1장 공통사항</h1>
+  </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- 결과 점수 출력 영역 -->
-        <div id="final-score-container"></div>
-        <!-- 문제 출력 영역 -->
-        <div id="quiz-container"></div>
+  <main class="app-container" id="quiz-container">
+    <!-- 자바스크립트를 통해 문제들이 여기에 렌더링 됩니다. -->
+  </main>
+
+  <footer class="footer-bar">
+    <div class="footer-container">
+      <!-- 10. 최종 점수 출력 -->
+      <div class="score-display">
+        현재 점수: <span id="score-text">0 / 0</span>
+      </div>
+      
+      <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
+      <div class="footer-buttons">
+        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
+        <a href="#prev" class="btn-nav">이전문제</a>
+        
+        <!-- 6. 새로고침 버튼 -->
+        <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
+        
+        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
+        <a href="./chap1_40.html" class="btn-nav">다음문제</a>
+      </div>
     </div>
+  </footer>
 
-    <!-- 하단 고정 Footer -->
-    <footer>
-        <a href="#prev.html" class="footer-btn">이전문제</a>
-        <button class="footer-btn primary" onclick="initQuiz()">새로고침</button>
-        <a href="./chap1_40.html" class="footer-btn">다음문제</a>
-    </footer>
+  <script>
+    // 원본 데이터 (사진 내용 기반)
+    const rawQuestions = [
+      {
+        num: "01",
+        text: "전압의 종별에서 교류 600V는 무엇으로 분류하는가?",
+        answer: "저압",
+        options: ["저압", "고압", "특고압", "초고압"],
+        explanation: `[해설]
+          <table class="exp-table">
+            <tr><th>구분</th><th>교류</th><th>직류</th></tr>
+            <tr><td>저압</td><td>1kV 이하</td><td>1.5kV 이하</td></tr>
+            <tr><td>고압</td><td>저압 초과 7kV 이하</td><td>저압 초과 7kV 이하</td></tr>
+            <tr><td>특고압</td><td colspan="2">7kV 초과</td></tr>
+          </table>`
+      },
+      {
+        num: "02",
+        text: "관등회로라고 하는 것은?",
+        answer: "방전등용 안정기로부터 방전관까지의 전로",
+        options: [
+          "분기점으로부터 안정기까지의 전로",
+          "스위치로부터 방전등까지의 전로",
+          "스위치로부터 안정기까지의 전로",
+          "방전등용 안정기로부터 방전관까지의 전로"
+        ],
+        explanation: `[해설]<br>"관등회로"란 방전등용 안정기(방전등용 변압기를 포함)로부터 방전관까지의 전로를 말한다.`
+      },
+      {
+        num: "03",
+        text: "전력 계통의 운용에 관한 지시를 하는 곳은?",
+        answer: "급전소",
+        options: ["급전소", "개폐소", "변전소", "발전소"],
+        explanation: `[해설]<br>"급전소"란 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다.`
+      }
+    ];
 
-    <script>
-        // 사진(036.jpg)에서 추출한 문제 데이터 객체 배열
-        const rawData = [
-            {
-                id: "01",
-                text: "전압의 종별에서 교류 600V는 무엇으로 분류하는가?",
-                options: ["저압", "고압", "특고압", "초고압"],
-                correct: "저압",
-                explanation: `
-                    <strong>[해설]</strong><br>
-                    <table>
-                        <tr><th>구분</th><th>교류</th><th>직류</th></tr>
-                        <tr><td>저압</td><td>1kV 이하</td><td>1.5kV 이하</td></tr>
-                        <tr><td>고압</td><td>1kV 초과 7kV 이하</td><td>1.5kV 초과 7kV 이하</td></tr>
-                        <tr><td>특고압</td><td>7kV 초과</td><td>7kV 초과</td></tr>
-                    </table>
-                `
-            },
-            {
-                id: "02",
-                text: "관등회로라고 하는 것은?",
-                options: [
-                    "분기점으로부터 안정기까지의 전로",
-                    "스위치로부터 방전등까지의 전로",
-                    "스위치로부터 안정기까지의 전로",
-                    "방전등용 안정기로부터 방전관까지의 전로"
-                ],
-                correct: "방전등용 안정기로부터 방전관까지의 전로",
-                explanation: "<strong>[해설]</strong><br>\"관등회로\"란 방전등용 안정기(방전등용 변압기를 포함)로부터 방전관까지의 전로를 말한다."
-            },
-            {
-                id: "03",
-                text: "전력 계통의 운용에 관한 지시를 하는 곳은?",
-                options: ["급전소", "개폐소", "변전소", "발전소"],
-                correct: "급전소",
-                explanation: "<strong>[해설]</strong><br>\"급전소\"란 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다."
-            }
-        ];
+    // 배열 셔플 함수 (Fisher-Yates 알고리즘)
+    function shuffleArray(array) {
+      let curId = array.length;
+      while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+      }
+      return array;
+    }
 
-        let currentScore = 0;
-        let answeredQuestions = 0;
-        const totalQuestions = rawData.length;
+    let currentScore = 0;
+    let totalAnswered = 0;
+    const totalQuestions = rawQuestions.length;
 
-        // 배열 랜덤 셔플 함수
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
+    // 퀴즈 초기화 및 렌더링 함수
+    function initQuiz() {
+      const container = document.getElementById("quiz-container");
+      container.innerHTML = "";
+      
+      currentScore = 0;
+      totalAnswered = 0;
+      updateScore();
+
+      // 8. 문제의 순서 랜덤 변경
+      let questions = JSON.parse(JSON.stringify(rawQuestions));
+      shuffleArray(questions);
+
+      const circleNumbers = ['①', '②', '③', '④'];
+
+      questions.forEach((q, qIndex) => {
+        // 7. 문제별 4개의 예시 랜덤 변경
+        shuffleArray(q.options);
+
+        let card = document.createElement("div");
+        card.className = "question-card";
+
+        // HTML 구조 생성
+        let html = `
+          <div class="q-header">
+            <!-- 9. 업로드한 이미지에 표기된 번호 그대로 사용 -->
+            <div class="q-num">${q.num}</div>
+            <div class="q-text">${q.text}</div>
+          </div>
+          <div class="options-container" id="opts-${qIndex}">
+        `;
+
+        q.options.forEach((opt, optIndex) => {
+          let isCorrect = (opt === q.answer) ? "true" : "false";
+          html += `
+            <button class="option-btn" 
+                    onclick="checkAnswer(this, ${qIndex}, ${isCorrect})" 
+                    data-correct="${isCorrect}">
+              ${circleNumbers[optIndex]} ${opt}
+            </button>
+          `;
+        });
+
+        html += `
+          </div>
+          <div id="feedback-${qIndex}" class="feedback"></div>
+          
+          <!-- 5. 해설 버튼 및 컨테이너 (기본값 안보임) -->
+          <button class="btn btn-outline-secondary exp-btn" onclick="toggleExp(${qIndex})">해설 보임</button>
+          <div id="exp-${qIndex}" class="explanation">${q.explanation}</div>
+        `;
+
+        card.innerHTML = html;
+        container.appendChild(card);
+      });
+
+      // 최상단으로 스크롤 부드럽게 이동
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 2, 4. 채점 및 정답/오답 확인
+    function checkAnswer(btn, qIndex, isCorrect) {
+      const container = document.getElementById(`opts-${qIndex}`);
+      const buttons = container.querySelectorAll('.option-btn');
+      const feedback = document.getElementById(`feedback-${qIndex}`);
+      
+      // 이미 푼 문제는 다시 클릭하지 못하도록 차단
+      if (buttons[0].disabled) return;
+
+      // 모든 버튼 비활성화 및 정답 표시
+      buttons.forEach(b => {
+        b.disabled = true;
+        // 3. 정답 인정 처리 시각화
+        if (b.dataset.correct === "true") {
+          b.classList.add("correct");
         }
+      });
 
-        // 문제 초기화 및 렌더링 함수
-        function initQuiz() {
-            currentScore = 0;
-            answeredQuestions = 0;
-            
-            const container = document.getElementById('quiz-container');
-            const scoreContainer = document.getElementById('final-score-container');
-            
-            container.innerHTML = '';
-            scoreContainer.style.display = 'none';
+      totalAnswered++;
 
-            // 1. 문제의 순서 랜덤 배치
-            const shuffledQuestions = shuffleArray(rawData);
+      if (isCorrect) {
+        btn.classList.add("correct");
+        feedback.innerHTML = "⭕ 정답입니다!";
+        feedback.className = "feedback text-correct";
+        currentScore++;
+      } else {
+        btn.classList.add("wrong");
+        feedback.innerHTML = "❌ 오답입니다!";
+        feedback.className = "feedback text-wrong";
+      }
 
-            shuffledQuestions.forEach((q, qIndex) => {
-                // 2. 예시(보기) 순서 랜덤 배치
-                const shuffledOptions = shuffleArray(q.options);
+      feedback.style.display = "block";
+      updateScore();
+    }
 
-                // 카드 DOM 생성
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.id = `q-card-${qIndex}`;
+    // 5. 해설 보임/안보임 토글
+    function toggleExp(qIndex) {
+      const expDiv = document.getElementById(`exp-${qIndex}`);
+      const btn = event.target;
+      
+      if (expDiv.style.display === "none" || expDiv.style.display === "") {
+        expDiv.style.display = "block";
+        btn.innerText = "해설 안보임";
+        btn.classList.replace('btn-outline-secondary', 'btn-secondary');
+      } else {
+        expDiv.style.display = "none";
+        btn.innerText = "해설 보임";
+        btn.classList.replace('btn-secondary', 'btn-outline-secondary');
+      }
+    }
 
-                // 제목 추가 (업로드 이미지 표기 번호 유지)
-                const title = document.createElement('div');
-                title.className = 'question-title';
-                title.innerHTML = `<span class="question-num">${q.id}.</span> ${q.text}`;
-                card.appendChild(title);
+    // 점수 업데이트 (문제 당 약 33.3점 환산, 3문제 기준 100점 만점)
+    function updateScore() {
+      let finalScore = Math.round((currentScore / totalQuestions) * 100);
+      let scoreText = (totalAnswered === 0) ? "0 / 0" : `${finalScore}점 ( ${currentScore} / ${totalQuestions} )`;
+      document.getElementById("score-text").innerText = scoreText;
+    }
 
-                // 옵션 버튼 그룹
-                const optionsGroup = document.createElement('div');
-                optionsGroup.className = 'options-group';
-
-                shuffledOptions.forEach((opt, optIndex) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'option-btn';
-                    // 보기 번호(①, ②, ③, ④) 텍스트 동적 부여
-                    const circleNum = ['①', '②', '③', '④'][optIndex];
-                    btn.innerHTML = `${circleNum} ${opt}`;
-                    
-                    // 정답 체크 이벤트
-                    btn.onclick = () => handleAnswer(qIndex, btn, opt, q.correct, optionsGroup, card);
-                    optionsGroup.appendChild(btn);
-                });
-                card.appendChild(optionsGroup);
-
-                // 해설 영역 생성
-                const explanationDiv = document.createElement('div');
-                explanationDiv.className = 'explanation';
-                explanationDiv.id = `explanation-${qIndex}`;
-                explanationDiv.innerHTML = q.explanation;
-                card.appendChild(explanationDiv);
-
-                container.appendChild(card);
-            });
-            
-            // 맨 위로 스크롤
-            window.scrollTo(0, 0);
-        }
-
-        // 정답 판별 및 처리 함수
-        function handleAnswer(qIndex, clickedBtn, selectedText, correctText, optionsGroup, card) {
-            const buttons = optionsGroup.querySelectorAll('.option-btn');
-            
-            // 해당 문제의 모든 버튼 비활성화 (중복 풀이 방지)
-            buttons.forEach(btn => btn.disabled = true);
-
-            // 정답/오답 디자인 적용
-            if (selectedText === correctText) {
-                clickedBtn.classList.add('correct');
-                currentScore += 1;
-            } else {
-                clickedBtn.classList.add('incorrect');
-                // 오답을 골랐을 때 정답인 버튼도 표시
-                buttons.forEach(btn => {
-                    if (btn.innerText.includes(correctText)) {
-                        btn.classList.add('correct');
-                    }
-                });
-            }
-
-            // 해설 출력
-            const explanation = card.querySelector(`#explanation-${qIndex}`);
-            explanation.style.display = 'block';
-
-            // 모든 문제를 풀었을 때 점수 출력
-            answeredQuestions += 1;
-            if (answeredQuestions === totalQuestions) {
-                showFinalScore();
-            }
-        }
-
-        // 최종 점수 화면 출력 함수
-        function showFinalScore() {
-            const scoreContainer = document.getElementById('final-score-container');
-            const scorePercent = Math.round((currentScore / totalQuestions) * 100);
-            scoreContainer.innerHTML = `최종 점수: ${currentScore} / ${totalQuestions} 문제 (${scorePercent}점)`;
-            scoreContainer.style.display = 'block';
-            
-            // 점수 확인 후 화면 상단으로 스크롤 이동
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 300);
-        }
-
-        // 페이지 로드 시 최초 실행
-        window.onload = initQuiz;
-    </script>
+    // 페이지 로드 시 최초 퀴즈 초기화
+    window.onload = initQuiz;
+  </script>
 </body>
 </html>
