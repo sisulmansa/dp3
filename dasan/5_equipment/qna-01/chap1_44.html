@@ -81,6 +81,9 @@
       word-break: keep-all;
       margin: 0;
     }
+    .strike-through {
+      text-decoration: line-through;
+    }
 
     /* 보기 버튼 스타일 */
     .option-btn {
@@ -139,8 +142,19 @@
       color: #555;
       display: none;
       word-break: keep-all;
-      line-height: 1.6;
     }
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .exp-table th, .exp-table td {
+      border: 1px solid #ced4da;
+      padding: 8px;
+      text-align: center;
+    }
+    .exp-table th { background-color: #e9ecef; font-weight: bold; }
 
     /* 14. 하단 고정 Footer */
     .footer-bar {
@@ -193,7 +207,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -211,54 +225,40 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_45.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_43.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_47.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_45.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 046.jpg 문제 데이터 반영[cite: 8]
+    // 044.jpg 문제 데이터 반영[cite: 6]
     const rawQuestions = [
       {
-        num: "18",
-        text: "전로의 절연 원칙에 따라 대지로부터 반드시 절연하여야 하는 것은?",
-        answer: "저압 가공전선로에 접속되는 변압기",
+        num: "14",
+        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 절연전선으로 <span class='strike-through'>「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에 KS에 적합한 것으로서</span> 사용할 수 없는 것은?",
+        answer: "450/750V 알루미늄 절연전선",
         options: [
-          "전로의 중성점에 접지공사를 하는 경우의 접지점",
-          "계기용변성기의 2차측 전로에 접지공사를 하는 경우의 접지점",
-          "저압 가공전선로에 접속되는 변압기",
-          "시험용 변압기"
+          "450/750V 고무절연전선",
+          "450/750V 비닐절연전선",
+          "450/750V 알루미늄 절연전선",
+          "450/750V 저독성 난연 폴리올레핀 절연전선"
         ],
-        explanation: `[해설]<br>전로는 다음 이외에는 대지로부터 절연하여야 한다.<br>
-          ① 저압전로에 접지공사를 하는 경우의 접지점<br>
-          ② 전로의 중성점에 접지공사를 하는 경우의 접지점<br>
-          ③ 계기용변성기의 2차측 전로에 접지공사를 하는 경우의 접지점<br>
-          ④ 저압 가공전선의 특고압 가공전선과 동일 지지물에 시설되는 부분에 접지공사를 하는 경우의 접지점<br>
-          ⑤ 저압전로를 결합하는 변압기의 2차측 전로에 접지공사를 하는 경우의 접지점<br>
-          ⑥ 시험용 변압기, 전력선 반송용 결합 리액터, 전기 울타리용 전원 장치, X선 발생 장치, 전기 방식용 양극, 단선식 전기 철도의 귀선 등 전로의 일부를 대지로부터 절연하지 아니하고 전기를 사용하는 것이 부득이한 경우<br>
-          ⑦ 전기 욕기, 전기로, 보일러, 전해조 등 대지로부터 절연하는 것이 기술상 곤란한 것.`
+        explanation: `[해설]<br>저압 절연전선 및 케이블의 종류
+          <table class="exp-table">
+            <tr><td style="width:30%; background-color:#e9ecef; font-weight:bold;">저압 절연전선</td><td style="text-align:left;">절연전선은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
+            <tr><td style="background-color:#e9ecef; font-weight:bold;">저압 케이블</td><td style="text-align:left;">사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
+          </table>
+          ※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
       },
       {
-        num: "19",
-        text: "대지로부터 절연을 하는 것이 기술상 곤란하여 절연을 하지 않아도 되는 것은?",
-        answer: "전기로",
-        options: ["항공 장애등", "전기로", "옥외 조명등", "에어콘"],
-        explanation: `[해설]<br>
-          <b>절연할 수 없는 부분 (절연하는 것이 기술상 곤란한 것)</b><br>
-          ① 시험용 변압기<br>
-          ② 전력선 반송용 결합 리액터<br>
-          ③ 전기 울타리용 전원장치<br>
-          ④ 엑스선 발생장치<br>
-          ⑤ 음극 가열용 변압기 및 부속장치<br>
-          ⑥ 전기부식방지용 양극<br>
-          ⑦ 단선식 전기철도의 귀선<br>
-          ⑧ 전기욕기<br>
-          ⑨ 전기로<br>
-          ⑩ 전기보일러<br>
-          ⑪ 전해조`
+        num: "15",
+        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 케이블의 종류가 아닌 것은?",
+        answer: "콤바인 덕트 케이블",
+        options: ["0.6/1kV 연피 케이블", "클로로프렌 외장 케이블", "폴리에틸렌 외장 케이블", "콤바인 덕트 케이블"],
+        explanation: `[해설]<br>저압 케이블<br>사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.<br>※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
       }
     ];
 

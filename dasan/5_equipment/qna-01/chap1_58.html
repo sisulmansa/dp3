@@ -208,7 +208,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -226,54 +226,54 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_51.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_57.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_53.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_59.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 052.jpg 문제 데이터 반영[cite: 14]
+    // 058.jpg 문제 데이터 반영[cite: 20]
     const rawQuestions = [
       {
-        num: "34",
-        text: "큰 고장전류가 구리 소재의 접지도체를 통하여 흐르지 않을 경우 접지도체의 최소 단면적은 몇 ㎟ 이상이어야 하는가?(단, 접지도체에 피뢰시스템이 접속되지 않는 경우이다.)",
-        answer: "6",
-        options: ["0.75", "2.5", "6", "16"],
-        explanation: `[해설]<br><b>접지도체 단면적</b><br>
-          가) 접지도체에 피뢰시스템이 접속된 경우<br>
-          &nbsp;&nbsp;• 구리 : 16㎟ 이상<br>
-          &nbsp;&nbsp;• 철제 : 50㎟ 이상<br><br>
-          나) 접지도체에 큰 고장전류가 흐르지 않는 경우<br>
-          &nbsp;&nbsp;• 구리 : 6㎟ 이상<br>
-          &nbsp;&nbsp;• 철제 : 50㎟ 이상`
+        num: "49",
+        text: "건축물·구조물의 외부에서 내부로 들어오는 금속제 배관의 보호 등전위본딩 시설에 관한 내용으로 틀린 것은?",
+        answer: "수도관 가스관의 경우 내부로 인입된 최초의 밸브 전단에서 등전위본딩",
+        options: [
+          "1개소에 집중해서 인입하고 인입구 부근에서 서로 접속하여 등전위본딩바에 접속",
+          "1개소에 집중하기 어려운 경우 본딩 도체를 1개의 본딩바에 연결",
+          "수도관 가스관의 경우 내부로 인입된 최초의 밸브 전단에서 등전위본딩",
+          "건축물, 구조물의 금속보강재는 등전위본딩한다."
+        ],
+        explanation: `[해설]<br><b>건축물·구조물의 외부에서 내부로 들어오는 각종 금속제 배관의 보호 등전위본딩시설</b><br>
+          ① 1개소에 집중하여 인입하고, 인입구 부근에서 서로 접속하여 등전위본딩 바에 접속<br>
+          ② 1개소에 집중하기 어려운 경우에는 본딩 도체를 1개의 본딩바에 연결<br>
+          ③ 수도관·가스관의 경우 내부로 인입된 최초의 밸브 <b>후단</b>에서 등전위본딩 한다.<br>
+          ④ 건축물·구조물의 철근, 철골 등 금속보강재는 등전위본딩을 하여야 한다.`
       },
       {
-        num: "35",
-        text: "22.9[kV] 다중접지 특고압 가공전선로의 전로와 저압 전로를 변압기에 의하여 결합하는 경우 중성점 접지공사에 사용하는 연동 접지선 굵기는 최소 몇 [㎟] 이상인가? 단, 전로에 지락이 생겼을 때에 2초 이내에 자동적으로 이를 전로로부터 차단하는 장치가 되어있다.",
-        answer: "6",
-        options: ["0.75", "2.5", "6", "8"],
-        explanation: `[해설]<br><b>&lt;연동선&gt;</b>
+        num: "50",
+        text: "보호 등전위본딩 도체로 알루미늄을 사용할 때 단면적은 몇 [㎟] 이상이어야 하는가?",
+        answer: "16",
+        options: ["6", "10", "16", "50"],
+        explanation: `[해설]<br><b>보호 등전위본딩 도체</b>
           <table class="exp-table">
-            <tr>
-              <th colspan="2">구 분</th>
-              <th>접지도체 단면적</th>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align: left;">특고압·고압 전기설비용 접지도체</td>
-              <td>6㎟ 이상</td>
-            </tr>
-            <tr>
-              <td rowspan="2">중성점<br>접지용<br>접지도체</td>
-              <td style="text-align: left;">① 7kV 이하의 전로<br>② 25kV 이하인 특고압 가공전선로<br>&nbsp;&nbsp;&nbsp;(중성선 다중접지식 지락사고 시 2초 이내 자동차단하는 장치가 있는 경우)</td>
-              <td>6㎟ 이상</td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">그 외</td>
-              <td>16㎟ 이상</td>
-            </tr>
+            <tr><th>구리</th><th>알루미늄</th><th>강철</th></tr>
+            <tr><td>6㎟ 이상</td><td>16㎟ 이상</td><td>50㎟ 이상</td></tr>
+          </table>`
+      },
+      {
+        num: "51",
+        text: "보조 보호 등전위본딩 도체가 기계적 손상에 대한 보호가 되지 않을 경우 본딩도체로 사용한 구리선의 단면적은 몇 [㎟] 이상이어야 하는가?",
+        answer: "4",
+        options: ["4", "6", "10", "16"],
+        explanation: `[해설]<br><b>보조 보호 등전위본딩 도체</b>
+          <table class="exp-table">
+            <tr><th>구 분</th><th>구리</th><th>알루미늄</th></tr>
+            <tr><td>기계적 손상에 대한 보호가 되는 경우</td><td>2.5㎟ 이상</td><td>16㎟ 이상</td></tr>
+            <tr><td>기계적 손상에 대한 보호가 되지 않는 경우</td><td>4.0㎟ 이상</td><td>16㎟ 이상</td></tr>
           </table>`
       }
     ];
@@ -413,3 +413,4 @@
   </script>
 </body>
 </html>
+```[cite: 20]

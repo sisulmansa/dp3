@@ -139,8 +139,21 @@
       color: #555;
       display: none;
       word-break: keep-all;
-      line-height: 1.6;
     }
+
+    /* 해설 내 표 스타일 (13번 문제용) */
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .exp-table th, .exp-table td {
+      border: 1px solid #ced4da;
+      padding: 8px;
+      text-align: center;
+    }
+    .exp-table th { background-color: #e9ecef; font-weight: bold; }
 
     /* 14. 하단 고정 Footer */
     .footer-bar {
@@ -193,7 +206,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -211,37 +224,46 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_58.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_42.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_60.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_44.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 059.jpg 문제 데이터 반영[cite: 21]
+    // 043.jpg 문제 데이터 반영[cite: 5]
     const rawQuestions = [
       {
-        num: "52",
-        text: "절연성 바닥으로 된 비접지 장소에 국부 등전위본딩을 해야 할 경우는 전기설비 상호 간의 간격이 몇 [m] 이하인 경우인가?",
-        answer: "2.5",
-        options: ["1.5", "2.5", "3.5", "4.5"],
-        explanation: `[해설]<br>절연성 바닥으로 된 비접지 장소에서 다음의 경우 국부등전위본딩을 해야 한다.<br>① 전기설비 상호 간이 2.5m 이내인 경우<br>② 전기설비와 이를 지지하는 금속체 사이`
+        num: "12",
+        text: "다음 중 감전에 대한 고장보호가 아닌 것은?",
+        answer: "몸을 통해 전류가 흐르는 것을 방지",
+        options: [
+          "몸을 통해 전류가 흐르는 것을 방지",
+          "몸을 통해 고장 전류가 흐르는 것을 방지",
+          "몸에 흐르는 고장전류를 위험하지 않은 값 이하로 제한",
+          "몸에 흐르는 고장전류의 지속시간을 위험하지 않은 시간까지로 제한"
+        ],
+        explanation: `[해설]<br>
+          <b>감전에 대한 기본 보호</b><br>
+          ① 몸을 통해 전류가 흐르는 것을 방지<br>
+          ② 몸에 흐르는 전류를 위험하지 않은 값 이하로 제한<br><br>
+          <b>감전에 대한 고장 보호</b><br>
+          ① 몸을 통해 고장전류가 흐르는 것을 방지<br>
+          ② 몸에 흐르는 고장전류를 위험하지 않은 값 이하로 제한<br>
+          ③ 몸에 흐르는 고장전류의 지속시간을 위험하지 않은 시간까지로 제한`
       },
       {
-        num: "53",
-        text: "외부 피뢰시스템을 구성하는 요소에 포함되지 않는 것은?",
-        answer: "서지보호장치",
-        options: ["수뢰부", "인하도선", "접지극", "서지보호장치"],
-        explanation: `[해설]<br>외부 피뢰시스템의 구성요소 : 수뢰부, 인하도선, 접지극`
-      },
-      {
-        num: "54",
-        text: "돌침, 수평도체, 메시도체의 요소 중에 한 가지 또는 이를 조합한 형식으로 시설하는 것은?",
-        answer: "수뢰부시스템",
-        options: ["접지극시스템", "수뢰부시스템", "내부피뢰시스템", "인하도선시스템"],
-        explanation: `[해설]<br>수뢰부시스템<br>수뢰부시스템은 돌침, 수평도체, 메시도체의 요소 중에 한 가지 또는 이를 조합한 형식으로 시설하여야 한다.`
+        num: "13",
+        text: "전선의 식별에 따른 색상에 포함되지 않는 것은?",
+        answer: "적색",
+        options: ["갈색", "흑색", "회색", "적색"],
+        explanation: `[해설]<br>전선의 식별
+          <table class="exp-table">
+            <tr><th>L1</th><th>L2</th><th>L3</th><th>N</th><th>보호도체</th></tr>
+            <tr><td>갈색</td><td>흑색</td><td>회색</td><td>청색</td><td>녹색-노란색</td></tr>
+          </table>`
       }
     ];
 
@@ -380,4 +402,3 @@
   </script>
 </body>
 </html>
-```[cite: 21]

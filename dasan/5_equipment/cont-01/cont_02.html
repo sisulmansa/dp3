@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 3 & 4. 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 5 & 6. 맨 아래 footer 항상 상단(화면 하단) 고정 및 이전/다음 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #343a40;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 14px;
+      color: #495057;
+      line-height: 1.5;
+    }
+
+    /* 업로드한 이미지 내 표 디자인 최적화 */
+    .table-custom {
+      font-size: 13.5px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .table-custom th {
+      background-color: #f1f3f5;
+      color: #212529;
+      text-align: center;
+    }
+
+    .table-custom td {
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- 4. h1 왼쪽에 home으로 이동할 수 있는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- 3. h1 내용은 간단하게 "제1장 공통사항" 및 배경색 #11477D 처리 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <!-- 1. 일반사항 -->
+    <div class="content-card">
+      <h2>1. 일반사항</h2>
+      
+      <h3>1. 목적</h3>
+      <p>한국전기설비규정(Korea Electro-technical Code, KEC)은 전기설비기술기준 고시에서 정하는 전기설비의 안전성능과 기술적 요구사항을 구체적으로 정하는 것을 목적으로 한다.</p>
+    </div>
+
+    <!-- 2. 전압의 구분 -->
+    <div class="content-card">
+      <h2>2. 전압의 구분</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-custom">
+          <thead>
+            <tr>
+              <th>구 분</th>
+              <th>교 류</th>
+              <th>직 류</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-bold">저 압</td>
+              <td>1kV 이하</td>
+              <td>1.5kV 이하</td>
+            </tr>
+            <tr>
+              <td class="fw-bold">고 압</td>
+              <td colspan="2">저압 초과 7kV 이하</td>
+            </tr>
+            <tr>
+              <td class="fw-bold">특고압</td>
+              <td colspan="2">7kV 초과</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. 용어 정의 -->
+    <div class="content-card">
+      <h2>3. 용어 정의</h2>
+      
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">가공인입선</p>
+        <p class="mb-0">가공전선의 지지물로부터 다른 지지물을 거치지 아니하고 수용장소의 붙임점에 이르는 가공전선</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">가섭선</p>
+        <p class="mb-0">지지물에 가설되는 모든 선류</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div>
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">개폐소</p>
+        <p class="mb-0">개폐소 안에 시설한 개폐기 및 기타 장치에 의하여 전로를 개폐하는 곳으로서 발전소·변전소 및 수용장소 이외의 곳</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 5 & 6. 하단 고정 푸터 ("이전페이지"와 "다음페이지" 버튼) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <!-- href 값은 필요에 맞게 직접 입력하여 사용하세요 -->
+      <a href="#" class="btn btn-outline-secondary nav-btn">⬅ 이전페이지</a>
+      <a href="./cont_03.html" class="btn btn-primary nav-btn">다음페이지 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

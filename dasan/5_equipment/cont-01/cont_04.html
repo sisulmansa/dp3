@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항 (용어 정의)</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 하단 고정 푸터 및 이전/다음 버튼, 초기화 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 카드 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    .term-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #212529;
+    }
+
+    .term-desc {
+      font-size: 13.5px;
+      color: #495057;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .diagram-box {
+      background-color: #f8f9fa;
+      border: 1px dashed #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- Home으로 이동하는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- h1 내용 및 배경색 #11477D 처리 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <div class="content-card">
+      <h2>3. 용어 정의 (계속)</h2>
+
+      <!-- 1. 등전위 본딩 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">등전위 본딩</p>
+        <p class="term-desc mb-2">등전위를 형성하기 위해 도전부 상호 간을 전기적으로 연결하는 것.</p>
+        
+        <!-- 등전위본딩의 기본 구성도 안내 (모바일 최적화 텍스트 리스트) -->
+        <div class="diagram-box">
+          <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[등전위본딩의 기본 구성도]</p>
+          <ul class="mb-0 ps-3 text-secondary" style="font-size: 12.5px; line-height: 1.4;">
+            <li>① 보호 도체 (PE)</li>
+            <li>② 보호등전위본딩 도체</li>
+            <li>③ 접지도체</li>
+            <li>④ 보조 보호등전위본딩 도체</li>
+            <li>⑤ 주접지단자 등전위본딩 모선</li>
+            <li>⑥ 전기기기의 노출도전성 부분</li>
+            <li>⑦ 계통외도전성 부분 (빌딩 철골, 금속 덕트)</li>
+            <li>⑧ 계통외도전성 부분 (금속제 수도관, 가스판)</li>
+            <li>⑨ 접지극</li>
+            <li>⑩ 전기설비·기기 (IT 기기, 뇌보호 설비)</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 2. 등전위 본딩망 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">등전위 본딩망</p>
+        <p class="term-desc">구조물의 모든 도전부와 충전도체를 제외한 내부설비를 접지극에 상호 접속하는 망</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 3. 리플프리 직류 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">리플프리(ripple-free) 직류</p>
+        <p class="term-desc">교류를 직류로 변환할 때 리플성분의 실효값이 10% 이하로 포함된 직류</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 4. 발전소 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">발전소</p>
+        <p class="term-desc">발전기·원동기·연료전지·태양전지·해양에너지발전설비·전기저장장치 그 밖의 기계기구[비상용 예비전원을 얻을 목적으로 시설하는 것 및 휴대용 발전기를 제외한다]를 시설하여 전기란 생산[원자력, 화력, 신재생에너지 등을 이용하여 전기를 발생시키는 것]과 양수발전, 전기저장장치와 같이 전기를 다른 에너지로 변환하여 저장 후 전기를 공급하는 것하는 곳</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 5. 변전소 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">변전소</p>
+        <p class="term-desc">변전소의 밖으로부터 전송받은 전기류 변전소 안에 시설한 변압기·전동 발전기·회전변류기·정류기 그 밖의 기계 기구에 의하여 변성하는 곳으로서 변성한 전기를 다시 변전소 밖으로 전송하는 곳</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 6. 보안공사 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">보안공사</p>
+        <p class="term-desc">저압 또는 고압의 가공전선이 다른 시설물과 접근·교차하는 경우의 시설 방법 중 일반적으로 규정되어 있는 시설방법보다도 강화하여야 할 점을 규정한 공통의 공사방법</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 7. 보호등전위본딩 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">보호등전위본딩</p>
+        <p class="term-desc">감전에 대한 보호 등과 같은 안전을 목적으로 하는 등전위본딩</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 8. 보호본딩도체 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">보호본딩도체</p>
+        <p class="term-desc">보호등전위본딩을 제공하는 보호도체</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 9. 보호접지 -->
+      <div>
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">보호접지</p>
+        <p class="term-desc">고장 시 감전에 대한 보호를 목적으로 기기의 한 점 또는 여러 점을 접지하는 것</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 하단 고정 푸터 (이전페이지, 다음페이지, 초기화 버튼) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <a href="./cont_03.html" class="btn btn-outline-secondary nav-btn">⬅ 이전</a>
+      <button onclick="resetData()" class="btn btn-outline-danger nav-btn" style="flex: 0.8;">초기화</button>
+      <a href="./cont_05.html" class="btn btn-primary nav-btn">다음 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS 및 로컬스토리지 연동 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const STORAGE_KEY = 'electric_theory_04';
+
+    // 데이터 초기화 함수
+    function resetData() {
+      if (confirm('저장된 입력 내용을 초기화하시겠습니까?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
+```[cite: 3]

@@ -81,9 +81,6 @@
       word-break: keep-all;
       margin: 0;
     }
-    .strike-through {
-      text-decoration: line-through;
-    }
 
     /* 보기 버튼 스타일 */
     .option-btn {
@@ -142,17 +139,21 @@
       color: #555;
       display: none;
       word-break: keep-all;
+      line-height: 1.6;
     }
+
+    /* 해설 표 스타일 */
     .exp-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
     .exp-table th, .exp-table td {
       border: 1px solid #ced4da;
       padding: 8px;
       text-align: center;
+      vertical-align: middle;
     }
     .exp-table th { background-color: #e9ecef; font-weight: bold; }
 
@@ -207,7 +208,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -225,40 +226,63 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_43.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_52.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_45.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_54.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 044.jpg 문제 데이터 반영[cite: 6]
+    // 053.jpg 문제 데이터 반영
     const rawQuestions = [
       {
-        num: "14",
-        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 절연전선으로 <span class='strike-through'>「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에 KS에 적합한 것으로서</span> 사용할 수 없는 것은?",
-        answer: "450/750V 알루미늄 절연전선",
-        options: [
-          "450/750V 고무절연전선",
-          "450/750V 비닐절연전선",
-          "450/750V 알루미늄 절연전선",
-          "450/750V 저독성 난연 폴리올레핀 절연전선"
-        ],
-        explanation: `[해설]<br>저압 절연전선 및 케이블의 종류
+        num: "36",
+        text: "이동하여 사용하는 전기기계기구의 금속제 외함에 특고압·고압 전기 설비용 접지도체 및 중성점 접지용 도체로 다심 캡타이어케이블의 차폐 또는 기타 금속체를 사용할 경우 접지 도체의 단면적은?",
+        answer: "10",
+        options: ["10", "16", "25", "50"],
+        explanation: `[해설]<br>이동하여 사용하는 전기기계기구의 금속제 외함
           <table class="exp-table">
-            <tr><td style="width:30%; background-color:#e9ecef; font-weight:bold;">저압 절연전선</td><td style="text-align:left;">절연전선은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
-            <tr><td style="background-color:#e9ecef; font-weight:bold;">저압 케이블</td><td style="text-align:left;">사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.</td></tr>
-          </table>
-          ※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
+            <tr>
+              <th>구 분</th>
+              <th style="width: 35%;">접지도체 단면적</th>
+            </tr>
+            <tr>
+              <td style="text-align: left;">
+                특고압·고압 전기설비용 접지도체 및 중성점 접지용 도체<br>
+                1. 클로로프렌 캡타이어케이블 (3종 및 4종)<br>
+                2. 클로로설포네이트폴리에틸렌 캡타이어케이블 (3종 및 4종)<br>
+                3. 다심 캡타이어케이블의 차폐 또는 기타 금속체
+              </td>
+              <td>10㎟ 이상</td>
+            </tr>
+            <tr>
+              <td style="text-align: left;">
+                저압 전기설비용 접지도체<br>
+                1. 다심 코드 또는 캡타이어 케이블의 1개 도체<br>
+                2. 기타 유연성이 있는 연동연선 1개 도체
+              </td>
+              <td>0.75㎟ 이상<br>1.5㎟ 이상</td>
+            </tr>
+          </table>`
       },
       {
-        num: "15",
-        text: "<small>'23.7.11 KEC 일부 개정에 따라 해당 문제는 더 이상 유효하지 않습니다.</small><br>저압 케이블의 종류가 아닌 것은?",
-        answer: "콤바인 덕트 케이블",
-        options: ["0.6/1kV 연피 케이블", "클로로프렌 외장 케이블", "폴리에틸렌 외장 케이블", "콤바인 덕트 케이블"],
-        explanation: `[해설]<br>저압 케이블<br>사용전압이 저압인 전로(전기기계기구 안의 전로를 제외한다)의 전선으로 사용하는 케이블은 「전기용품 및 생활용품 안전관리법」의 적용을 받는 것 이외에는 KS에 적합하거나 동등 이상의 성능을 만족하는 것을 사용하여야 한다.<br>※ '23.7.11 KEC 일부 개정에 따라 교재와 같이 내용이 변경되었습니다. (사용 가능한 전선의 종류를 삭제하고, KS 동등 이상 성능을 만족하도록 규정) 따라서 교재와 강의가 상이한 내용은 교재의 내용으로 학습바랍니다.`
+        num: "37",
+        text: "보호도체의 종류에 해당하지 않는 것은?",
+        answer: "가요성 금속 전선관",
+        options: [
+          "다심 케이블의 도체",
+          "충전도체와 같은 트렁킹에 수납된 절연도체 또는 나도체",
+          "가요성 금속 전선관",
+          "금속케이블 외장, 케이블 차폐, 케이블 외장, 전선 묶음, 동심도체, 금속관"
+        ],
+        explanation: `[해설]<br>
+          <b>보호도체의 종류</b><br>
+          ① 다심케이블의 도체<br>
+          ② 충전도체와 같은 트렁킹에 수납된 절연도체 또는 나도체<br>
+          ③ 고정된 절연도체 또는 나도체<br>
+          ④ 금속케이블 외장, 케이블 차폐, 케이블 외장, 전선묶음(편조전선), 동심도체, 금속관(기계적, 화학적, 전기화학적 열화에 대하여 보호할 수 있으며 전기적 연속성을 유지한 경우)`
       }
     ];
 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항 (용어 정의)</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 하단 고정 푸터 및 이전/다음 버튼, 초기화 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 카드 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    .term-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #212529;
+    }
+
+    .term-desc {
+      font-size: 13.5px;
+      color: #495057;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .diagram-box {
+      background-color: #f8f9fa;
+      border: 1px dashed #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- 4. Home으로 이동하는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- 3. h1 내용은 간단하게 "제1장 공통사항" 및 배경색 #11477D 처리 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <div class="content-card">
+      <h2>3. 용어 정의 (계속)</h2>
+
+      <!-- 1. 옥외배선 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">옥외배선</p>
+        <p class="term-desc mb-2">건축물 외부의 전기사용장소에서 전기사용을 목적으로 고정시켜 시설하는 전선</p>
+        
+        <div class="diagram-box">
+          <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[옥외배선 및 옥측배선 개념도]</p>
+          <p class="text-secondary mb-0" style="font-size: 12.5px; line-height: 1.4;">
+            건축물 외벽·담 등을 따라 시설되는 옥외배선 및 조영물에 고정되는 옥측배선 구조
+          </p>
+        </div>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 2. 옥측배선 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">옥측배선</p>
+        <p class="term-desc">건축물 외부의 전기사용장소에서 전기사용을 목적으로 조영물에 고정시켜 시설하는 전선</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 3. 외부 피뢰시스템 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">외부 피뢰시스템</p>
+        <p class="term-desc">수뢰부 시스템, 인하도선 시스템, 접지극 시스템으로 구성된 피뢰시스템의 일종</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 4. 우선내 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">우선내</p>
+        <p class="term-desc mb-2">옥측의 처마 또는 이와 유사한 것의 선단에서 연직선에 대하여 45° 각도로 그은 선내의 옥측 부분으로 통상의 강우 상태에서 비를 맞지 않는 부분</p>
+        
+        <div class="diagram-box">
+          <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[우선내 / 우선외 판정 기준]</p>
+          <p class="text-secondary mb-0" style="font-size: 12.5px; line-height: 1.4;">
+            지붕 처마 끝단에서 연직선 기준 45° 각도 안쪽 (우선내: 비를 맞지 않음 / 우선외: 비를 맞는 부분)
+          </p>
+        </div>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 5. 우선외 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">우선외</p>
+        <p class="term-desc">옥측에서 우선내 이외의 부분</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 6. 이격거리 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">이격거리</p>
+        <p class="term-desc">떨어져야할 물체의 표면간의 최단거리</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 7. 인하도선시스템 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">인하도선시스템</p>
+        <p class="term-desc">뇌전류를 수뢰시스템에서 접지극으로 흘리기 위한 외부 피뢰시스템의 일부</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 8. 임펄스내전압 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">임펄스내전압</p>
+        <p class="term-desc">지정된 조건 하에서 절연파괴를 일으키지 않는 규정된 파형 및 극성의 임펄스 전압의 최대 파고값 또는 충격내전압</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 9. 전기기계기구 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">전기기계기구</p>
+        <p class="term-desc">전로를 구성하는 기계기구</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 10. 전기철도용 급전선 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">전기철도용 급전선</p>
+        <p class="term-desc">전기철도용 변전소로부터 다른 전기철도용 변전소 또는 전차선에 이르는 전선</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 11. 전기철도용 급전선로 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">전기철도용 급전선로</p>
+        <p class="term-desc">전기철도용 급전선 및 이를 지지하거나 수용하는 시설물</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 12. 전로 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">전로</p>
+        <p class="term-desc">통상의 사용 상태에서 전기가 통하고 있는 곳</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 13. 전선로 -->
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">전선로</p>
+        <p class="term-desc">발전소·변전소·개폐소, 이에 준하는 곳, 전기사용장소 상호 간의 전선(전차선을 제외한다) 및 이를 지지하거나 수용하는 시설물</p>
+      </div>
+      <hr class="text-muted">
+
+      <!-- 14. 접속 설비 -->
+      <div>
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="term-title">접속 설비</p>
+        <p class="term-desc">공용전력 계통으로부터 특정 분산형전원 설치자의 전기설비에 이르기까지의 전로와 이에 부속하는 개폐장치, 모선 및 기타 관련 설비</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 5 & 6. 하단 고정 푸터 ("이전페이지"와 "다음페이지" 버튼 및 초기화) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <!-- href 값은 필요에 맞게 직접 입력하여 사용하세요 -->
+      <a href="./cont_05.html" class="btn btn-outline-secondary nav-btn">⬅ 이전</a>
+      <button onclick="resetData()" class="btn btn-outline-danger nav-btn" style="flex: 0.8;">초기화</button>
+      <a href="./cont_07.html" class="btn btn-primary nav-btn">다음 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS 및 로컬스토리지 초기화 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const STORAGE_KEY = 'electric_theory_06';
+
+    // 데이터 초기화 함수
+    function resetData() {
+      if (confirm('저장된 내용 및 설정을 초기화하시겠습니까?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>

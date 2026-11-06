@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 하단 고정 푸터 및 이전/다음 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #343a40;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 14px;
+      color: #495057;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- Home으로 이동하는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- h1 내용 "제1장 공통사항" 및 배경색 #11477D, 가운데 정렬 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <!-- 용어 정의 (계속) -->
+    <div class="content-card">
+      <h2>3. 용어 정의 (계속)</h2>
+      
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-1">특별저압 (ELV)</p>
+        <p class="mb-1">• AC 50V 이하, DC 120V 이하의 인체에 위험을 초래하지 않을 정도의 저압</p>
+        <p class="mb-1">• SELV (Safety Extra Low Voltage)는 비접지회로에 해당</p>
+        <p class="mb-0">• PELV (Protective Extra Low Voltage)는 접지회로에 해당</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">피뢰 등전위 본딩</p>
+        <p class="mb-0">뇌전류에 의한 전위차를 줄이기 위해 직접적인 도전접속 또는 서지보호장치를 통하여 분리된 금속부를 피뢰시스템에 본딩하는 것</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">피뢰레벨</p>
+        <p class="mb-0">자연적으로 발생하는 뇌방전을 초과하지 않는 최대 그리고 최소 설계값에 대한 확률과 관련된 일련의 뇌격전류 매개변수로 정해지는 레벨</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">피뢰시스템</p>
+        <p class="mb-0">구조물 뇌격으로 인한 물리적 손상을 줄이기 위해 사용되는 전체시스템을 말하며, 외부 피뢰시스템과 내부 피뢰시스템으로 구성</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div class="mb-3">
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">피뢰시스템의 자연적 구성부재</p>
+        <p class="mb-0">피뢰의 목적으로 특별히 설치하지는 않았으나 추가로 피뢰시스템으로 사용될 수 있거나 피뢰시스템의 하나 이상의 기능을 제공하는 도전성 구성부재</p>
+      </div>
+
+      <hr class="text-muted">
+
+      <div>
+        <span class="badge bg-secondary mb-1">용어</span>
+        <p class="fw-bold text-dark mb-2">PEN 도체</p>
+        <p class="mb-0">중성선 겸용 보호도체</p>
+      </div>
+    </div>
+
+    <!-- 4. 감전에 대한 보호 (인축 보호) -->
+    <div class="content-card">
+      <h2>4. 감전에 대한 보호 (인축 보호)</h2>
+      <p class="text-muted mb-2" style="font-size: 13px;">충전부에 인축이 접촉하여 일어날 수 있는 위험으로부터 보호</p>
+      
+      <h3>① 기본보호 (직접접촉 방지)</h3>
+      <ul class="ps-3 mb-3">
+        <li>몸을 통해 전류가 흐르는 것을 방지</li>
+        <li>몸에 흐르는 전류를 위험하지 않은 값 이하로 제한</li>
+      </ul>
+
+      <h3>② 고장보호 (간접접촉 방지)</h3>
+      <p class="text-muted mb-2" style="font-size: 13px;">기본절연의 고장에 의한 간접접촉을 방지</p>
+      <ul class="ps-3 mb-0">
+        <li>몸을 통해 고장전류가 흐르는 것을 방지</li>
+        <li>몸에 흐르는 고장전류를 위험하지 않은 값 이하로 제한</li>
+        <li>몸에 흐르는 고장전류의 지속시간을 위험하지 않은 시간까지로 제한</li>
+      </ul>
+    </div>
+
+    <!-- 5. 과전류에 대한 보호 -->
+    <div class="content-card">
+      <h2>5. 과전류에 대한 보호</h2>
+      <p class="mb-2"><strong>가.</strong> 과전류에 의한 과열 또는 전기·기계적 응력에 의한 위험으로부터 인축의 상해를 방지하고 재산을 보호</p>
+      <p class="mb-0"><strong>나.</strong> 과전류에 대한 보호는 과전류가 흐르는 것을 방지하거나 과전류의 지속시간을 위험하지 않은 시간까지로 제한함으로써 보호</p>
+    </div>
+
+    <!-- 6. 고장전류에 대한 보호 -->
+    <div class="content-card">
+      <h2>6. 고장전류에 대한 보호</h2>
+      <p class="mb-2"><strong>가.</strong> 고장전류로 인해 허용온도 상승 한계에 도달하지 않도록 하여야 한다.</p>
+      <p class="mb-0"><strong>나.</strong> 인축의 상해 또는 재산의 손실을 방지하기 위하여 보호장치가 구비되어야 한다.</p>
+    </div>
+
+  </main>
+
+  <!-- 하단 고정 푸터 ("이전페이지"와 "다음페이지" 버튼) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <!-- href 값은 필요에 맞게 직접 입력하여 사용하세요 -->
+      <a href="./cont_07.html" class="btn btn-outline-secondary nav-btn">⬅ 이전페이지</a>
+      <a href="#" class="btn btn-primary nav-btn">다음페이지 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

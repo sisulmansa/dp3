@@ -18,11 +18,11 @@
     }
     
     .app-container {
-      max-width: 600px; /* 모바일 및 데스크탑 화면 중앙 정렬 */
+      max-width: 600px;
       margin: auto;
     }
 
-    /* 12. h1 배경색 및 가운데 정렬, 13. home 태그 */
+    /* 12, 13. h1 배경색, 가운데 정렬 및 home 버튼 */
     .header-bar {
       background-color: #11477D;
       color: white;
@@ -141,20 +141,6 @@
       word-break: keep-all;
     }
 
-    /* 해설 내 표 스타일 (1번 문제) */
-    .exp-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 0.85rem;
-    }
-    .exp-table th, .exp-table td {
-      border: 1px solid #ced4da;
-      padding: 8px;
-      text-align: center;
-    }
-    .exp-table th { background-color: #e9ecef; font-weight: bold; }
-
     /* 14. 하단 고정 Footer */
     .footer-bar {
       position: fixed;
@@ -206,13 +192,13 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
 
   <main class="app-container" id="quiz-container">
-    <!-- 자바스크립트를 통해 문제들이 여기에 렌더링 됩니다. -->
+    <!-- 퀴즈 렌더링 영역 -->
   </main>
 
   <footer class="footer-bar">
@@ -224,56 +210,41 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
-        <a href="#prev" class="btn-nav">이전문제</a>
-        
+        <a href="./chap1_39.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        
-        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
-        <a href="./chap1_40.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_41.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 원본 데이터 (사진 내용 기반)
+    // 040.jpg 문제 데이터 반영
     const rawQuestions = [
       {
-        num: "01",
-        text: "전압의 종별에서 교류 600V는 무엇으로 분류하는가?",
-        answer: "저압",
-        options: ["저압", "고압", "특고압", "초고압"],
-        explanation: `[해설]
-          <table class="exp-table">
-            <tr><th>구분</th><th>교류</th><th>직류</th></tr>
-            <tr><td>저압</td><td>1kV 이하</td><td>1.5kV 이하</td></tr>
-            <tr><td>고압</td><td>저압 초과 7kV 이하</td><td>저압 초과 7kV 이하</td></tr>
-            <tr><td>특고압</td><td colspan="2">7kV 초과</td></tr>
-          </table>`
+        num: "04",
+        text: "\"리플프리(Ripple-free)직류\"란 교류를 직류로 변환할 때 리플성분의 실효값이 몇 % 이하로 포함된 직류를 말하는가?",
+        answer: "10",
+        options: ["3", "5", "10", "15"],
+        explanation: `[해설]<br>"리플프리(Ripple-free)직류"란 교류를 직류로 변환할 때 리플성분의 실효값이 10% 이하로 포함된 직류를 말한다.`
       },
       {
-        num: "02",
-        text: "관등회로라고 하는 것은?",
-        answer: "방전등용 안정기로부터 방전관까지의 전로",
-        options: [
-          "분기점으로부터 안정기까지의 전로",
-          "스위치로부터 방전등까지의 전로",
-          "스위치로부터 안정기까지의 전로",
-          "방전등용 안정기로부터 방전관까지의 전로"
-        ],
-        explanation: `[해설]<br>"관등회로"란 방전등용 안정기(방전등용 변압기를 포함)로부터 방전관까지의 전로를 말한다.`
+        num: "05",
+        text: "한 수용장소의 인입구에서 분기하여 지지물을 거치지 않고 다른 수용장소의 인입구에 이르는 부분을 무엇이라 하는가?",
+        answer: "연접 인입선",
+        options: ["가공인입선", "연접 인입선", "옥상 배선", "옥측 배선"],
+        explanation: `[해설]<br>"연접인입선"이란 한 수용장소의 인입선에서 분기하여 지지물을 거치지 아니하고 다른 수용장소의 인입구에 이르는 부분의 전선을 말한다.`
       },
       {
-        num: "03",
-        text: "전력 계통의 운용에 관한 지시를 하는 곳은?",
-        answer: "급전소",
-        options: ["급전소", "개폐소", "변전소", "발전소"],
-        explanation: `[해설]<br>"급전소"란 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다.`
+        num: "06",
+        text: "전기철도용 변전소로부터 다른 전기철도용 변전소 또는 전차선에 이르는 전선을 무엇이라 하는가?",
+        answer: "전기철도용 급전선",
+        options: ["급전선", "전기철도용 급전선", "급전선로", "전기철도용 급전선로"],
+        explanation: `[해설]<br>"전기철도용 급전선"이란 전기철도용 변전소로부터 다른 전기철도용 변전소 또는 전차선에 이르는 전선을 말한다.`
       }
     ];
 
-    // 배열 셔플 함수 (Fisher-Yates 알고리즘)
+    // 셔플 함수
     function shuffleArray(array) {
       let curId = array.length;
       while (0 !== curId) {
@@ -290,7 +261,7 @@
     let totalAnswered = 0;
     const totalQuestions = rawQuestions.length;
 
-    // 퀴즈 초기화 및 렌더링 함수
+    // 퀴즈 초기화
     function initQuiz() {
       const container = document.getElementById("quiz-container");
       container.innerHTML = "";
@@ -299,23 +270,22 @@
       totalAnswered = 0;
       updateScore();
 
-      // 8. 문제의 순서 랜덤 변경
+      // 8. 문제 순서 랜덤
       let questions = JSON.parse(JSON.stringify(rawQuestions));
       shuffleArray(questions);
 
       const circleNumbers = ['①', '②', '③', '④'];
 
       questions.forEach((q, qIndex) => {
-        // 7. 문제별 4개의 예시 랜덤 변경
+        // 7. 예시 순서 랜덤
         shuffleArray(q.options);
 
         let card = document.createElement("div");
         card.className = "question-card";
 
-        // HTML 구조 생성
+        // HTML 구조 생성 (9. 업로드한 번호 사용)
         let html = `
           <div class="q-header">
-            <!-- 9. 업로드한 이미지에 표기된 번호 그대로 사용 -->
             <div class="q-num">${q.num}</div>
             <div class="q-text">${q.text}</div>
           </div>
@@ -337,7 +307,7 @@
           </div>
           <div id="feedback-${qIndex}" class="feedback"></div>
           
-          <!-- 5. 해설 버튼 및 컨테이너 (기본값 안보임) -->
+          <!-- 5. 해설 보임/안보임 버튼 -->
           <button class="btn btn-outline-secondary exp-btn" onclick="toggleExp(${qIndex})">해설 보임</button>
           <div id="exp-${qIndex}" class="explanation">${q.explanation}</div>
         `;
@@ -346,23 +316,20 @@
         container.appendChild(card);
       });
 
-      // 최상단으로 스크롤 부드럽게 이동
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 2, 4. 채점 및 정답/오답 확인
+    // 2, 4. 채점 및 피드백
     function checkAnswer(btn, qIndex, isCorrect) {
       const container = document.getElementById(`opts-${qIndex}`);
       const buttons = container.querySelectorAll('.option-btn');
       const feedback = document.getElementById(`feedback-${qIndex}`);
       
-      // 이미 푼 문제는 다시 클릭하지 못하도록 차단
       if (buttons[0].disabled) return;
 
-      // 모든 버튼 비활성화 및 정답 표시
       buttons.forEach(b => {
         b.disabled = true;
-        // 3. 정답 인정 처리 시각화
+        // 3. 정답만 정답으로 시각적 인정
         if (b.dataset.correct === "true") {
           b.classList.add("correct");
         }
@@ -385,7 +352,7 @@
       updateScore();
     }
 
-    // 5. 해설 보임/안보임 토글
+    // 5. 해설 토글 함수
     function toggleExp(qIndex) {
       const expDiv = document.getElementById(`exp-${qIndex}`);
       const btn = event.target;
@@ -401,14 +368,13 @@
       }
     }
 
-    // 점수 업데이트 (문제 당 약 33.3점 환산, 3문제 기준 100점 만점)
+    // 점수 갱신
     function updateScore() {
       let finalScore = Math.round((currentScore / totalQuestions) * 100);
       let scoreText = (totalAnswered === 0) ? "0 / 0" : `${finalScore}점 ( ${currentScore} / ${totalQuestions} )`;
       document.getElementById("score-text").innerText = scoreText;
     }
 
-    // 페이지 로드 시 최초 퀴즈 초기화
     window.onload = initQuiz;
   </script>
 </body>

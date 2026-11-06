@@ -142,6 +142,21 @@
       line-height: 1.6;
     }
 
+    /* 해설 표 스타일 */
+    .exp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .exp-table th, .exp-table td {
+      border: 1px solid #ced4da;
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .exp-table th { background-color: #e9ecef; font-weight: bold; }
+
     /* 14. 하단 고정 Footer */
     .footer-bar {
       position: fixed;
@@ -193,7 +208,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -211,46 +226,84 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_55.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_54.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_57.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_56.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 056.jpg 문제 데이터 반영[cite: 18]
+    // 055.jpg 문제 데이터 반영[cite: 17]
     const rawQuestions = [
       {
-        num: "43",
-        text: "겸용도체의 시설기준으로 틀린 것은?",
-        answer: "중성선과 보호도체의 겸용도체는 전기설비의 전원측으로 시설하면 안됨.",
-        options: [
-          "겸용도체는 고정된 전기설비에서만 사용할 수 있다.",
-          "단면적 구리 10㎟ 또는 알루미늄 16㎟ 이상",
-          "중성선과 보호도체의 겸용도체는 전기설비의 전원측으로 시설하면 안됨.",
-          "폭발성 분위기 장소는 보호도체를 전용으로 사용하여야 함."
-        ],
+        num: "40",
+        text: "선도체의 단면적이 16㎟인 경우 보호도체와 선도체의 재질이 같을 때 보호도체의 단면적은?",
+        answer: "16",
+        options: ["10", "16", "25", "50"],
         explanation: `[해설]<br>
-          겸용도체는 고정된 전기설비에만 사용 가능<br>
-          ① 단면적 구리 10㎟ 또는 알루미늄 16㎟ 이상<br>
-          ② 중성선과 보호도체의 겸용도체는 전기설비의 <b>부하측</b>으로 시설하면 안됨.<br>
-          ③ 폭발성 분위기 장소는 보호도체를 전용으로 하여야 함.`
+          <table class="exp-table">
+            <tr>
+              <th rowspan="2">선도체의 단면적 S<br>(㎟, 구리)</th>
+              <th colspan="2">보호도체의 최소 단면적 (㎟, 구리)</th>
+            </tr>
+            <tr>
+              <th>보호도체의 재질이<br>선도체와 같은 경우</th>
+              <th>보호도체의 재질이<br>선도체와 다른 경우</th>
+            </tr>
+            <tr>
+              <td>16㎟ 이하</td>
+              <td>S</td>
+              <td>(k₁/k₂) × S</td>
+            </tr>
+            <tr>
+              <td>16㎟ 초과 35㎟ 이하</td>
+              <td>16</td>
+              <td>(k₁/k₂) × 16</td>
+            </tr>
+            <tr>
+              <td>35㎟ 초과</td>
+              <td>S/2</td>
+              <td>(k₁/k₂) × (S/2)</td>
+            </tr>
+          </table>`
       },
       {
-        num: "44",
-        text: "주접지시스템에 주접지단자를 설치하고 연결해야 할 도체로 잘못된 것은?",
-        answer: "접지극",
-        options: ["등전위본딩 도체", "접지도체", "기능성 접지도체", "접지극"],
-        explanation: `[해설]<br>접지시스템은 주접지단자를 설치하고, 다음의 도체들을 접속하여야 한다.<br>① 등전위본딩 도체 &nbsp;&nbsp; ② 접지도체 &nbsp;&nbsp; ③ 보호도체 &nbsp;&nbsp; ④ 기능성 접지도체`
+        num: "41",
+        text: "전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐를 때 보호도체가 하나인 경우 단면적 몇 ㎟ 이상의 알루미늄선으로 보강해야 하는가?",
+        answer: "16",
+        options: ["10", "16", "25", "50"],
+        explanation: `[해설]<br>
+          <b>보호도체의 단면적 보강</b><br>
+          ① 보호도체는 정상 운전상태에서 전류의 전도성 경로로 사용되지 않아야 한다.<br>
+          ② 전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐르는 경우, 다음에 의해 보호도체를 증강하여 사용하여야 한다.
+          <table class="exp-table">
+            <tr>
+              <th>구 분</th>
+              <th>구리</th>
+              <th>알루미늄</th>
+            </tr>
+            <tr>
+              <td style="text-align: left;">보호도체가 하나인 경우</td>
+              <td>10㎟ 이상</td>
+              <td>16㎟ 이상</td>
+            </tr>
+            <tr>
+              <td style="text-align: left;">추가로 보호도체를 위한 별도의 단자가 구비된 경우</td>
+              <td>10㎟ 이상</td>
+              <td>16㎟ 이상</td>
+            </tr>
+          </table>`
       },
       {
-        num: "45",
-        text: "저압 수용가 인입구에 설치하는 접지도체는 단면적 몇 ㎟ 이상의 연동선을 사용하여 고장 시 흐르는 전류를 안전하게 통전할 수 있는 것이어야 하는가??",
-        answer: "6",
-        options: ["2.5", "4", "6", "10"],
-        explanation: `[해설]<br>저압 수용가 인입구에 설치하는 접지도체는 6㎟ 이상의 연동선으로 고장 시 흐르는 전류를 안전하게 통전할 수 있는 것이어야 한다.`
+        num: "42",
+        text: "보호도체와 중성선의 겸용선은?",
+        answer: "PEN",
+        options: ["PEN", "PEL", "PEM", "PEO"],
+        explanation: `[해설]<br>
+          <b>보호도체와 계통도체 겸용</b><br>
+          ① 중성선과 겸용 (PEN) &nbsp;&nbsp; ② 선도체와 겸용 (PEL) &nbsp;&nbsp; ③ 중간도체와 겸용 (PEM)`
       }
     ];
 

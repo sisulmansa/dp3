@@ -139,23 +139,7 @@
       color: #555;
       display: none;
       word-break: keep-all;
-      line-height: 1.6;
     }
-
-    /* 해설 표 스타일 */
-    .exp-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 0.85rem;
-    }
-    .exp-table th, .exp-table td {
-      border: 1px solid #ced4da;
-      padding: 8px;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .exp-table th { background-color: #e9ecef; font-weight: bold; }
 
     /* 14. 하단 고정 Footer */
     .footer-bar {
@@ -208,7 +192,7 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
@@ -226,84 +210,47 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_54.html" class="btn-nav">이전문제</a>
+        <a href="./chap1_40.html" class="btn-nav">이전문제</a>
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_56.html" class="btn-nav">다음문제</a>
+        <a href="./chap1_42.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 055.jpg 문제 데이터 반영[cite: 17]
+    // 041.jpg 문제 데이터 반영[cite: 3]
     const rawQuestions = [
       {
-        num: "40",
-        text: "선도체의 단면적이 16㎟인 경우 보호도체와 선도체의 재질이 같을 때 보호도체의 단면적은?",
-        answer: "16",
-        options: ["10", "16", "25", "50"],
-        explanation: `[해설]<br>
-          <table class="exp-table">
-            <tr>
-              <th rowspan="2">선도체의 단면적 S<br>(㎟, 구리)</th>
-              <th colspan="2">보호도체의 최소 단면적 (㎟, 구리)</th>
-            </tr>
-            <tr>
-              <th>보호도체의 재질이<br>선도체와 같은 경우</th>
-              <th>보호도체의 재질이<br>선도체와 다른 경우</th>
-            </tr>
-            <tr>
-              <td>16㎟ 이하</td>
-              <td>S</td>
-              <td>(k₁/k₂) × S</td>
-            </tr>
-            <tr>
-              <td>16㎟ 초과 35㎟ 이하</td>
-              <td>16</td>
-              <td>(k₁/k₂) × 16</td>
-            </tr>
-            <tr>
-              <td>35㎟ 초과</td>
-              <td>S/2</td>
-              <td>(k₁/k₂) × (S/2)</td>
-            </tr>
-          </table>`
+        num: "07",
+        text: "다음 전선로에 대한 설명으로 옳은 것은?",
+        answer: "발전소·변전소·개폐소 및 이에 준하는 곳, 전기사용장소 상호 간의 전선 및 이를 지지하거나 수용하는 시설물",
+        options: [
+          "발전소·변전소·개폐소 및 이에 준하는 곳, 전기사용장소 상호 간의 전선 및 이를 지지하거나 수용하는 시설물",
+          "발전소·변전소·개폐소 및 이에 준하는 곳, 전기사용장소 상호 간의 전선 및 전차선을 지지하거나 수용하는 시설물",
+          "통상의 사용 상태에서 전기가 통하고 있는 전선",
+          "통상의 사용 상태에서 전기를 절연한 전선"
+        ],
+        explanation: `[해설]<br>"전선로"란 발전소·변전소·개폐소, 이에 준하는 곳, 전기사용장소 상호 간의 전선(전차선을 제외한다) 및 이를 지지하거나 수용하는 시설물을 말한다.`
       },
       {
-        num: "41",
-        text: "전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐를 때 보호도체가 하나인 경우 단면적 몇 ㎟ 이상의 알루미늄선으로 보강해야 하는가?",
-        answer: "16",
-        options: ["10", "16", "25", "50"],
-        explanation: `[해설]<br>
-          <b>보호도체의 단면적 보강</b><br>
-          ① 보호도체는 정상 운전상태에서 전류의 전도성 경로로 사용되지 않아야 한다.<br>
-          ② 전기설비의 정상 운전상태에서 보호도체에 10mA를 초과하는 전류가 흐르는 경우, 다음에 의해 보호도체를 증강하여 사용하여야 한다.
-          <table class="exp-table">
-            <tr>
-              <th>구 분</th>
-              <th>구리</th>
-              <th>알루미늄</th>
-            </tr>
-            <tr>
-              <td style="text-align: left;">보호도체가 하나인 경우</td>
-              <td>10㎟ 이상</td>
-              <td>16㎟ 이상</td>
-            </tr>
-            <tr>
-              <td style="text-align: left;">추가로 보호도체를 위한 별도의 단자가 구비된 경우</td>
-              <td>10㎟ 이상</td>
-              <td>16㎟ 이상</td>
-            </tr>
-          </table>`
+        num: "08",
+        text: "\"제2차 접근상태\"라 함은 가공전선이 다른 시설물과 접근하는 경우에 그 가공전선이 다른 시설물의 위쪽 또는 옆쪽에서 수평거리로 몇 m 미만인 곳에 시설되는 상태를 말하는가?",
+        answer: "3",
+        options: ["2", "3", "4", "5"],
+        explanation: `[해설]<br>"제2차 접근상태"란 가공전선이 다른 시설물과 접근하는 경우에 그 가공전선이 다른 시설물의 위쪽 또는 옆쪽에서 수평거리로 3m 미만인 곳에 시설되는 상태를 말한다.`
       },
       {
-        num: "42",
-        text: "보호도체와 중성선의 겸용선은?",
-        answer: "PEN",
-        options: ["PEN", "PEL", "PEM", "PEO"],
-        explanation: `[해설]<br>
-          <b>보호도체와 계통도체 겸용</b><br>
-          ① 중성선과 겸용 (PEN) &nbsp;&nbsp; ② 선도체와 겸용 (PEL) &nbsp;&nbsp; ③ 중간도체와 겸용 (PEM)`
+        num: "09",
+        text: "\"조상설비\"에 대한 용어의 정의로 알맞은 것은?",
+        answer: "무효전력을 조정하는 전기기계기구를 말한다.",
+        options: [
+          "전압을 조정하는 설비를 말한다.",
+          "전류를 조정하는 설비를 말한다.",
+          "유효전력을 조정하는 전기기계기구를 말한다.",
+          "무효전력을 조정하는 전기기계기구를 말한다."
+        ],
+        explanation: `[해설]<br>"조상설비"란 무효전력을 조정하는 전기기계기구를 말한다.`
       }
     ];
 

@@ -18,11 +18,11 @@
     }
     
     .app-container {
-      max-width: 600px;
+      max-width: 600px; /* 모바일 및 데스크탑 화면 중앙 정렬 */
       margin: auto;
     }
 
-    /* 12, 13. h1 배경색, 가운데 정렬 및 home 버튼 */
+    /* 12. h1 배경색 및 가운데 정렬, 13. home 태그 */
     .header-bar {
       background-color: #11477D;
       color: white;
@@ -139,10 +139,9 @@
       color: #555;
       display: none;
       word-break: keep-all;
-      line-height: 1.6;
     }
 
-    /* 해설 표 스타일 */
+    /* 해설 내 표 스타일 (1번 문제) */
     .exp-table {
       width: 100%;
       border-collapse: collapse;
@@ -153,7 +152,6 @@
       border: 1px solid #ced4da;
       padding: 8px;
       text-align: center;
-      vertical-align: middle;
     }
     .exp-table th { background-color: #e9ecef; font-weight: bold; }
 
@@ -208,13 +206,13 @@
 
   <header class="header-bar sticky-top">
     <!-- 13. home으로 이동하는 <a> 태그 -->
-    <a href="../index.html" class="btn-home">Home</a>
+    <a href="../../index.html" class="btn-home">Home</a>
     <!-- 12. h1 내용 설정 -->
     <h1>제1장 공통사항</h1>
   </header>
 
   <main class="app-container" id="quiz-container">
-    <!-- 퀴즈 렌더링 영역 -->
+    <!-- 자바스크립트를 통해 문제들이 여기에 렌더링 됩니다. -->
   </main>
 
   <footer class="footer-bar">
@@ -226,60 +224,56 @@
       
       <!-- 14, 15. 이전/새로고침/다음 버튼 레이아웃 -->
       <div class="footer-buttons">
-        <a href="./chap1_48.html" class="btn-nav">이전문제</a>
+        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
+        <a href="#prev" class="btn-nav">이전문제</a>
+        
         <!-- 6. 새로고침 버튼 -->
         <button onclick="initQuiz()" class="btn-refresh">새로고침</button>
-        <a href="./chap1_50.html" class="btn-nav">다음문제</a>
+        
+        <!-- 사용자가 직접 href를 수정할 수 있도록 비워두거나 기본값 적용 -->
+        <a href="./chap1_40.html" class="btn-nav">다음문제</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 049.jpg 문제 데이터 반영[cite: 11]
+    // 원본 데이터 (사진 내용 기반)
     const rawQuestions = [
       {
-        num: "26",
-        text: "연료전지 및 태양전지 모듈의 절연내력 시험을 하는 경우 충전 부분과 대지 사이에 어느 정도의 시험전압을 인가하여야 하는가? 단, 연속해서 10분간 가하여 견디는 것이어야 한다.",
-        answer: "최대 사용전압의 1.5배 직류전압 또는 1배 교류전압",
-        options: [
-          "최대 사용전압의 1.5배 직류전압 또는 1.25배 교류전압",
-          "최대 사용전압의 1.25배 직류전압 또는 1.25배 교류전압",
-          "최대 사용전압의 1.5배 직류전압 또는 1배 교류전압",
-          "최대 사용전압의 1.25배 직류전압 또는 1배 교류전압"
-        ],
-        explanation: `[해설]<br><b>연료전지 및 태양전지 모듈의 절연내력 시험</b><br>충전 부분과 대지 사이에 최대 사용전압의 1.5배의 직류전압 또는 1배의 교류전압을 연속해서 10분간 가하여 견딜 것.`
-      },
-      {
-        num: "27",
-        text: "접지시스템의 시설 종류에 따른 분류가 아닌 것은?",
-        answer: "계통접지",
-        options: ["단독접지", "계통접지", "공통접지", "통합접지"],
-        explanation: `[해설]<br>
+        num: "01",
+        text: "전압의 종별에서 교류 600V는 무엇으로 분류하는가?",
+        answer: "저압",
+        options: ["저압", "고압", "특고압", "초고압"],
+        explanation: `[해설]
           <table class="exp-table">
-            <tr>
-              <th style="width: 25%;">구 분</th>
-              <td style="text-align: left;">① 계통접지 ② 보호접지 ③ 피뢰시스템 접지</td>
-            </tr>
-            <tr>
-              <th>시설 종류</th>
-              <td style="text-align: left;">① 단독접지 ② 공통접지 ③ 통합접지</td>
-            </tr>
-            <tr>
-              <th>구성 요소</th>
-              <td style="text-align: left;">① 접지극 ② 접지도체 ③ 보호도체 ④ 기타설비<br>(접지극은 접지도체를 사용하여 주접지단자에 연결하여야 한다.)</td>
-            </tr>
+            <tr><th>구분</th><th>교류</th><th>직류</th></tr>
+            <tr><td>저압</td><td>1kV 이하</td><td>1.5kV 이하</td></tr>
+            <tr><td>고압</td><td>저압 초과 7kV 이하</td><td>저압 초과 7kV 이하</td></tr>
+            <tr><td>특고압</td><td colspan="2">7kV 초과</td></tr>
           </table>`
       },
       {
-        num: "28",
-        text: "접지 시스템의 구성에서 접지극은 무엇을 사용하여 주접지단자에 연결해야 하는가?",
-        answer: "접지도체",
-        options: ["보호도체", "보호등전위본딩 도체", "접지도체", "보조 보호등전위본딩 도체"],
-        explanation: `[해설]<br>1: 보호도체<br>2: 보호등전위본딩 도체<br>3: 접지도체<br>4: 보조 보호등전위본딩 도체<br>B: 주접지단자<br>M: 노출도전성 부분<br>C: 계통외도전성 부분<br>P: 주 금속제 수도관<br>T: 접지극`
+        num: "02",
+        text: "관등회로라고 하는 것은?",
+        answer: "방전등용 안정기로부터 방전관까지의 전로",
+        options: [
+          "분기점으로부터 안정기까지의 전로",
+          "스위치로부터 방전등까지의 전로",
+          "스위치로부터 안정기까지의 전로",
+          "방전등용 안정기로부터 방전관까지의 전로"
+        ],
+        explanation: `[해설]<br>"관등회로"란 방전등용 안정기(방전등용 변압기를 포함)로부터 방전관까지의 전로를 말한다.`
+      },
+      {
+        num: "03",
+        text: "전력 계통의 운용에 관한 지시를 하는 곳은?",
+        answer: "급전소",
+        options: ["급전소", "개폐소", "변전소", "발전소"],
+        explanation: `[해설]<br>"급전소"란 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다.`
       }
     ];
 
-    // 셔플 함수
+    // 배열 셔플 함수 (Fisher-Yates 알고리즘)
     function shuffleArray(array) {
       let curId = array.length;
       while (0 !== curId) {
@@ -296,7 +290,7 @@
     let totalAnswered = 0;
     const totalQuestions = rawQuestions.length;
 
-    // 퀴즈 초기화
+    // 퀴즈 초기화 및 렌더링 함수
     function initQuiz() {
       const container = document.getElementById("quiz-container");
       container.innerHTML = "";
@@ -305,22 +299,23 @@
       totalAnswered = 0;
       updateScore();
 
-      // 8. 문제 순서 랜덤
+      // 8. 문제의 순서 랜덤 변경
       let questions = JSON.parse(JSON.stringify(rawQuestions));
       shuffleArray(questions);
 
       const circleNumbers = ['①', '②', '③', '④'];
 
       questions.forEach((q, qIndex) => {
-        // 7. 예시 순서 랜덤
+        // 7. 문제별 4개의 예시 랜덤 변경
         shuffleArray(q.options);
 
         let card = document.createElement("div");
         card.className = "question-card";
 
-        // HTML 구조 생성 (9. 업로드한 번호 사용)
+        // HTML 구조 생성
         let html = `
           <div class="q-header">
+            <!-- 9. 업로드한 이미지에 표기된 번호 그대로 사용 -->
             <div class="q-num">${q.num}</div>
             <div class="q-text">${q.text}</div>
           </div>
@@ -342,7 +337,7 @@
           </div>
           <div id="feedback-${qIndex}" class="feedback"></div>
           
-          <!-- 5. 해설 보임/안보임 버튼 -->
+          <!-- 5. 해설 버튼 및 컨테이너 (기본값 안보임) -->
           <button class="btn btn-outline-secondary exp-btn" onclick="toggleExp(${qIndex})">해설 보임</button>
           <div id="exp-${qIndex}" class="explanation">${q.explanation}</div>
         `;
@@ -351,20 +346,23 @@
         container.appendChild(card);
       });
 
+      // 최상단으로 스크롤 부드럽게 이동
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 2, 4. 채점 및 피드백
+    // 2, 4. 채점 및 정답/오답 확인
     function checkAnswer(btn, qIndex, isCorrect) {
       const container = document.getElementById(`opts-${qIndex}`);
       const buttons = container.querySelectorAll('.option-btn');
       const feedback = document.getElementById(`feedback-${qIndex}`);
       
+      // 이미 푼 문제는 다시 클릭하지 못하도록 차단
       if (buttons[0].disabled) return;
 
+      // 모든 버튼 비활성화 및 정답 표시
       buttons.forEach(b => {
         b.disabled = true;
-        // 3. 정답만 정답으로 시각적 인정
+        // 3. 정답 인정 처리 시각화
         if (b.dataset.correct === "true") {
           b.classList.add("correct");
         }
@@ -387,7 +385,7 @@
       updateScore();
     }
 
-    // 5. 해설 토글 함수
+    // 5. 해설 보임/안보임 토글
     function toggleExp(qIndex) {
       const expDiv = document.getElementById(`exp-${qIndex}`);
       const btn = event.target;
@@ -403,13 +401,14 @@
       }
     }
 
-    // 점수 갱신
+    // 점수 업데이트 (문제 당 약 33.3점 환산, 3문제 기준 100점 만점)
     function updateScore() {
       let finalScore = Math.round((currentScore / totalQuestions) * 100);
       let scoreText = (totalAnswered === 0) ? "0 / 0" : `${finalScore}점 ( ${currentScore} / ${totalQuestions} )`;
       document.getElementById("score-text").innerText = scoreText;
     }
 
+    // 페이지 로드 시 최초 퀴즈 초기화
     window.onload = initQuiz;
   </script>
 </body>
