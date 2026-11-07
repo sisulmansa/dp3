@@ -248,13 +248,17 @@
         answer: "0.5MΩ",
         options: ["0.2MΩ", "0.3MΩ", "0.4MΩ", "0.5MΩ"],
         explanation: `[해설]
+          <br>1) 저압인 전로의 전선 상호간 및 전로와 대지 사이의 절연저항
           <table class="exp-table">
             <tr><th>전로의 사용전압 (V)</th><th>DC 시험전압 (V)</th><th>절연저항 (MΩ)</th></tr>
             <tr><td>SELV 및 PELV</td><td>250</td><td>0.5</td></tr>
             <tr><td>FELV, 500V 이하</td><td>500</td><td>1.0</td></tr>
             <tr><td>500V 초과</td><td>1000</td><td>1.0</td></tr>
-          </table>
-          <br>[주] 특별저압(Extra low voltage : 2차 전압이 AC 50V, DC 120V 이하)으로 SELV(비접지회로 구성) 및 PELV(접지회로 구성)은 1차와 2차가 전기적으로 절연된 회로, FELV는 1차와 2차가 전기적으로 절연되지 않은 회로`
+            </table>
+            <br>2) 정전이 어려운 경우 : 누설전류가 1mA 이하이면 절연성능 적합
+            <br>3) 사용전압에 대한 누설전류가 1Line당 최대공급전류의 1/2000을 넘지 않아야 함
+            <br>4) 특별저압(Extra low voltage : 2차 전압이 AC 50V, DC 120V 이하)으로 SELV(비접지회로 구성) 및 PELV(접지회로 구성)은 1차와 2차가 전기적으로 절연된 회로, FELV는 1차와 2차가 전기적으로 절연되지 않은 회로
+          `
       },
       {
         num: "22",
