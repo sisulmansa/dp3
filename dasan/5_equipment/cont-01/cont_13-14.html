@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항 (전로의 절연저항 측정 및 절연내력 시험)</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 하단 고정 푸터 및 이전/다음 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 카드 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #343a40;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 13.5px;
+      color: #495057;
+      line-height: 1.5;
+    }
+
+    .table-custom {
+      font-size: 12.5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .table-custom th {
+      background-color: #f1f3f5;
+      color: #212529;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .table-custom td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .diagram-box {
+      background-color: #f8f9fa;
+      border: 1px dashed #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- Home으로 이동하는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- h1 내용 및 배경색 #11477D 처리 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <div class="content-card">
+      <h2>2. 전로의 절연저항 측정 및 절연내력 시험</h2>
+      
+      <h3>가. 저압 전로의 절연저항</h3>
+      
+      <p class="mb-2"><strong>1)</strong> 정전이 어려운 경우 등 절연저항 측정이 곤란한 경우에는 저항성분의 누설전류가 1mA 이하이면 그 전로의 절연성능은 적합한 것으로 본다.</p>
+      
+      <div class="diagram-box">
+        <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[그림 1-5 절연저항 측정]</p>
+        <p class="text-secondary mb-0" style="font-size: 12.5px; line-height: 1.4;">
+          <img src="./../images/electroline-5.png" width="100%" alt="">
+        </p>
+      </div>
+
+      <p class="mb-2 mt-3"><strong>2)</strong> 저압전로의 절연 성능 (기술기준 제52조)</p>
+      <p class="text-secondary mb-2" style="font-size: 13px;">
+        전기사용장소의 사용전압이 저압인 전로의 전선 상호 간 및 전로와 대지 사이의 절연저항은 개폐기 또는 과전류차단기로 쉽게 구분할 수 있는 전로마다 다음 표에서 정한 값 이상이어야 한다. 다만 전선 상호 간의 절연저항은 기기기구를 쉽게 분리가 곤란한 분기회로의 경우 기기 접속 전에 측정할 수 있다.
+      </p>
+      <p class="text-secondary mb-3" style="font-size: 13px;">
+        또한, 측정 시 영향을 주거나 손상을 받을 수 있는 SPD 등은 측정 전에 분리시켜야 하고, 부득이하게 분리가 어려운 경우에는 시험 전압을 250V DC로 낮추어 측정할 수 있지만 절연저항 값은 1MΩ 이상이어야 한다.
+      </p>
+
+      <div class="table-responsive">
+        <p class="text-danger">저압전로에서 절연이 잘 되어 있다고 판단하는 기준</p>
+        <table class="table table-bordered table-custom">
+          <thead>
+            <tr>
+              <th>전로의 사용전압 (V)</th>
+              <th>DC 시험전압 (V)</th>
+              <th>절연저항 (MΩ)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SELV 및 PELV</td>
+              <td>250</td>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <td>FELV를 포함한 500V 이하</td>
+              <td>500</td>
+              <td rowspan="2">1.0</td>
+            </tr>
+            <tr>
+              <td>500V 초과</td>
+              <td>1000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted mb-3" style="font-size: 12px;">&lt;삭제&gt; '25.06.04 전기설비기술기준 일부 개정 : [주]내용 삭제됨.</p>
+
+      <div class="diagram-box">
+        <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[그림 1-6 저압전로의 절연]</p>
+        <p class="text-secondary mb-0" style="font-size: 12.5px; line-height: 1.4;">
+          <img src="./../images/electroline-6.png" width="100%" alt="">
+        </p>
+      </div>
+
+      <hr class="text-muted">
+
+      <h3>나. 고압 및 특고압의 전로</h3>
+      <p class="mb-2">아래의 표에서 정한 시험전압을 전로와 대지 사이(다심케이블은 심선 상호 간 및 심선과 대지 사이)에 연속하여 10분간 가하여 절연내력을 시험하였을 때 이에 견디어야 한다. (케이블을 사용하는 경우 직류로 시험할 수 있으며, 시험전압은 교류 경우의 2배)</p>
+
+      <div class="diagram-box">
+        <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[그림 1-7 절연 내력 시험]</p>
+        <p class="text-secondary mb-0" style="font-size: 12.5px;">전원, 변압기(Tr×2), PT, MA, 피시험기기 회로 구성도</p>
+      </div>
+
+      <p class="fw-bold text-dark mb-2 mt-3" style="font-size: 14px;">[최대사용전압 및 시험전압]</p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-custom">
+          <thead>
+            <tr>
+              <th>최대사용전압</th>
+              <th>시험전압</th>
+              <th>최저시험전압</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-start">1. 7kV 이하인 전로</td>
+              <td>1.5배</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="text-start">2. 7kV 초과 25kV 이하인 중성점 접지식 전로 (중성선 다중 접지식)</td>
+              <td>0.92배</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="text-start">3. 7kV 초과 60kV 이하인 전로 (2란 제외)</td>
+              <td>1.25배</td>
+              <td>10.5kV</td>
+            </tr>
+            <tr>
+              <td class="text-start">4. 60kV 초과 중성점 비접지식 전로</td>
+              <td>1.25배</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="text-start">5. 60kV 초과 중성점 접지식 전로 (6, 7란 제외)</td>
+              <td>1.1배</td>
+              <td>75kV</td>
+            </tr>
+            <tr>
+              <td class="text-start">6. 60kV 초과 중성점 직접접지식 전로 (7란 제외)</td>
+              <td>0.72배</td>
+              <td>#1</td>
+            </tr>
+            <tr>
+              <td class="text-start">7. 170kV 초과 중성점 직접접지식 전로 중 중성점이 직접접지되어 있는 발전소 또는 변전소</td>
+              <td>0.64배</td>
+              <td>#2</td>
+            </tr>
+            <tr>
+              <td class="text-start">8. 60kV 초과 정류기에 접속되고 있는 전로</td>
+              <td>1.1배</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-secondary mb-0" style="font-size: 11.5px; line-height: 1.4;">
+        #1. 전력케이블은 정격전압을 24시간 가하여 절연내력시험하였을 때 이에 견딜 경우는 제외<br>
+        #2. 지중전선로는 최대사용전압의 0.64배의 전압을 전로와 대지사이에 연속 60분간 절연내력시험을 했을때 견디는 경우는 제외
+      </p>
+
+    </div>
+
+  </main>
+
+  <!-- 하단 고정 푸터 ("이전페이지"와 "다음페이지" 버튼) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <!-- href 값은 필요에 맞게 직접 입력하여 사용하세요 -->
+      <a href="cont_12.html" class="btn btn-outline-secondary nav-btn">⬅ 이전페이지</a>
+      <a href="cont_15.html" class="btn btn-primary nav-btn">다음페이지 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
