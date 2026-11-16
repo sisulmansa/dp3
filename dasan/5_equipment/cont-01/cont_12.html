@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 아이폰 프로 13 등 모바일 환경 최적화 및 Safe Area 대응 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>전기기사 이론설명 - 제1장 공통사항 (전로의 절연)</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      /* 상단 고정 헤더와 하단 고정 푸터에 본문이 가리지 않도록 여백 확보 */
+      padding-top: calc(70px + env(safe-area-inset-top));
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+      margin: 0;
+    }
+    
+    .app-container {
+      max-width: 430px; /* 아이폰 13 프로 화면 크기 고려 */
+      margin: 0 auto;
+    }
+
+    /* 상단 고정 헤더 및 h1 디자인 (#11477D, 가운데 정렬, Home 링크) */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #11477D;
+      color: white;
+      z-index: 1030;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .header-content {
+      max-width: 430px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .home-link {
+      position: absolute;
+      left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .home-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    /* 하단 고정 푸터 및 이전/다음 버튼 디자인 */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      z-index: 1030;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .footer-content {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 12px 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* 본문 콘텐츠 카드 스타일 */
+    .content-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #11477D;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #343a40;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 13.5px;
+      color: #495057;
+      line-height: 1.5;
+    }
+
+    .diagram-box {
+      background-color: #f8f9fa;
+      border: 1px dashed #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="header-bar">
+    <div class="header-content">
+      <!-- Home으로 이동하는 a 태그 -->
+      <a href="../../index.html" class="home-link">🏠 Home</a>
+      <!-- h1 내용 및 배경색 #11477D 처리 -->
+      <h1 class="h5 fw-bold mb-0 text-white">제1장 공통사항</h1>
+    </div>
+  </header>
+
+  <!-- 본문 컨테이너 -->
+  <main class="app-container p-3">
+    
+    <div class="content-card">
+      <h2>3. 전로의 절연</h2>
+      
+      <h3>1. 전로의 절연 원칙</h3>
+      
+      <div class="diagram-box">
+        <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">
+            <img src="./../images/electroline-3.png" width="100%" alt="">
+        </p>
+      </div>
+
+      <p class="fw-bold text-dark mt-3 mb-2">가. 전로는 다음 이외에는 대지로부터 절연하여야 한다.</p>
+      <div><img src="./../images/electroline-4.png" width="100%" alt="#"></div>
+
+      <ol class="ps-3 mb-3 text-secondary" style="font-size: 13.5px; line-height: 1.6;">
+        <li>수용장소의 인입구의 <span class="text-primary">접지</span></li>
+        <li>고압 또는 특고압과 저압의 혼촉에 의한 위험방지 시설</li>
+        <li>피뢰기의 <span class="text-primary">접지</span></li>
+        <li>특고압 가공전선로의 지지물에 시설하는 저압 기계기구 등의 시설</li>
+        <li>옥내에 시설하는 저압전로에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>전로의 중성점에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>계기용변성기 2차측 전로에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>저압 가공전선의 특고압 가공전선과 동일 지지물에 시설되는 부분에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>파이프라인 등의 전열장치의 시설에 따라 시설하는 소구경관에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>저압전로와 사용전압이 300V 이하의 저압전로를 결합하는 변압기의 2차측 전로에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점</li>
+        <li>직류계통에 접지공사를 하는 경우의 <span class="text-primary">접지</span>점 (저압 옥내직류 전기설비의 접지)</li>
+      </ol>
+
+      <p class="fw-bold text-dark mt-3 mb-2">나. 대지와 절연할 수 없는 부부 (절연하는 것이 기술상 곤란한 것)</p>
+      <ol class="ps-3 mb-2 text-secondary" style="font-size: 13.5px; line-height: 1.6;">
+        <li class="text-danger">시험용 변압기</li>
+        <li>전력선 반송용 결합 리액터</li>
+        <li>전기 울타리용 전원장치</li>
+        <li>엑스선 발생장치</li>
+        <li>음극 가열용 변압기 및 부속장치</li>
+        <li>전기부식방지용 양극</li>
+        <li>단선식 전기철도의 귀선</li>
+        <li class="text-danger">전기욕기</li>
+        <li class="text-danger">전기로</li>
+        <li>전기보일러</li>
+        <li>전해조</li>
+      </ol>
+
+      <div class="diagram-box mt-3">
+        <p class="fw-bold mb-1 text-dark" style="font-size: 13px;">[그림 1-4 절연할 수 없는 부부]</p>
+        <p class="text-secondary mb-0" style="font-size: 12.5px; line-height: 1.4;">
+          • [전기철도의 귀선]<br>
+          • [전기욕기]
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 하단 고정 푸터 ("이전페이지"와 "다음페이지" 버튼) -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <!-- href 값은 필요에 맞게 직접 입력하여 사용하세요 -->
+      <!-- <a href="prev_page.html" class="btn btn-outline-secondary nav-btn">⬅ 이전페이지</a> -->
+      <a href="./cont_13-14.html" class="btn btn-primary nav-btn">다음페이지 ➡</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
