@@ -274,7 +274,7 @@
         <div class="roadmap-info text-center">
           <strong class="d-block mb-1 text-primary">⏰ 순찰 주기 및 시간 - <span style="font-size: 12.5px; font-weight: normal; color: #666; display: inline-block; margin-top: 5px;">(21시, 0시, 03시, 06시)</span></strong>
           <span style="font-weight: bold; color: #333;">외기온도 기준 -5℃ 미만시</span> 온도 체크를 수행<br>
-          <span class="text-danger">🌟 천장온도(OUT) 1℃ 이하이면 조장에게 보고하여 점검구 개방조치</span>
+          <a href="#prevent" class="text-danger">🌟 천장온도(OUT) 1℃ 이하시 조치방법 바로가기</a>
         </div>
 
         <!-- 순찰 지점 1 -->
@@ -397,11 +397,30 @@
         </section>
 
         <!-- 동파 예방 활동 -->
-        <section class="ref-card prevent-card">
+        <section id="prevent" class="ref-card prevent-card">
           <div class="ref-title" style="color: #17324d;">🛡️ 동파 예방 활동</div>
 
+                    <div class="prevent-block">
+            <div class="prevent-sub-title">1. 천장온도(OUT) 1℃ 이하시 천장내부 조치사항</div>
+            <table class="table table-bordered bypass-table">
+              <thead>
+                <tr>
+                  <th>위험물운반로</th>
+                  <th>에스컬레이터 앞</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fw-bold text-primary">
+                  <td>열선 전원램프 점등상태 확인</td>
+                  <td>점검구 개방</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        
           <div class="prevent-block">
-            <div class="prevent-sub-title">1. 외기온도 저하에 따른 공조기 난방수 By-Pass 개도량</div>
+            <div class="prevent-sub-title">2. 외기온도 저하에 따른 공조기 난방수 By-Pass 개도량</div>
             <table class="table table-bordered bypass-table">
               <thead>
                 <tr>
@@ -423,12 +442,12 @@
           </div>
 
           <div class="prevent-block">
-            <div class="prevent-sub-title">2. 동파사고 발생 시</div>
+            <div class="prevent-sub-title">3. 동파사고 발생 시</div>
             <div class="ps-2">방재센터 1명, 대기환경배기설비 1명 이동 및 순차적 Off</div>
           </div>
 
           <div class="prevent-block">
-            <div class="prevent-sub-title">3. 외기 -10°C 이하 시</div>
+            <div class="prevent-sub-title">4. 외기 -10°C 이하 시</div>
             <ul class="mb-0 ps-3">
               <li>방재센터 1명 상주</li>
               <li>E5동 세미나실용  공조기 가동</li>
@@ -440,7 +459,7 @@
           </div>
 
           <div class="prevent-block">
-            <div class="prevent-sub-title">4. 방재센터 모니터링 대상</div>
+            <div class="prevent-sub-title">5. 방재센터 모니터링 대상</div>
 
             <div class="monitor-sub">
               <strong class="d-block text-dark mb-1">1) 각 동 난방 열교환기 / 설정온도 미달 시 (단계별)</strong>
